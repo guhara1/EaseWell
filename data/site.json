@@ -1,0 +1,33 @@
+{
+  "name": "간다GO",
+  "tagline": "경기남부 출장마사지 · 도시별·생활권별 지역 안내",
+  "baseUrl": "https://ganda-go.com",
+  "locale": "ko_KR",
+  "phone": "0508-202-4719",
+  "phoneLabel": "전화예약",
+  "telegram": {
+    "reservation": "https://t.me/gandago_reserve",
+    "webBuild": "https://t.me/gandago_web",
+    "partnership": "https://t.me/gandago_partner"
+  },
+  "org": {
+    "legalName": "간다GO",
+    "description": "경기남부 출장마사지·홈타이 지역 안내 및 예약 전 확인 서비스",
+    "areaServed": "경기남부(수원·성남·용인·화성·오산·평택 등)"
+  },
+  "author": {
+    "name": "경기남부 지역 안내 콘텐츠 담당자",
+    "reviewer": "간다GO 운영 책임자",
+    "role": "지역 안내 콘텐츠 작성 및 품질 검수"
+  },
+  "nav": [
+    { "label": "홈", "href": "/gyeonggi-south/" },
+    { "label": "권역 안내", "href": "/gyeonggi-south/area/" },
+    { "label": "도시 안내", "href": "/gyeonggi-south/city/" },
+    { "label": "생활권", "href": "/gyeonggi-south/life/" },
+    { "label": "지하철역", "href": "/gyeonggi-south/station/" },
+    { "label": "이용 장소", "href": "/gyeonggi-south/use/" },
+    { "label": "예약 전 확인", "href": "/gyeonggi-south/check/" },
+    { "label": "문의하기", "href": "/gyeonggi-south/contact/" }
+  ]
+}

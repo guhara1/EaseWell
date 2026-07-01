@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#211C17"/><stop offset="1" stop-color="#14110E"/></linearGradient>
+<radialGradient id="o" cx="0.85" cy="0.15" r="0.6"><stop offset="0" stop-color="#FF6A2C" stop-opacity="0.5"/><stop offset="1" stop-color="#FF6A2C" stop-opacity="0"/></radialGradient></defs>
+<rect width="1200" height="630" fill="url(#g)"/><rect width="1200" height="630" fill="url(#o)"/>
+<text x="80" y="300" fill="#fff" font-family="Pretendard, sans-serif" font-size="84" font-weight="800">간다<tspan fill="#FF6A2C">GO</tspan></text>
+<text x="80" y="380" fill="#E9E1D5" font-family="Pretendard, sans-serif" font-size="40" font-weight="600">경기남부 출장마사지 · 생활권 지역 안내</text>
+<text x="80" y="470" fill="#FF9E63" font-family="Pretendard, sans-serif" font-size="34" font-weight="700">전화예약 0508-202-4719</text></svg>

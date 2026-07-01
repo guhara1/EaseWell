@@ -1,0 +1,11 @@
+{
+  "name": "gandago-gyeonggi-south",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "간다GO 경기남부 출장마사지 지역 안내 정적 사이트 (의존성 없는 생성기)",
+  "scripts": {
+    "build": "node build.mjs",
+    "serve": "node build.mjs && node --eval \"import('node:http').then(({createServer})=>{import('node:fs').then(fs=>{import('node:path').then(p=>{createServer((req,res)=>{let u=decodeURIComponent(req.url.split('?')[0]);let f=p.join('dist',u);try{if(fs.statSync(f).isDirectory())f=p.join(f,'index.html')}catch{ }let t=f.endsWith('.css')?'text/css':f.endsWith('.svg')?'image/svg+xml':f.endsWith('.xml')?'application/xml':'text/html; charset=utf-8';fs.readFile(f,(e,d)=>{if(e){res.writeHead(404);res.end('404')}else{res.writeHead(200,{'content-type':t});res.end(d)}})}).listen(4321,()=>console.log('http://localhost:4321/'))})})})\""
+  }
+}

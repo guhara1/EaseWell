@@ -1,0 +1,97 @@
+/* =============================================================
+   간다GO · Design Tokens — Premium Palette
+   Pretendard 기반. 기존 토큰 시스템을 프리미엄 팔레트로 교체.
+   ============================================================= */
+
+:root {
+  /* ---- Brand: Premium Orange ---------------------------------- */
+  --color-brand-50:  #FFF4ED;
+  --color-brand-100: #FFE3D0;
+  --color-brand-200: #FFC29B;
+  --color-brand-300: #FF9E63;
+  --color-brand-400: #FF7A34;
+  --color-brand-500: #FF6A2C;   /* Primary CTA */
+  --color-brand-600: #ED5411;
+  --color-brand-700: #C43F08;
+  --color-brand-800: #93300B;
+  --color-brand-900: #6E280D;
+
+  /* ---- Warm Ink (near-black) ---------------------------------- */
+  --color-ink-900: #14110E;
+  --color-ink-800: #211C17;
+  --color-ink-700: #322A22;
+  --color-ink-600: #4A3F34;
+  --color-ink-500: #6B5D4E;
+  --color-ink-400: #928473;
+  --color-ink-300: #B9AD9C;
+
+  /* ---- Warm Neutral Surfaces ---------------------------------- */
+  --color-surface-0:  #FFFFFF;
+  --color-surface-50: #FAF7F2;
+  --color-surface-100:#F3EEE6;
+  --color-surface-200:#E9E1D5;
+  --color-surface-300:#DBD0C0;
+
+  /* ---- Premium Gold Accent (신뢰/프리미엄 신호) ---------------- */
+  --color-gold-300: #E4C97A;
+  --color-gold-500: #C9A227;
+  --color-gold-700: #9A7B14;
+
+  /* ---- Semantic ------------------------------------------------ */
+  --color-bg:        var(--color-surface-50);
+  --color-bg-elev:   var(--color-surface-0);
+  --color-text:      var(--color-ink-900);
+  --color-text-soft: var(--color-ink-500);
+  --color-text-mute: var(--color-ink-400);
+  --color-line:      var(--color-surface-200);
+  --color-primary:   var(--color-brand-500);
+  --color-primary-strong: var(--color-brand-600);
+  --color-on-primary:#FFFFFF;
+
+  /* ---- Gradients / Overlays ----------------------------------- */
+  --grad-brand: linear-gradient(135deg, var(--color-brand-400) 0%, var(--color-brand-600) 100%);
+  --grad-ink:   linear-gradient(160deg, var(--color-ink-900) 0%, var(--color-ink-700) 100%);
+  --overlay-hero: linear-gradient(180deg, rgba(20,17,14,.72) 0%, rgba(20,17,14,.86) 100%);
+  --overlay-glass: linear-gradient(180deg, rgba(255,255,255,.72) 0%, rgba(255,255,255,.55) 100%);
+
+  /* ---- Typography (Pretendard 유지) --------------------------- */
+  --font-sans: "Pretendard", "Pretendard Variable", -apple-system, BlinkMacSystemFont,
+               system-ui, "Segoe UI", Roboto, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  --fs-xs:  0.8125rem;   /* 13 */
+  --fs-sm:  0.9375rem;   /* 15 */
+  --fs-md:  1.0625rem;   /* 17 */
+  --fs-lg:  1.25rem;     /* 20 */
+  --fs-xl:  1.5rem;      /* 24 */
+  --fs-2xl: 2rem;        /* 32 */
+  --fs-3xl: 2.75rem;     /* 44 */
+  --lh-tight: 1.25;
+  --lh-body:  1.75;
+
+  /* ---- Radius / Shadow / Space -------------------------------- */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --radius-pill: 999px;
+  --shadow-sm: 0 1px 2px rgba(20,17,14,.06), 0 2px 6px rgba(20,17,14,.05);
+  --shadow-md: 0 6px 18px rgba(20,17,14,.08), 0 2px 6px rgba(20,17,14,.05);
+  --shadow-lg: 0 18px 48px rgba(20,17,14,.16);
+  --shadow-brand: 0 10px 24px rgba(237,84,17,.28);
+  --space-1: 4px;  --space-2: 8px;  --space-3: 12px; --space-4: 16px;
+  --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 72px;
+  --container: 1120px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg:        var(--color-ink-900);
+    --color-bg-elev:   var(--color-ink-800);
+    --color-text:      #F6F1EA;
+    --color-text-soft: var(--color-ink-300);
+    --color-text-mute: var(--color-ink-400);
+    --color-line:      var(--color-ink-700);
+    --overlay-glass:   linear-gradient(180deg, rgba(33,28,23,.72) 0%, rgba(33,28,23,.55) 100%);
+    --shadow-sm: 0 1px 2px rgba(0,0,0,.4);
+    --shadow-md: 0 6px 18px rgba(0,0,0,.45);
+    --shadow-lg: 0 18px 48px rgba(0,0,0,.55);
+  }
+}
