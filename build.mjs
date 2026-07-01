@@ -18,6 +18,7 @@ const stations = readJSON(join(DATA, "gyeonggi-south/stations.json"));
 const useCases = readJSON(join(DATA, "gyeonggi-south/use-cases.json"));
 const checks = readJSON(join(DATA, "gyeonggi-south/checks.json"));
 const policies = readJSON(join(DATA, "gyeonggi-south/policies.json"));
+const adminDongs = readJSON(join(DATA, "gyeonggi-south/admin-dongs.json"));
 
 const urls = []; // sitemap 수집
 
@@ -25,6 +26,17 @@ function readJSON(p) { return JSON.parse(readFileSync(p, "utf8")); }
 function esc(s = "") { return String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])); }
 function cityBy(slug) { return cities.find(c => c.slug === slug); }
 function stationBy(slug) { return stations.find(s => s.slug === slug); }
+function lifeBy(slug) { return lifeAreas.find(l => l.slug === slug); }
+function dongBy(slug) { return adminDongs.find(d => d.slug === slug); }
+function dongUrl(d) { return d.districtSlug ? `/gyeonggi-south/city/${d.city}/${d.districtSlug}/${d.slug}/` : `/gyeonggi-south/city/${d.city}/dong/${d.slug}/`; }
+function dongsInCity(citySlug, districtSlug) { return adminDongs.filter(d => d.city === citySlug && (districtSlug === undefined || d.districtSlug === districtSlug)); }
+// 인접 행정동 이름 → 실제 페이지가 있는 동으로 연결 (없으면 텍스트만)
+function adjacentDongLinks(d) {
+  return (d.adjacent || []).map(name => {
+    const t = adminDongs.find(x => x.city === d.city && x.name === name);
+    return t ? { href: dongUrl(t), text: `${name}` } : null;
+  }).filter(Boolean);
+}
 function clampDesc(s) { return s.length > 80 ? s.slice(0, 79) + "…" : s; }
 
 // ---- 공통 블록 -------------------------------------------------
@@ -384,6 +396,7 @@ function buildCities() {
     const lifeLinks = lifeAreas.filter(l => l.city === c.slug).map(l => ({ href: `/gyeonggi-south/life/${l.slug}/`, text: `${l.name} 생활권` }));
     const stationLinks = stations.filter(s => s.city === c.slug).map(s => ({ href: `/gyeonggi-south/station/${s.slug}/`, text: s.name }));
     const adjLinks = c.adjacent.map(a => ({ href: `/gyeonggi-south/city/${a.slug}/`, text: `${a.name} 안내` }));
+    const cityDongLinks = dongsInCity(c.slug).map(x => ({ href: dongUrl(x), text: x.district ? `${x.district} ${x.name}` : x.name }));
     const districtSection = c.districts.length ? `<h2>행정구별 생활권</h2><ul>${c.districts.map(d => `<li><a href="/gyeonggi-south/city/${c.slug}/${d.slug}/"><strong>${esc(d.name)}</strong></a> — ${esc(d.note)}</li>`).join("")}</ul>` : "";
     const body = `
     <div class="prose section">
@@ -397,6 +410,7 @@ function buildCities() {
       <p>자택은 공동현관·엘리베이터·주차 여부를, 오피스텔은 방문자 등록과 관리 규정을, 호텔·숙소는 외부인 방문 정책과 객실 출입 방식을 먼저 확인합니다. 신도시·업무지구는 동·호수와 보안 규정을, 외곽·산업지구는 차량 이동 거리와 추가 이동비, 예약 가능 시간을 확인하는 것이 좋습니다.</p>
       <h2>안내 방향</h2><p>${esc(c.focus)}</p>
     </div>
+    ${linkCluster("대표 행정동 안내", cityDongLinks)}
     ${linkCluster("대표 생활권 바로가기", lifeLinks)}
     ${linkCluster("가까운 지하철역", stationLinks)}
     ${linkCluster("인접 도시", adjLinks.concat([{ href: `/gyeonggi-south/area/${c.regionSlug}/`, text: `${c.region} 권역` }]))}
@@ -436,6 +450,7 @@ function buildDistrict(c, d) {
   const siblingLinks = c.districts.filter(x => x.slug !== d.slug).map(x => ({ href: `/gyeonggi-south/city/${c.slug}/${x.slug}/`, text: `${c.name} ${x.name}` }));
   const lifeLinks = lifeAreas.filter(l => l.city === c.slug && (l.districts || []).includes(d.name)).map(l => ({ href: `/gyeonggi-south/life/${l.slug}/`, text: `${l.name} 생활권` }));
   const stationLinks = stations.filter(s => s.city === c.slug && s.district === d.name).map(s => ({ href: `/gyeonggi-south/station/${s.slug}/`, text: s.name }));
+  const dongLinks = dongsInCity(c.slug, d.slug).map(x => ({ href: dongUrl(x), text: x.name }));
   const body = `
   <div class="prose section">
     <span class="eyebrow">${esc(c.name)} · 행정구 안내</span>
@@ -445,6 +460,7 @@ function buildDistrict(c, d) {
     <h2>대표 생활권</h2><p>${esc(d.note)} 생활권을 중심으로 오피스텔·상권·주거지가 형성되어 있습니다. 이용 장소가 자택·오피스텔·숙소인지에 따라 공동현관과 출입 방식 확인이 먼저 필요합니다.</p>
     <h2>이용 장소별 기준</h2><p>오피스텔은 공동현관·엘리베이터·관리 규정과 방문 가능 시간을, 상권·업무지구는 건물 보안 규정과 예약 가능 시간을, 주거지는 공동현관 출입 방식을 확인하는 것이 좋습니다.</p>
   </div>
+  ${linkCluster("대표 행정동", dongLinks)}
   ${linkCluster("같은 도시 다른 행정구", siblingLinks)}
   ${linkCluster("관련 생활권", lifeLinks.length ? lifeLinks : lifeAreas.filter(l => l.city === c.slug).slice(0, 3).map(l => ({ href: `/gyeonggi-south/life/${l.slug}/`, text: `${l.name} 생활권` })))}
   ${linkCluster("가까운 지하철역", stationLinks)}
@@ -463,6 +479,90 @@ function buildDistrict(c, d) {
     breadcrumb: [{ name: "홈", href: "/gyeonggi-south/" }, { name: "도시 안내", href: "/gyeonggi-south/city/" }, { name: c.name, href: `/gyeonggi-south/city/${c.slug}/` }, { name: d.name, href: `/gyeonggi-south/city/${c.slug}/${d.slug}/` }],
     body
   }));
+}
+
+function buildDongIndex() {
+  const byCity = {};
+  for (const d of adminDongs) (byCity[d.city] ||= []).push(d);
+  const groups = cities.filter(c => byCity[c.slug]).map(c => {
+    const list = byCity[c.slug];
+    return `<div class="card"><h3><a href="/gyeonggi-south/city/${c.slug}/">${esc(c.name)}</a></h3><nav class="linkcluster">${list.map(d => `<a href="${dongUrl(d)}">${esc(d.district ? d.district + " " : "")}${esc(d.name)}${d.index ? "" : " ·"}</a>`).join("")}</nav></div>`;
+  }).join("");
+  const idx = adminDongs.filter(d => d.index).length;
+  const body = `<div class="section"><span class="eyebrow">행정동 안내</span><h1>경기남부 대표 행정동 안내</h1>
+    <p class="lead">검색 수요와 본문 품질이 확보된 <strong>대표 행정동</strong>만 안내합니다. 번호동(예: 매탄1~4동)은 대표동으로 묶고, 출구별·노선별 분리 페이지는 만들지 않아 중복·저품질 페이지를 줄입니다.</p>
+    <div class="grid grid-2">${groups}</div>
+    <p style="margin-top:16px;color:var(--color-text-mute);font-size:var(--fs-sm)">· 표시는 다른 생활권·역세권 안내와 내용이 겹칠 수 있어 색인에서 제외(noindex)하고 내부 이동용으로만 유지하는 행정동입니다. 대표 색인 행정동 ${idx}곳.</p>
+    </div>${whoHowWhy("경기남부 도시·행정구별 대표 행정동과 인접 동·생활권·역세권 안내")}`;
+  write("gyeonggi-south/dong", layout({
+    title: "경기남부 행정동 안내｜대표 행정동 | 간다GO",
+    description: "경기남부 출장마사지 도시·행정구별 대표 행정동과 인접 동·생활권 안내.",
+    canonical: "/gyeonggi-south/dong/", h1: "경기남부 대표 행정동 안내",
+    breadcrumb: [{ name: "홈", href: "/gyeonggi-south/" }, { name: "행정동", href: "/gyeonggi-south/dong/" }],
+    body
+  }));
+}
+
+function buildDongs() {
+  for (const d of adminDongs) {
+    const c = cityBy(d.city);
+    const district = c.districts.find(x => x.name === d.district);
+    const life = d.life ? lifeBy(d.life) : null;
+    const station = d.station ? stationBy(d.station) : null;
+    const url = dongUrl(d);
+    const adjLinks = adjacentDongLinks(d);
+    const parentLinks = [{ href: `/gyeonggi-south/city/${c.slug}/`, text: `${c.name} 안내` }];
+    if (district) parentLinks.push({ href: `/gyeonggi-south/city/${c.slug}/${district.slug}/`, text: `${c.name} ${district.name}` });
+    const stationLinks = station ? [{ href: `/gyeonggi-south/station/${station.slug}/`, text: station.name }] : [];
+    const lifeLinks = life ? [{ href: `/gyeonggi-south/life/${life.slug}/`, text: `${life.name} 생활권` }] : [];
+    const posDesc = district ? `${c.name} ${d.district}에 속한 행정동` : `${c.name}의 행정동`;
+    const h1 = `${d.name} 출장마사지 · ${district ? d.district + " " : c.name + " "}생활권 안내`;
+    const body = `
+    <div class="prose section">
+      <span class="eyebrow">${esc(c.name)}${district ? " · " + esc(d.district) : ""} · 행정동</span>
+      <h1>${esc(h1)}</h1>
+      <p class="lead">${esc(d.note)}</p>
+      <h2>행정동 위치</h2>
+      <p>${esc(d.name)}은(는) ${esc(posDesc)}으로, ${esc((d.adjacent || []).join(", "))} 등과 인접합니다.${life ? ` 생활권으로는 ${esc(life.name)}과(와) 이어집니다.` : ""} 같은 이름의 동이 다른 도시에 있을 수 있어, 방문 주소는 도시·행정구·행정동을 함께 확인하는 것이 정확합니다.</p>
+      <h2>상위 도시·행정구</h2>
+      <p><a href="/gyeonggi-south/city/${c.slug}/">${esc(c.name)} 전체 안내</a>${district ? `와 <a href="/gyeonggi-south/city/${c.slug}/${district.slug}/">${esc(c.name)} ${esc(district.name)} 안내</a>` : ""}에서 인접 지역과 도시 전체 생활권을 함께 확인할 수 있습니다. ${esc(c.name)}은(는) ${esc(c.region)}에 속합니다.</p>
+      <h2>가까운 역·생활권</h2>
+      <p>${station ? `가까운 역은 <a href="/gyeonggi-south/station/${station.slug}/">${esc(station.name)}</a>이며, 역명은 위치 참고용이고 실제 방문 가능 여부는 정확한 주소로 확인합니다. ` : "지하철 접근보다 차량 이동 기준이 중요한 지역으로, 방문 주소와 이동 거리를 먼저 확인합니다. "}${life ? `<a href="/gyeonggi-south/life/${life.slug}/">${esc(life.name)} 생활권</a> 안내에서 인근 이용 기준을 함께 확인할 수 있습니다.` : ""}</p>
+      <h2>이용 장소별 기준</h2>
+      <p>자택은 공동현관·엘리베이터·주차 여부를, 오피스텔은 방문자 등록과 관리 규정을, 숙소는 외부인 방문 정책과 객실 출입 방식을 먼저 확인합니다. ${d.note.includes("외곽") || d.note.includes("차량") ? "외곽·산업권은 차량 이동 거리와 추가 이동비, 예약 가능 시간을 확인하는 것이 좋습니다." : "신규 단지가 많은 지역은 정확한 단지명과 동·호수를 확인하는 것이 좋습니다."}</p>
+    </div>
+    ${linkCluster("상위 도시·행정구", parentLinks)}
+    ${linkCluster("인접 행정동", adjLinks)}
+    ${linkCluster("관련 생활권·역세권", lifeLinks.concat(stationLinks))}
+    ${checklistBlock([
+      `${d.name}의 정확한 방문 주소(동·호수)를 확인했나요?`,
+      "도시·행정구·행정동이 정확한가요?",
+      "공동현관·건물 출입 방식을 확인했나요?",
+      "가까운 생활권과 이동 기준을 확인했나요?",
+      "예약 가능 시간과 개인정보 처리 기준을 확인했나요?"
+    ])}
+    ${linkCluster("이용 장소 · 예약 전 확인", [
+      { href: "/gyeonggi-south/use/home/", text: "자택 이용 전 확인" },
+      { href: "/gyeonggi-south/use/officetel/", text: "오피스텔 이용 전 확인" },
+      { href: "/gyeonggi-south/check/address/", text: "방문 주소 확인" },
+      { href: "/gyeonggi-south/check/service-policy/", text: "불법·선정적 서비스 불가 안내" },
+      { href: "/gyeonggi-south/contact/", text: "문의하기" }
+    ])}
+    ${faqBlock(SHARED_FAQ.slice(0, 4))}
+    ${whoHowWhy(`${c.name} ${d.name} 위치·인접 행정동·생활권·역세권과 이용 장소별 확인사항`)}`;
+    const crumb = [{ name: "홈", href: "/gyeonggi-south/" }, { name: "도시 안내", href: "/gyeonggi-south/city/" }, { name: c.name, href: `/gyeonggi-south/city/${c.slug}/` }];
+    if (district) crumb.push({ name: district.name, href: `/gyeonggi-south/city/${c.slug}/${district.slug}/` });
+    crumb.push({ name: d.name, href: url });
+    write(url.replace(/^\/|\/$/g, ""), layout({
+      title: `${d.name} 출장마사지·홈타이 생활권 안내 | 간다GO`,
+      description: clampDesc(`${d.name} 출장마사지·홈타이 예약 전 ${c.name}${district ? " " + d.district : ""} 생활권 확인 안내.`),
+      canonical: url, h1: `${d.name} 출장마사지`,
+      ogAlt: `${d.name} 생활권 예약 전 확인 이미지`,
+      noindex: !d.index,
+      breadcrumb: crumb,
+      body
+    }));
+  }
 }
 
 function buildLifeIndex() {
@@ -756,6 +856,7 @@ buildAssets();
 buildHome();
 buildAreaIndex(); buildAreas();
 buildCityIndex(); buildCities();
+buildDongIndex(); buildDongs();
 buildLifeIndex(); buildLifeAreas();
 buildStationIndex(); buildStations();
 buildUseIndex(); buildUseCases();

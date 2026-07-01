@@ -24,6 +24,7 @@
     { "label": "홈", "href": "/gyeonggi-south/" },
     { "label": "권역 안내", "href": "/gyeonggi-south/area/" },
     { "label": "도시 안내", "href": "/gyeonggi-south/city/" },
+    { "label": "행정동", "href": "/gyeonggi-south/dong/" },
     { "label": "생활권", "href": "/gyeonggi-south/life/" },
     { "label": "지하철역", "href": "/gyeonggi-south/station/" },
     { "label": "이용 장소", "href": "/gyeonggi-south/use/" },
