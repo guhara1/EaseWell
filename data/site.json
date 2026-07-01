@@ -34,6 +34,7 @@
     { "label": "생활권", "href": "/life/" },
     { "label": "지하철역", "href": "/station/" },
     { "label": "이용 장소", "href": "/use/" },
+    { "label": "이용 후기", "href": "/reviews/" },
     { "label": "예약 전 확인", "href": "/check/" },
     { "label": "문의하기", "href": "/contact/" }
   ]

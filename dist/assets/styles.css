@@ -414,3 +414,26 @@ a.card:hover { text-decoration: none; transform: translateY(-4px); box-shadow: v
 .menu-note { color: rgba(238,236,250,.5); font-size: var(--fs-xs); margin: var(--space-6) 0 0; }
 .menu-note a { color: var(--pastel-peach); font-weight: 700; }
 .menu-note a:hover { color: #FFD9BE; }
+
+/* ---- Reviews (이용 후기 · 별점) ------------------------------ */
+.reviews { padding-block: var(--space-8); }
+.reviews > .eyebrow { display: inline-block; }
+.stars { color: var(--pastel-gold); letter-spacing: 2px; font-size: 1.05em; }
+.review-agg { display: flex; align-items: center; gap: 10px; margin: 4px 0 var(--space-5); font-size: var(--fs-lg); }
+.review-agg strong { color: var(--color-heading); font-size: 1.6rem; font-weight: 900; }
+.review-agg span { color: var(--color-text-mute); font-size: var(--fs-sm); }
+.review-agg-lg { font-size: var(--fs-xl); }
+.review-agg-lg strong { font-size: 2.2rem; }
+.review-grid { align-items: stretch; }
+.review-card {
+  margin: 0; background: var(--color-bg-elev); border: 1px solid var(--color-line);
+  border-radius: var(--radius-md); padding: var(--space-5); box-shadow: var(--shadow-sm);
+  display: flex; flex-direction: column; gap: 8px;
+}
+.review-top { display: flex; align-items: center; gap: 8px; }
+.review-score { font-weight: 800; color: var(--color-heading); font-size: var(--fs-sm); }
+.review-title { font-weight: 800; color: var(--color-heading); font-size: var(--fs-md); }
+.review-card blockquote { margin: 0; color: var(--color-text-soft); font-size: var(--fs-sm); line-height: 1.7; flex: 1; }
+.review-author { color: var(--pastel-lav); font-size: var(--fs-xs); font-weight: 700; }
+.review-more { margin-top: var(--space-5); }
+.review-more a { font-weight: 700; color: var(--pastel-peach); }

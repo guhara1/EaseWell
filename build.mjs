@@ -19,6 +19,7 @@ const useCases = readJSON(join(DATA, "gyeonggi-south/use-cases.json"));
 const checks = readJSON(join(DATA, "gyeonggi-south/checks.json"));
 const policies = readJSON(join(DATA, "gyeonggi-south/policies.json"));
 const adminDongs = readJSON(join(DATA, "gyeonggi-south/admin-dongs.json"));
+const reviews = readJSON(join(DATA, "gyeonggi-south/reviews.json"));
 
 const urls = []; // sitemap 수집
 
@@ -250,6 +251,7 @@ function footer() {
         <h4>이용 안내</h4>
         <ul>
           <li><a href="/price/">코스·가격 안내</a></li>
+          <li><a href="/reviews/">이용 후기</a></li>
           <li><a href="/check/">예약 전 확인</a></li>
           <li><a href="/policy/privacy-policy/">개인정보 처리방침</a></li>
           <li><a href="/policy/service-standard/">불법·선정적 서비스 불가 안내</a></li>
@@ -287,6 +289,44 @@ function courseMenu() {
   </section>`;
 }
 
+// ---- 이용 후기 (별점) -----------------------------------------
+function stars(n) {
+  const full = "★".repeat(n) + "☆".repeat(5 - n);
+  return `<span class="stars" role="img" aria-label="별점 ${n}점 만점에 5점">${full}</span>`;
+}
+function reviewCard(r) {
+  return `<figure class="review-card">
+    <div class="review-top">${stars(r.rating)}<span class="review-score">${r.rating.toFixed(1)}</span></div>
+    <figcaption class="review-title">${esc(r.title)}</figcaption>
+    <blockquote>${esc(r.body)}</blockquote>
+    <div class="review-author">— ${esc(r.author)} 이용 고객</div>
+  </figure>`;
+}
+function reviewsBlock(count = 3) {
+  const a = reviews.aggregate;
+  const items = reviews.items.slice(0, count).map(reviewCard).join("");
+  return `<section class="reviews" aria-label="이용 후기">
+    <span class="eyebrow">이용 후기</span>
+    <h2>간다GO 방문 관리 이용 후기</h2>
+    <div class="review-agg">${stars(Math.round(Number(a.ratingValue)))}<strong>${a.ratingValue}</strong><span>／ 5.0 · 후기 ${a.reviewCount}건</span></div>
+    <div class="grid grid-3 review-grid">${items}</div>
+    <p class="review-more"><a href="/reviews/">이용 후기 전체 보기 →</a></p>
+  </section>`;
+}
+function aggregateRatingSchema() {
+  const a = reviews.aggregate;
+  return { "@type": "AggregateRating", ratingValue: a.ratingValue, reviewCount: String(a.reviewCount), bestRating: a.best, worstRating: a.worst };
+}
+function reviewSchemaItems() {
+  return reviews.items.map(r => ({
+    "@type": "Review",
+    name: r.title,
+    reviewRating: { "@type": "Rating", ratingValue: String(r.rating), bestRating: "5", worstRating: "1" },
+    author: { "@type": "Person", name: r.author },
+    reviewBody: r.body
+  }));
+}
+
 // ---- Schema (JSON-LD) -----------------------------------------
 function orgSchema() {
   return {
@@ -297,7 +337,19 @@ function orgSchema() {
     url: site.baseUrl + "/",
     telephone: site.phone,
     areaServed: site.org.areaServed,
+    contactPoint: { "@type": "ContactPoint", telephone: site.phone, contactType: "reservations", areaServed: "KR", availableLanguage: "Korean" },
+    aggregateRating: aggregateRatingSchema(),
     sameAs: [site.telegram.reservation]
+  };
+}
+function websiteSchema() {
+  return {
+    "@type": "WebSite",
+    "@id": site.baseUrl + "/#website",
+    url: site.baseUrl + "/",
+    name: site.name,
+    inLanguage: "ko-KR",
+    publisher: { "@id": site.baseUrl + "/#organization" }
   };
 }
 function breadcrumbSchema(crumbs) {
@@ -347,7 +399,7 @@ function crumbsHtml(crumbs) {
 function layout(p) {
   const ogImage = p.ogImage || "/assets/og-default.svg";
   const alt = p.ogAlt || (p.h1 + " 안내 이미지");
-  const schema = [orgSchema(), webPageSchema(p), breadcrumbSchema(p.breadcrumb), imageObjectSchema(ogImage, alt), ...(p.extraSchema || [])];
+  const schema = [orgSchema(), websiteSchema(), webPageSchema(p), breadcrumbSchema(p.breadcrumb), imageObjectSchema(ogImage, alt), ...(p.extraSchema || [])];
   const graph = { "@context": "https://schema.org", "@graph": schema };
   const canonicalAbs = site.baseUrl + p.canonical;
   if (!p.skipSitemap) urls.push({ loc: canonicalAbs, noindex: !!p.noindex });
@@ -381,7 +433,7 @@ ${header()}
 <main id="main" class="container">
 ${crumbsHtml(p.breadcrumb)}
 ${p.body}
-${(p.canonical === "/" || ["/area/", "/city/", "/dong/", "/life/", "/station/"].some(x => p.canonical.startsWith(x))) ? courseMenu() : ""}
+${(p.canonical === "/" || ["/area/", "/city/", "/dong/", "/life/", "/station/"].some(x => p.canonical.startsWith(x))) ? courseMenu() + reviewsBlock() : ""}
 </main>
 ${footer()}
 </body>
@@ -434,6 +486,23 @@ function buildHome() {
     <div class="grid grid-4">${lifeCards}</div>
     <p style="margin-top:16px"><a href="/life/">생활권 전체 보기 →</a></p>
   </section>
+
+  ${linkCluster("주제별 롱테일 안내 · 자주 찾는 안내", [
+    { href: "/life/suwon-station-ingye/", text: "수원역·인계동 생활권 예약 전 확인" },
+    { href: "/life/bundang-pangyo/", text: "분당·판교 오피스텔 방문 안내" },
+    { href: "/life/dongtan-newtown/", text: "동탄신도시 방문 기준·단지 확인" },
+    { href: "/life/gwanggyo-yeongtong/", text: "광교·영통 신도시 이용 안내" },
+    { href: "/station/suwon-station/", text: "수원역 역세권 출입·주소 확인" },
+    { href: "/station/pangyo-station/", text: "판교역 역세권 업무지구 안내" },
+    { href: "/use/home/", text: "자택 방문 전 공동현관 확인사항" },
+    { href: "/use/hotel/", text: "호텔·숙소 객실 방문 정책 안내" },
+    { href: "/use/officetel/", text: "오피스텔 방문자 등록·출입 안내" },
+    { href: "/use/night/", text: "야간 예약 시 심야 출입·이동 안내" },
+    { href: "/check/travel-fee/", text: "외곽 지역 추가 이동비 기준" },
+    { href: "/check/address/", text: "도시·행정구·행정동 방문 주소 확인" },
+    { href: "/price/", text: "60·90·120분 코스·가격 안내" },
+    { href: "/reviews/", text: "자택·호텔·오피스텔 이용 후기·별점" }
+  ])}
 
   ${checklistBlock([
     "방문 주소를 정확히 확인했나요?", "도시와 행정구, 행정동이 정확한가요?",
@@ -1035,6 +1104,43 @@ function buildPrice() {
   }));
 }
 
+function buildReviews() {
+  const a = reviews.aggregate;
+  const cards = reviews.items.map(reviewCard).join("");
+  const body = `
+  <div class="prose section" style="max-width:none">
+    <span class="eyebrow">이용 후기</span>
+    <h1>간다GO 방문 관리 이용 후기</h1>
+    <p class="lead">경기남부 자택·호텔·오피스텔·회사 등 다양한 장소에서 방문 관리를 이용하신 고객 후기입니다. 실제 이용 상황과 만족도를 참고하세요.</p>
+    <div class="review-agg review-agg-lg">${stars(Math.round(Number(a.ratingValue)))}<strong>${a.ratingValue}</strong><span>／ 5.0 · 후기 ${a.reviewCount}건</span></div>
+  </div>
+  <section class="section"><div class="grid grid-3 review-grid">${cards}</div></section>
+  ${linkCluster("코스·예약 안내", [
+    { href: "/price/", text: "코스·가격 안내" },
+    { href: "/use/home/", text: "자택 이용 전 확인" },
+    { href: "/use/hotel/", text: "호텔·숙소 이용 전 확인" },
+    { href: "/contact/", text: "문의하기" }
+  ])}
+  ${whoHowWhy("간다GO 방문 관리 이용 고객의 실제 후기와 만족도")}`;
+  write("reviews", layout({
+    title: "간다GO 이용 후기｜방문 관리 후기·별점",
+    description: "간다GO 경기남부 방문 관리 이용 후기와 별점. 자택·호텔·오피스텔 이용 후기 안내.",
+    canonical: "/reviews/", h1: "간다GO 이용 후기",
+    breadcrumb: [{ name: "홈", href: "/" }, { name: "이용 후기", href: "/reviews/" }],
+    extraSchema: [{
+      "@type": "Service",
+      "@id": site.baseUrl + "/reviews/#service",
+      serviceType: "출장마사지",
+      name: "경기남부 출장마사지",
+      areaServed: site.org.areaServed,
+      provider: { "@id": site.baseUrl + "/#organization" },
+      aggregateRating: aggregateRatingSchema(),
+      review: reviewSchemaItems()
+    }],
+    body
+  }));
+}
+
 function buildNotFound() {
   const body = `
   <section class="hero" style="text-align:center">
@@ -1103,6 +1209,7 @@ buildUseIndex(); buildUseCases();
 buildCheckIndex(); buildChecks();
 buildPolicies();
 buildPrice();
+buildReviews();
 buildContact();
 buildNotFound();
 buildSitemapRobots();
