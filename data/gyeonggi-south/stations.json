@@ -1,42 +1,573 @@
 [
-  { "slug": "suwon-station", "name": "수원역", "city": "suwon", "cityName": "수원", "district": "팔달구", "dongs": ["매산동", "고등동"], "life": "수원역·인계동", "transfer": true, "note": "1호선·분당선 성격이 있는 역세권으로 상권과 숙소가 밀집합니다." },
-  { "slug": "suwon-cityhall-station", "name": "수원시청역", "city": "suwon", "cityName": "수원", "district": "팔달구", "dongs": ["인계동"], "life": "수원역·인계동", "transfer": false, "note": "인계동 상권 중심의 역세권입니다." },
-  { "slug": "gwanggyo-jungang-station", "name": "광교중앙역", "city": "suwon", "cityName": "수원", "district": "영통구", "dongs": ["이의동", "하동"], "life": "광교·영통", "transfer": false, "note": "광교신도시 오피스텔·업무지구와 가깝습니다." },
-  { "slug": "yeongtong-station", "name": "영통역", "city": "suwon", "cityName": "수원", "district": "영통구", "dongs": ["영통동"], "life": "광교·영통", "transfer": false, "note": "영통 주거·상권 생활권의 역세권입니다." },
-  { "slug": "mangpo-station", "name": "망포역", "city": "suwon", "cityName": "수원", "district": "영통구", "dongs": ["망포동", "매탄동"], "life": "망포·매탄", "transfer": false, "note": "망포·매탄 신규 아파트 생활권과 가깝습니다." },
-  { "slug": "pangyo-station", "name": "판교역", "city": "seongnam", "cityName": "성남", "district": "분당구", "dongs": ["판교동", "백현동"], "life": "분당·판교", "transfer": true, "note": "판교 업무지구·오피스텔 중심의 역세권입니다." },
-  { "slug": "jeongja-station", "name": "정자역", "city": "seongnam", "cityName": "성남", "district": "분당구", "dongs": ["정자동"], "life": "정자·수내", "transfer": true, "note": "분당선·신분당선 성격이 있으나 역명 기준으로 안내합니다." },
-  { "slug": "seohyeon-station", "name": "서현역", "city": "seongnam", "cityName": "성남", "district": "분당구", "dongs": ["서현동"], "life": "야탑·서현", "transfer": false, "note": "서현 상권·주거 생활권의 역세권입니다." },
-  { "slug": "yatap-station", "name": "야탑역", "city": "seongnam", "cityName": "성남", "district": "분당구", "dongs": ["야탑동"], "life": "야탑·서현", "transfer": false, "note": "야탑 상권·터미널 인접 역세권입니다." },
-  { "slug": "moran-station", "name": "모란역", "city": "seongnam", "cityName": "성남", "district": "중원구", "dongs": ["성남동"], "life": "위례·수정", "transfer": true, "note": "원도심 상권 중심의 환승 성격 역세권입니다." },
-  { "slug": "jukjeon-station", "name": "죽전역", "city": "yongin", "cityName": "용인", "district": "수지구", "dongs": ["죽전동"], "life": "죽전·수지", "transfer": false, "note": "죽전 상권·오피스텔 생활권의 역세권입니다." },
-  { "slug": "giheung-station", "name": "기흥역", "city": "yongin", "cityName": "용인", "district": "기흥구", "dongs": ["구갈동"], "life": "기흥·동백", "transfer": true, "note": "분당선·에버라인 성격이 있으나 역명 기준으로 안내합니다." },
-  { "slug": "dongbaek-station", "name": "동백역", "city": "yongin", "cityName": "용인", "district": "기흥구", "dongs": ["중동"], "life": "기흥·동백", "transfer": false, "note": "동백 주거 생활권의 에버라인 역세권입니다." },
-  { "slug": "dongtan-station", "name": "동탄역", "city": "hwaseong", "cityName": "화성", "district": "", "dongs": ["오산동", "청계동"], "life": "동탄신도시", "transfer": true, "note": "SRT·GTX 성격이 있으나 역명 기준으로 안내합니다." },
-  { "slug": "byeongjeom-station", "name": "병점역", "city": "hwaseong", "cityName": "화성", "district": "", "dongs": ["병점동"], "life": "병점·봉담", "transfer": false, "note": "병점 주거 생활권의 1호선 역세권입니다." },
-  { "slug": "osan-station", "name": "오산역", "city": "osan", "cityName": "오산", "district": "", "dongs": ["오산동", "궐동"], "life": "오산역·중앙", "transfer": false, "note": "오산 상권 중심의 1호선 역세권입니다." },
-  { "slug": "osandae-station", "name": "오산대역", "city": "osan", "cityName": "오산", "district": "", "dongs": ["수청동"], "life": "세교·수청", "transfer": false, "note": "세교·수청 생활권과 가까운 역세권입니다." },
-  { "slug": "pyeongtaek-station", "name": "평택역", "city": "pyeongtaek", "cityName": "평택", "district": "", "dongs": ["평택동", "비전동"], "life": "평택역·소사벌", "transfer": false, "note": "평택 상권·숙소가 밀집한 1호선 역세권입니다." },
-  { "slug": "seojeong-ri-station", "name": "서정리역", "city": "pyeongtaek", "cityName": "평택", "district": "", "dongs": ["서정동"], "life": "송탄·서정리", "transfer": false, "note": "고덕신도시 인접 역세권입니다." },
-  { "slug": "anyang-station", "name": "안양역", "city": "anyang", "cityName": "안양", "district": "만안구", "dongs": ["안양동"], "life": "안양역", "transfer": false, "note": "만안구 원도심 상권 중심의 1호선 역세권입니다." },
-  { "slug": "beomgye-station", "name": "범계역", "city": "anyang", "cityName": "안양", "district": "동안구", "dongs": ["호계동"], "life": "범계", "transfer": false, "note": "범계 상권·오피스텔 밀집 역세권입니다." },
-  { "slug": "pyeongchon-station", "name": "평촌역", "city": "anyang", "cityName": "안양", "district": "동안구", "dongs": ["평촌동"], "life": "평촌", "transfer": false, "note": "평촌 상권·주거 생활권의 역세권입니다." },
-  { "slug": "geumjeong-station", "name": "금정역", "city": "gunpo", "cityName": "군포", "district": "", "dongs": ["금정동"], "life": "금정", "transfer": true, "note": "1호선·4호선 환승 성격이 있으나 역명 기준으로 안내합니다." },
-  { "slug": "sanbon-station", "name": "산본역", "city": "gunpo", "cityName": "군포", "district": "", "dongs": ["산본동"], "life": "산본", "transfer": false, "note": "산본 신도시 상권 중심의 역세권입니다." },
-  { "slug": "uiwang-station", "name": "의왕역", "city": "uiwang", "cityName": "의왕", "district": "", "dongs": ["오전동"], "life": "의왕역", "transfer": false, "note": "의왕 주거 생활권의 1호선 역세권입니다." },
-  { "slug": "gwacheon-government-complex-station", "name": "정부과천청사역", "city": "gwacheon", "cityName": "과천", "district": "", "dongs": ["중앙동", "별양동"], "life": "정부청사", "transfer": false, "note": "과천 행정업무지구 중심의 4호선 역세권입니다." },
-  { "slug": "jungang-station", "name": "중앙역", "city": "ansan", "cityName": "안산", "district": "단원구", "dongs": ["고잔동"], "life": "안산중앙·고잔", "transfer": false, "note": "안산 상권 중심의 4호선 역세권입니다." },
-  { "slug": "gojan-station", "name": "고잔역", "city": "ansan", "cityName": "안산", "district": "단원구", "dongs": ["고잔동"], "life": "안산중앙·고잔", "transfer": false, "note": "고잔 주거·상권 생활권의 역세권입니다." },
-  { "slug": "choji-station", "name": "초지역", "city": "ansan", "cityName": "안산", "district": "단원구", "dongs": ["초지동"], "life": "초지·선부", "transfer": true, "note": "4호선·서해선 환승 성격이 있으나 역명 기준으로 안내합니다." },
-  { "slug": "jeongwang-station", "name": "정왕역", "city": "siheung", "cityName": "시흥", "district": "", "dongs": ["정왕동"], "life": "정왕", "transfer": false, "note": "시화산단 인접 역세권입니다." },
-  { "slug": "siheung-neunggok-station", "name": "시흥능곡역", "city": "siheung", "cityName": "시흥", "district": "", "dongs": ["능곡동"], "life": "장현·월곶", "transfer": false, "note": "능곡·장현 신도시 생활권의 서해선 역세권입니다." },
-  { "slug": "gwangmyeong-station", "name": "광명역", "city": "gwangmyeong", "cityName": "광명", "district": "", "dongs": ["일직동"], "life": "일직·KTX광명", "transfer": true, "note": "KTX 성격이 있는 역세권으로 업무·개발권과 가깝습니다." },
-  { "slug": "cheolsan-station", "name": "철산역", "city": "gwangmyeong", "cityName": "광명", "district": "", "dongs": ["철산동"], "life": "광명·철산", "transfer": false, "note": "철산 상권·오피스텔 중심의 7호선 역세권입니다." },
-  { "slug": "misa-station", "name": "미사역", "city": "hanam", "cityName": "하남", "district": "", "dongs": ["망월동", "풍산동"], "life": "미사", "transfer": false, "note": "미사신도시 오피스텔·아파트 밀집 역세권입니다." },
-  { "slug": "hanam-geomdansan-station", "name": "하남검단산역", "city": "hanam", "cityName": "하남", "district": "", "dongs": ["창우동"], "life": "신장", "transfer": false, "note": "하남 원도심 생활권의 5호선 종점 역세권입니다." },
-  { "slug": "gyeonggi-gwangju-station", "name": "경기광주역", "city": "gwangju-si", "cityName": "광주", "district": "", "dongs": ["경안동"], "life": "경기광주", "transfer": false, "note": "경기광주 도심 상권 중심의 경강선 역세권입니다." },
-  { "slug": "gonjiam-station", "name": "곤지암역", "city": "gwangju-si", "cityName": "광주", "district": "", "dongs": ["곤지암읍"], "life": "곤지암·초월", "transfer": false, "note": "곤지암 외곽 생활권의 경강선 역세권입니다." },
-  { "slug": "icheon-station", "name": "이천역", "city": "icheon", "cityName": "이천", "district": "", "dongs": ["창전동", "중리동"], "life": "이천 시내", "transfer": false, "note": "이천 도심 상권 중심의 경강선 역세권입니다." },
-  { "slug": "bubal-station", "name": "부발역", "city": "icheon", "cityName": "이천", "district": "", "dongs": ["부발읍"], "life": "부발", "transfer": false, "note": "부발 산업·주거권의 경강선 역세권입니다." },
-  { "slug": "yeoju-station", "name": "여주역", "city": "yeoju", "cityName": "여주", "district": "", "dongs": ["여흥동", "오학동"], "life": "여주 시내", "transfer": false, "note": "여주 도심 생활권의 경강선 역세권입니다." }
+  {
+    "slug": "suwon-station",
+    "name": "수원역",
+    "city": "suwon",
+    "cityName": "수원",
+    "district": "팔달구",
+    "dongs": [
+      "매산동",
+      "고등동"
+    ],
+    "life": "수원역·인계동",
+    "transfer": true,
+    "note": "1호선·분당선 성격이 있는 역세권으로 상권과 숙소가 밀집합니다.",
+    "lines": "1호선·수인분당선"
+  },
+  {
+    "slug": "suwon-cityhall-station",
+    "name": "수원시청역",
+    "city": "suwon",
+    "cityName": "수원",
+    "district": "팔달구",
+    "dongs": [
+      "인계동"
+    ],
+    "life": "수원역·인계동",
+    "transfer": false,
+    "note": "인계동 상권 중심의 역세권입니다.",
+    "lines": "수인분당선"
+  },
+  {
+    "slug": "gwanggyo-jungang-station",
+    "name": "광교중앙역",
+    "city": "suwon",
+    "cityName": "수원",
+    "district": "영통구",
+    "dongs": [
+      "이의동",
+      "하동"
+    ],
+    "life": "광교·영통",
+    "transfer": false,
+    "note": "광교신도시 오피스텔·업무지구와 가깝습니다.",
+    "lines": "신분당선"
+  },
+  {
+    "slug": "yeongtong-station",
+    "name": "영통역",
+    "city": "suwon",
+    "cityName": "수원",
+    "district": "영통구",
+    "dongs": [
+      "영통동"
+    ],
+    "life": "광교·영통",
+    "transfer": false,
+    "note": "영통 주거·상권 생활권의 역세권입니다.",
+    "lines": "수인분당선"
+  },
+  {
+    "slug": "mangpo-station",
+    "name": "망포역",
+    "city": "suwon",
+    "cityName": "수원",
+    "district": "영통구",
+    "dongs": [
+      "망포동",
+      "매탄동"
+    ],
+    "life": "망포·매탄",
+    "transfer": false,
+    "note": "망포·매탄 신규 아파트 생활권과 가깝습니다.",
+    "lines": "수인분당선"
+  },
+  {
+    "slug": "pangyo-station",
+    "name": "판교역",
+    "city": "seongnam",
+    "cityName": "성남",
+    "district": "분당구",
+    "dongs": [
+      "판교동",
+      "백현동"
+    ],
+    "life": "분당·판교",
+    "transfer": true,
+    "note": "판교 업무지구·오피스텔 중심의 역세권입니다.",
+    "lines": "신분당선·경강선"
+  },
+  {
+    "slug": "jeongja-station",
+    "name": "정자역",
+    "city": "seongnam",
+    "cityName": "성남",
+    "district": "분당구",
+    "dongs": [
+      "정자동"
+    ],
+    "life": "정자·수내",
+    "transfer": true,
+    "note": "분당선·신분당선 성격이 있으나 역명 기준으로 안내합니다.",
+    "lines": "수인분당선·신분당선"
+  },
+  {
+    "slug": "seohyeon-station",
+    "name": "서현역",
+    "city": "seongnam",
+    "cityName": "성남",
+    "district": "분당구",
+    "dongs": [
+      "서현동"
+    ],
+    "life": "야탑·서현",
+    "transfer": false,
+    "note": "서현 상권·주거 생활권의 역세권입니다.",
+    "lines": "수인분당선"
+  },
+  {
+    "slug": "yatap-station",
+    "name": "야탑역",
+    "city": "seongnam",
+    "cityName": "성남",
+    "district": "분당구",
+    "dongs": [
+      "야탑동"
+    ],
+    "life": "야탑·서현",
+    "transfer": false,
+    "note": "야탑 상권·터미널 인접 역세권입니다.",
+    "lines": "수인분당선"
+  },
+  {
+    "slug": "moran-station",
+    "name": "모란역",
+    "city": "seongnam",
+    "cityName": "성남",
+    "district": "중원구",
+    "dongs": [
+      "성남동"
+    ],
+    "life": "위례·수정",
+    "transfer": true,
+    "note": "원도심 상권 중심의 환승 성격 역세권입니다.",
+    "lines": "수인분당선·8호선"
+  },
+  {
+    "slug": "jukjeon-station",
+    "name": "죽전역",
+    "city": "yongin",
+    "cityName": "용인",
+    "district": "수지구",
+    "dongs": [
+      "죽전동"
+    ],
+    "life": "죽전·수지",
+    "transfer": false,
+    "note": "죽전 상권·오피스텔 생활권의 역세권입니다.",
+    "lines": "수인분당선"
+  },
+  {
+    "slug": "giheung-station",
+    "name": "기흥역",
+    "city": "yongin",
+    "cityName": "용인",
+    "district": "기흥구",
+    "dongs": [
+      "구갈동"
+    ],
+    "life": "기흥·동백",
+    "transfer": true,
+    "note": "분당선·에버라인 성격이 있으나 역명 기준으로 안내합니다.",
+    "lines": "수인분당선·용인경전철"
+  },
+  {
+    "slug": "dongbaek-station",
+    "name": "동백역",
+    "city": "yongin",
+    "cityName": "용인",
+    "district": "기흥구",
+    "dongs": [
+      "중동"
+    ],
+    "life": "기흥·동백",
+    "transfer": false,
+    "note": "동백 주거 생활권의 에버라인 역세권입니다.",
+    "lines": "용인경전철"
+  },
+  {
+    "slug": "dongtan-station",
+    "name": "동탄역",
+    "city": "hwaseong",
+    "cityName": "화성",
+    "district": "",
+    "dongs": [
+      "오산동",
+      "청계동"
+    ],
+    "life": "동탄신도시",
+    "transfer": true,
+    "note": "SRT·GTX 성격이 있으나 역명 기준으로 안내합니다.",
+    "lines": "SRT·GTX-A"
+  },
+  {
+    "slug": "byeongjeom-station",
+    "name": "병점역",
+    "city": "hwaseong",
+    "cityName": "화성",
+    "district": "",
+    "dongs": [
+      "병점동"
+    ],
+    "life": "병점·봉담",
+    "transfer": false,
+    "note": "병점 주거 생활권의 1호선 역세권입니다.",
+    "lines": "1호선"
+  },
+  {
+    "slug": "osan-station",
+    "name": "오산역",
+    "city": "osan",
+    "cityName": "오산",
+    "district": "",
+    "dongs": [
+      "오산동",
+      "궐동"
+    ],
+    "life": "오산역·중앙",
+    "transfer": false,
+    "note": "오산 상권 중심의 1호선 역세권입니다.",
+    "lines": "1호선"
+  },
+  {
+    "slug": "osandae-station",
+    "name": "오산대역",
+    "city": "osan",
+    "cityName": "오산",
+    "district": "",
+    "dongs": [
+      "수청동"
+    ],
+    "life": "세교·수청",
+    "transfer": false,
+    "note": "세교·수청 생활권과 가까운 역세권입니다.",
+    "lines": "1호선"
+  },
+  {
+    "slug": "pyeongtaek-station",
+    "name": "평택역",
+    "city": "pyeongtaek",
+    "cityName": "평택",
+    "district": "",
+    "dongs": [
+      "평택동",
+      "비전동"
+    ],
+    "life": "평택역·소사벌",
+    "transfer": false,
+    "note": "평택 상권·숙소가 밀집한 1호선 역세권입니다.",
+    "lines": "1호선"
+  },
+  {
+    "slug": "seojeong-ri-station",
+    "name": "서정리역",
+    "city": "pyeongtaek",
+    "cityName": "평택",
+    "district": "",
+    "dongs": [
+      "서정동"
+    ],
+    "life": "송탄·서정리",
+    "transfer": false,
+    "note": "고덕신도시 인접 역세권입니다.",
+    "lines": "1호선"
+  },
+  {
+    "slug": "anyang-station",
+    "name": "안양역",
+    "city": "anyang",
+    "cityName": "안양",
+    "district": "만안구",
+    "dongs": [
+      "안양동"
+    ],
+    "life": "안양역",
+    "transfer": false,
+    "note": "만안구 원도심 상권 중심의 1호선 역세권입니다.",
+    "lines": "1호선"
+  },
+  {
+    "slug": "beomgye-station",
+    "name": "범계역",
+    "city": "anyang",
+    "cityName": "안양",
+    "district": "동안구",
+    "dongs": [
+      "호계동"
+    ],
+    "life": "범계",
+    "transfer": false,
+    "note": "범계 상권·오피스텔 밀집 역세권입니다.",
+    "lines": "4호선"
+  },
+  {
+    "slug": "pyeongchon-station",
+    "name": "평촌역",
+    "city": "anyang",
+    "cityName": "안양",
+    "district": "동안구",
+    "dongs": [
+      "평촌동"
+    ],
+    "life": "평촌",
+    "transfer": false,
+    "note": "평촌 상권·주거 생활권의 역세권입니다.",
+    "lines": "4호선"
+  },
+  {
+    "slug": "geumjeong-station",
+    "name": "금정역",
+    "city": "gunpo",
+    "cityName": "군포",
+    "district": "",
+    "dongs": [
+      "금정동"
+    ],
+    "life": "금정",
+    "transfer": true,
+    "note": "1호선·4호선 환승 성격이 있으나 역명 기준으로 안내합니다.",
+    "lines": "1호선·4호선"
+  },
+  {
+    "slug": "sanbon-station",
+    "name": "산본역",
+    "city": "gunpo",
+    "cityName": "군포",
+    "district": "",
+    "dongs": [
+      "산본동"
+    ],
+    "life": "산본",
+    "transfer": false,
+    "note": "산본 신도시 상권 중심의 역세권입니다.",
+    "lines": "4호선"
+  },
+  {
+    "slug": "uiwang-station",
+    "name": "의왕역",
+    "city": "uiwang",
+    "cityName": "의왕",
+    "district": "",
+    "dongs": [
+      "오전동"
+    ],
+    "life": "의왕역",
+    "transfer": false,
+    "note": "의왕 주거 생활권의 1호선 역세권입니다.",
+    "lines": "1호선"
+  },
+  {
+    "slug": "gwacheon-government-complex-station",
+    "name": "정부과천청사역",
+    "city": "gwacheon",
+    "cityName": "과천",
+    "district": "",
+    "dongs": [
+      "중앙동",
+      "별양동"
+    ],
+    "life": "정부청사",
+    "transfer": false,
+    "note": "과천 행정업무지구 중심의 4호선 역세권입니다.",
+    "lines": "4호선"
+  },
+  {
+    "slug": "jungang-station",
+    "name": "중앙역",
+    "city": "ansan",
+    "cityName": "안산",
+    "district": "단원구",
+    "dongs": [
+      "고잔동"
+    ],
+    "life": "안산중앙·고잔",
+    "transfer": false,
+    "note": "안산 상권 중심의 4호선 역세권입니다.",
+    "lines": "4호선·수인분당선"
+  },
+  {
+    "slug": "gojan-station",
+    "name": "고잔역",
+    "city": "ansan",
+    "cityName": "안산",
+    "district": "단원구",
+    "dongs": [
+      "고잔동"
+    ],
+    "life": "안산중앙·고잔",
+    "transfer": false,
+    "note": "고잔 주거·상권 생활권의 역세권입니다.",
+    "lines": "4호선·수인분당선"
+  },
+  {
+    "slug": "choji-station",
+    "name": "초지역",
+    "city": "ansan",
+    "cityName": "안산",
+    "district": "단원구",
+    "dongs": [
+      "초지동"
+    ],
+    "life": "초지·선부",
+    "transfer": true,
+    "note": "4호선·서해선 환승 성격이 있으나 역명 기준으로 안내합니다.",
+    "lines": "4호선·수인분당선·서해선"
+  },
+  {
+    "slug": "jeongwang-station",
+    "name": "정왕역",
+    "city": "siheung",
+    "cityName": "시흥",
+    "district": "",
+    "dongs": [
+      "정왕동"
+    ],
+    "life": "정왕",
+    "transfer": false,
+    "note": "시화산단 인접 역세권입니다.",
+    "lines": "4호선·수인분당선"
+  },
+  {
+    "slug": "siheung-neunggok-station",
+    "name": "시흥능곡역",
+    "city": "siheung",
+    "cityName": "시흥",
+    "district": "",
+    "dongs": [
+      "능곡동"
+    ],
+    "life": "장현·월곶",
+    "transfer": false,
+    "note": "능곡·장현 신도시 생활권의 서해선 역세권입니다.",
+    "lines": "서해선"
+  },
+  {
+    "slug": "gwangmyeong-station",
+    "name": "광명역",
+    "city": "gwangmyeong",
+    "cityName": "광명",
+    "district": "",
+    "dongs": [
+      "일직동"
+    ],
+    "life": "일직·KTX광명",
+    "transfer": true,
+    "note": "KTX 성격이 있는 역세권으로 업무·개발권과 가깝습니다.",
+    "lines": "1호선·KTX"
+  },
+  {
+    "slug": "cheolsan-station",
+    "name": "철산역",
+    "city": "gwangmyeong",
+    "cityName": "광명",
+    "district": "",
+    "dongs": [
+      "철산동"
+    ],
+    "life": "광명·철산",
+    "transfer": false,
+    "note": "철산 상권·오피스텔 중심의 7호선 역세권입니다.",
+    "lines": "7호선"
+  },
+  {
+    "slug": "misa-station",
+    "name": "미사역",
+    "city": "hanam",
+    "cityName": "하남",
+    "district": "",
+    "dongs": [
+      "망월동",
+      "풍산동"
+    ],
+    "life": "미사",
+    "transfer": false,
+    "note": "미사신도시 오피스텔·아파트 밀집 역세권입니다.",
+    "lines": "5호선"
+  },
+  {
+    "slug": "hanam-geomdansan-station",
+    "name": "하남검단산역",
+    "city": "hanam",
+    "cityName": "하남",
+    "district": "",
+    "dongs": [
+      "창우동"
+    ],
+    "life": "신장",
+    "transfer": false,
+    "note": "하남 원도심 생활권의 5호선 종점 역세권입니다.",
+    "lines": "5호선"
+  },
+  {
+    "slug": "gyeonggi-gwangju-station",
+    "name": "경기광주역",
+    "city": "gwangju-si",
+    "cityName": "광주",
+    "district": "",
+    "dongs": [
+      "경안동"
+    ],
+    "life": "경기광주",
+    "transfer": false,
+    "note": "경기광주 도심 상권 중심의 경강선 역세권입니다.",
+    "lines": "경강선"
+  },
+  {
+    "slug": "gonjiam-station",
+    "name": "곤지암역",
+    "city": "gwangju-si",
+    "cityName": "광주",
+    "district": "",
+    "dongs": [
+      "곤지암읍"
+    ],
+    "life": "곤지암·초월",
+    "transfer": false,
+    "note": "곤지암 외곽 생활권의 경강선 역세권입니다.",
+    "lines": "경강선"
+  },
+  {
+    "slug": "icheon-station",
+    "name": "이천역",
+    "city": "icheon",
+    "cityName": "이천",
+    "district": "",
+    "dongs": [
+      "창전동",
+      "중리동"
+    ],
+    "life": "이천 시내",
+    "transfer": false,
+    "note": "이천 도심 상권 중심의 경강선 역세권입니다.",
+    "lines": "경강선"
+  },
+  {
+    "slug": "bubal-station",
+    "name": "부발역",
+    "city": "icheon",
+    "cityName": "이천",
+    "district": "",
+    "dongs": [
+      "부발읍"
+    ],
+    "life": "부발",
+    "transfer": false,
+    "note": "부발 산업·주거권의 경강선 역세권입니다.",
+    "lines": "경강선"
+  },
+  {
+    "slug": "yeoju-station",
+    "name": "여주역",
+    "city": "yeoju",
+    "cityName": "여주",
+    "district": "",
+    "dongs": [
+      "여흥동",
+      "오학동"
+    ],
+    "life": "여주 시내",
+    "transfer": false,
+    "note": "여주 도심 생활권의 경강선 역세권입니다.",
+    "lines": "경강선"
+  }
 ]

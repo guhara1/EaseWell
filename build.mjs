@@ -99,6 +99,51 @@ function cityDetailSections(c) {
   return html ? `<div class="prose section" style="max-width:none">${html}</div>` : "";
 }
 
+// 지역 유형별 이용 참고 — 장소명 없이 카테고리별로 다른 안내(도어웨이 방지: 이름 치환 아님)
+const TYPE_GUIDE = {
+  industrial: { label: "산업지구 생활권", ps: [
+    "산업지구가 포함된 지역은 공장·물류·연구 시설과 인근 주거·숙소가 섞여 있어, 방문 주소가 단지 내부인지 인접 주거지인지에 따라 진입로와 이동 기준이 달라집니다. 일부 단지는 정문 게이트에서 방문 차량을 확인하므로 정확한 건물 위치와 진입 동선을 먼저 확인하는 것이 좋습니다.",
+    "교대 근무가 많아 야간 예약 수요가 있는 편이며, 도심 대비 이동 소요 시간이 길어 예약 시간을 여유 있게 잡는 것이 좋습니다. 지하철 접근이 어려운 구간은 차량 이동을 기본으로 하고, 추가 이동비 기준을 예약 전에 안내받는 것이 원활합니다."
+  ] },
+  outer: { label: "외곽·읍면 생활권", ps: [
+    "외곽·읍면 지역은 도심에서 떨어져 있어 차량 이동 거리가 길고, 같은 지명이 넓게 퍼져 있어 정확한 방문 위치 확인이 특히 중요합니다. 방문 주소가 도심 생활권인지 외곽인지에 따라 이동 소요 시간과 추가 이동비 기준이 달라지므로 예약 전에 함께 확인하는 것이 좋습니다.",
+    "지하철 접근이 어려운 곳이 많아 차량 이동을 기본으로 하며, 예약 시간을 여유 있게 잡고 이동비 기준을 사전에 안내받는 것이 좋습니다. 자택·숙소 여부와 단독주택 현관·공동현관 등 건물 출입 방식도 함께 확인하면 방문이 원활합니다."
+  ] },
+  newtown: { label: "신도시 생활권", ps: [
+    "신도시 생활권은 대규모 아파트·오피스텔 단지가 밀집해 같은 이름의 단지가 여러 블록에 걸쳐 있는 경우가 많습니다. 정확한 단지명과 동·호수를 확인하지 않으면 인접 단지와 혼동되기 쉬워, 방문 전에 단지 정보를 명확히 확인하는 것이 좋습니다.",
+    "공동현관 비밀번호나 세대 호출, 엘리베이터 카드 인증, 방문객 주차 등록처럼 출입 절차가 정해진 단지가 많습니다. 관리 규정과 방문 가능 시간대를 함께 확인해두면 이동이 원활하며, 야간 예약 시에는 심야 출입 방식을 미리 확인하는 것이 좋습니다."
+  ] },
+  business: { label: "업무지구 생활권", ps: [
+    "업무지구가 포함된 지역은 오피스 빌딩과 지식산업센터, 주상복합 오피스텔이 섞여 있어 건물마다 보안 규정이 다릅니다. 로비 안내데스크를 거치거나 방문자 등록이 필요한 곳이 있어, 정확한 동·층·호수와 로비 출입 방식을 먼저 확인하는 것이 좋습니다.",
+    "주간과 야간·주말의 출입 방식이 다를 수 있고, 업무 시간대와 예약 가능 시간을 맞추는 것이 중요합니다. 주차는 방문객 등록 여부와 요금을 함께 확인해두면 편리합니다."
+  ] },
+  station: { label: "역세권·상권 생활권", ps: [
+    "역세권·상권 생활권은 오피스텔·숙소·상가가 섞여 있어 건물 유형에 따라 확인 사항이 다릅니다. 오피스텔은 공동현관·엘리베이터 카드와 관리 규정을, 숙소는 외부인 방문 정책과 객실 출입 방식을, 상가 건물은 보안 규정과 예약 가능 시간을 확인하는 것이 좋습니다.",
+    "역명과 출구 방향은 위치를 가늠하는 참고 정보이며, 실제 방문 가능 여부는 정확한 도로명 주소와 건물 출입 방식으로 확인합니다. 유동 인구가 많은 시간대에는 이동 동선을 미리 파악해두면 방문이 원활합니다."
+  ] },
+  residential: { label: "주거 생활권", ps: [
+    "주거 생활권은 아파트와 빌라·주상복합이 섞여 있어 공동현관 출입 방식과 세대 호출, 주차 가능 여부를 확인하는 것이 방문의 핵심입니다. 저층 빌라·단독주택은 골목형 주소가 많아 정확한 동·호수와 현관 위치를 미리 확인하는 것이 좋습니다.",
+    "조용한 주거지는 방문 시간대와 출입 동선을 배려하는 것이 좋으며, 야간 예약 시에는 심야 공동현관 출입 방식과 연락 방법을 함께 확인하면 방문이 원활합니다."
+  ] },
+  default: { label: "생활권 이용", ps: [
+    "이 지역은 주거·상업·업무 기능이 함께 있어, 방문 장소가 자택·오피스텔·숙소·업무 건물 중 어디인지에 따라 확인 사항이 달라집니다. 공통적으로 정확한 방문 주소와 공동현관·건물 출입 방식, 예약 가능 시간을 먼저 확인하는 것이 좋습니다.",
+    "신도시·산업지구·외곽에 해당하면 차량 이동 거리와 추가 이동비를, 도심 역세권이면 유동 인구와 건물 출입 동선을 함께 확인하면 방문이 원활합니다."
+  ] }
+};
+function categoryOf(text = "") {
+  if (/산업|산단|시화|반월|물류/.test(text)) return "industrial";
+  if (/외곽|읍면|차량 이동|읍$|면$|읍 |면 /.test(text)) return "outer";
+  if (/신도시|택지|지구/.test(text)) return "newtown";
+  if (/업무|테크노|청사/.test(text)) return "business";
+  if (/역세권|상권|상업/.test(text)) return "station";
+  if (/주거/.test(text)) return "residential";
+  return "default";
+}
+function typeGuidance(text) {
+  const g = TYPE_GUIDE[categoryOf(text)];
+  return `<div class="prose section" style="max-width:none"><h2>이용 시 참고 · ${esc(g.label)}</h2>${g.ps.map(p => `<p>${esc(p)}</p>`).join("")}</div>`;
+}
+
 function areaDetail(a) {
   let html = `<h2>${esc(a.name)} 도시별 안내</h2>`;
   for (const cs of a.cities) {
@@ -107,6 +152,7 @@ function areaDetail(a) {
     const sts = stations.filter(s => s.city === c.slug).slice(0, 4);
     html += `<h3><a href="/city/${c.slug}/">${esc(c.name)}</a></h3><p>${esc(c.intro)} ${lifes.length ? `대표 생활권은 ${lifes.map(l => `<a href="/life/${l.slug}/">${esc(l.name)}</a>`).join(", ")} 등이며, ` : ""}${sts.length ? `가까운 역은 ${sts.map(s => `<a href="/station/${s.slug}/">${esc(s.name)}</a>`).join(", ")} 등입니다.` : "지하철보다 차량 이동 기준이 중요한 지역입니다."}</p>`;
   }
+  html += `<p>같은 권역 안에서도 도시와 생활권에 따라 이동 기준이 다릅니다. 방문 전에는 정확한 방문 주소와 행정구·행정동, 공동현관·건물 출입 방식, 예약 가능 시간을 확인하고, 신도시·산업지구·외곽에 해당하면 차량 이동 거리와 추가 이동비 기준을 함께 확인하는 것이 좋습니다.</p>`;
   return `<div class="prose section" style="max-width:none">${html}</div>`;
 }
 
@@ -116,8 +162,10 @@ function stationDetail(s) {
   const sameLife = stations.filter(x => x.life === s.life && x.slug !== s.slug);
   let html = `<h2>${esc(s.name)} 주변 생활권</h2>`;
   html += `<p>${esc(s.name)}은(는) ${esc(s.cityName)}${s.district ? " " + esc(s.district) : ""} ${esc((s.dongs || []).join("·"))} 일대를 아우르며, ${life ? `<a href="/life/${life.slug}/">${esc(life.name)}</a> 생활권과 이어집니다. ${esc(life.note)}` : "인근 주거·상권 생활권과 이어집니다."}</p>`;
+  if (s.lines) html += `<p>수도권 전철 ${esc(s.lines)} 노선이 지나는 역으로, 환승 노선이 있어도 노선별·출구별로 페이지를 나누지 않고 역명 기준으로 위치를 안내해 중복을 줄입니다.</p>`;
   if (sameLife.length) html += `<p>같은 생활권의 다른 역으로는 ${sameLife.map(x => `<a href="/station/${x.slug}/">${esc(x.name)}</a>`).join(", ")}이(가) 있습니다. 역명은 위치 참고용이며, 실제 방문 가능 여부는 정확한 주소와 건물 출입 방식으로 확인합니다.</p>`;
   html += `<h2>${esc(s.name)} 이용 장소별 확인</h2><p>역 주변 오피스텔은 공동현관·엘리베이터·관리 규정과 방문 가능 시간을, 숙소는 외부인 방문 정책과 객실 출입 방식을, 상권 건물은 보안 규정과 예약 가능 시간을 확인하는 것이 좋습니다. 자택 방문은 정확한 동·호수와 공동현관 출입 방식을 미리 확인하면 이동과 예약이 원활합니다.</p>`;
+  html += `<p>${esc(s.name)}은(는) 출구별·노선별로 페이지를 나누지 않고 역명 기준으로 위치를 안내해 중복을 줄입니다. 예약 전에는 정확한 도로명 주소와 건물 출입 방식, 예약 가능 시간을 확인하고, 신도시·외곽 방향이면 차량 이동 거리와 추가 이동비 기준을 함께 확인하는 것이 좋습니다. 개인정보는 예약 확인에 필요한 최소 정보만 안내받으며, 불법·선정적 서비스는 제공하거나 안내하지 않습니다.</p>`;
   return `<div class="prose section" style="max-width:none">${html}</div>`;
 }
 
@@ -136,7 +184,8 @@ function districtDetail(c, d) {
   const dongs = dongsInCity(c.slug, d.slug);
   if (!dongs.length) return "";
   const html = `<h2>${esc(c.name)} ${esc(d.name)} 대표 행정동 자세히</h2>` +
-    dongs.map(x => `<h3><a href="${dongUrl(x)}">${esc(x.name)}</a></h3><p>${esc(x.note)}</p>`).join("");
+    dongs.map(x => `<h3><a href="${dongUrl(x)}">${esc(x.name)}</a></h3><p>${esc(x.note)}</p>`).join("") +
+    `<p>${esc(d.name)} 안에서도 행정동과 생활권에 따라 이동 기준과 이용 환경이 다릅니다. 방문 전에는 정확한 방문 주소(동·호수)와 공동현관·건물 출입 방식, 예약 가능 시간을 확인하고, 인접 행정구·행정동과 헷갈리지 않도록 도시·행정구까지 함께 확인하는 것이 정확합니다.</p>`;
   return `<div class="prose section" style="max-width:none">${html}</div>`;
 }
 
@@ -146,7 +195,8 @@ function lifeDetail(l) {
   if (sts.length) html += `<h2>${esc(l.name)} 가까운 지하철역</h2><ul>${sts.map(s => `<li><a href="/station/${s.slug}/"><strong>${esc(s.name)}</strong></a> — ${esc(s.note)}</li>`).join("")}</ul>`;
   const dongs = (l.dongs || []).map(n => adminDongs.find(x => x.city === l.city && x.name === n)).filter(Boolean);
   if (dongs.length) html += `<h2>${esc(l.name)} 포함 행정동</h2>${dongs.map(x => `<h3><a href="${dongUrl(x)}">${esc(x.name)}</a></h3><p>${esc(x.note)}</p>`).join("")}`;
-  return html ? `<div class="prose section" style="max-width:none">${html}</div>` : "";
+  html += `<p>${esc(l.name)} 생활권은 인접 생활권·역세권과 이동으로 이어지며, 같은 생활권 안에서도 자택·오피스텔·숙소·업무 건물 등 방문 장소에 따라 확인 사항이 다릅니다. 예약 전에는 정확한 방문 주소와 공동현관·건물 출입 방식, 예약 가능 시간을 확인하고, 신도시·산업·외곽에 해당하면 차량 이동 거리와 추가 이동비 기준을 함께 확인하는 것이 좋습니다.</p>`;
+  return `<div class="prose section" style="max-width:none">${html}</div>`;
 }
 
 // ---- 헤더/푸터 -------------------------------------------------
@@ -446,6 +496,7 @@ function buildAreas() {
       <h2>이동 기준</h2><p>${esc(a.move)}</p>
     </div>
     ${areaDetail(a)}
+    ${typeGuidance(a.name + " " + a.move + " " + a.lead)}
     ${linkCluster("포함 도시", cityLinks)}
     ${linkCluster("대표 생활권", lifeLinks)}
     ${linkCluster("가까운 지하철역", stationLinks)}
@@ -554,6 +605,7 @@ function buildDistrict(c, d) {
     <h2>이용 장소별 기준</h2><p>오피스텔은 공동현관·엘리베이터·관리 규정과 방문 가능 시간을, 상권·업무지구는 건물 보안 규정과 예약 가능 시간을, 주거지는 공동현관 출입 방식을 확인하는 것이 좋습니다.</p>
   </div>
   ${districtDetail(c, d)}
+  ${typeGuidance(d.note)}
   ${linkCluster("대표 행정동", dongLinks)}
   ${linkCluster("같은 도시 다른 행정구", siblingLinks)}
   ${linkCluster("관련 생활권", lifeLinks.length ? lifeLinks : lifeAreas.filter(l => l.city === c.slug).slice(0, 3).map(l => ({ href: `/life/${l.slug}/`, text: `${l.name} 생활권` })))}
@@ -626,6 +678,7 @@ function buildDongs() {
       <p>자택은 공동현관·엘리베이터·주차 여부를, 오피스텔은 방문자 등록과 관리 규정을, 숙소는 외부인 방문 정책과 객실 출입 방식을 먼저 확인합니다. ${d.note.includes("외곽") || d.note.includes("차량") ? "외곽·산업권은 차량 이동 거리와 추가 이동비, 예약 가능 시간을 확인하는 것이 좋습니다." : "신규 단지가 많은 지역은 정확한 단지명과 동·호수를 확인하는 것이 좋습니다."}</p>
     </div>
     ${dongDetail(d)}
+    ${typeGuidance(d.note)}
     ${linkCluster("상위 도시·행정구", parentLinks)}
     ${linkCluster("인접 행정동", adjLinks)}
     ${linkCluster("관련 생활권·역세권", lifeLinks.concat(stationLinks))}
@@ -694,6 +747,7 @@ function buildLifeAreas() {
       <p>신도시·오피스텔은 동·호수와 공동현관·관리 규정을, 역세권 상권은 숙소·건물 출입 방식을, 산업·외곽은 차량 이동 거리와 추가 이동비를 확인합니다.</p>
     </div>
     ${lifeDetail(l)}
+    ${typeGuidance(l.type + " " + l.note)}
     ${linkCluster("포함 도시·행정구", [{ href: `/city/${l.city}/`, text: `${l.cityName} 안내` }].concat((l.districts || []).map(d => {
       const dobj = (c?.districts || []).find(x => x.name === d);
       return dobj ? { href: `/city/${l.city}/${dobj.slug}/`, text: `${l.cityName} ${d}` } : null;
@@ -755,6 +809,7 @@ function buildStations() {
       <p>역 주변 오피스텔은 공동현관·관리 규정을, 숙소는 외부인 방문 정책과 객실 출입 방식을, 상권 건물은 보안·예약 가능 시간을 확인합니다.</p>
     </div>
     ${stationDetail(s)}
+    ${typeGuidance(s.note + " " + (life ? life.type : ""))}
     ${linkCluster("상위 도시·생활권", [{ href: `/city/${s.city}/`, text: `${s.cityName} 안내` }, life ? { href: `/life/${life.slug}/`, text: `${life.name} 생활권` } : null])}
     ${linkCluster("같은 도시 다른 역", sameCity)}
     ${checklistBlock(["역명이 아닌 정확한 방문 주소를 확인했나요?", "건물 공동현관·출입 방식을 확인했나요?", "가까운 생활권을 확인했나요?", "예약 가능 시간을 확인했나요?", "개인정보 처리 기준을 확인했나요?"])}
@@ -802,10 +857,12 @@ function buildUseCases() {
       ${(u.long || []).map((p, i) => (i === 1 ? `<h2>경기남부 지역별 참고</h2>` : "") + `<p>${esc(p)}</p>`).join("")}
       <h2>확인해야 할 내용</h2>
       <ul class="checklist">${u.points.map(p => `<li>${esc(p)}</li>`).join("")}</ul>
+      ${(u.close || []).length ? `<h2>예약 팁 · 간다GO 안내</h2>${u.close.map(p => `<p>${esc(p)}</p>`).join("")}` : ""}
+      <p>코스와 요금이 궁금하면 <a href="/price/">코스·가격 안내</a>에서, 예약은 <a href="/contact/">문의하기</a>에서 확인할 수 있습니다. 방문 지역과 이용 장소 정보를 미리 준비해두면 이동과 예약이 한결 수월합니다.</p>
     </div>
     ${linkCluster("도시별 안내", cityLinks)}
     ${linkCluster("예약 전 확인", checks.slice(0, 5).map(ch => ({ href: `/check/${ch.slug}/`, text: ch.name })))}
-    ${faqBlock(SHARED_FAQ.slice(0, 4))}
+    ${faqBlock(SHARED_FAQ)}
     ${whoHowWhy(`${u.name} 방문 전 확인사항과 경기남부 지역별 이용 기준`)}`;
     write(`use/${u.slug}`, layout({
       title: `${u.h1} | 간다GO`,
@@ -843,10 +900,12 @@ function buildChecks() {
       ${(ch.long || []).map((p, i) => (i === 1 ? `<h2>경기남부 지역별 참고</h2>` : "") + `<p>${esc(p)}</p>`).join("")}
       <h2>확인 항목</h2>
       <ul class="checklist">${ch.points.map(p => `<li>${esc(p)}</li>`).join("")}</ul>
+      ${(ch.close || []).length ? `<h2>예약 팁 · 간다GO 안내</h2>${ch.close.map(p => `<p>${esc(p)}</p>`).join("")}` : ""}
+      <p>코스와 요금은 <a href="/price/">코스·가격 안내</a>에서, 예약은 <a href="/contact/">문의하기</a>에서 확인할 수 있습니다. 예약 전 확인 항목을 미리 정리해두면 이동과 예약이 한결 수월합니다.</p>
     </div>
     ${linkCluster("다른 확인 항목", others)}
     ${linkCluster("이용 장소", useCases.slice(0, 5).map(u => ({ href: `/use/${u.slug}/`, text: u.name })))}
-    ${faqBlock(SHARED_FAQ.slice(0, 4))}
+    ${faqBlock(SHARED_FAQ)}
     ${whoHowWhy(`${ch.name} 항목과 경기남부 도시·생활권별 차이`)}`;
     write(`check/${ch.slug}`, layout({
       title: `${ch.h1} | 간다GO`,
@@ -941,6 +1000,15 @@ function buildPrice() {
       <li><strong>인원·시간대</strong> — 인원 구성과 야간 예약 여부에 따라 안내 금액이 달라질 수 있습니다.</li>
     </ul>
     <p>표시 요금은 기본 정찰가이며, 허위·과장된 가격 문구나 즉시 할인 보장 표현은 사용하지 않습니다. 정확한 금액은 예약 전에 안내받는 것이 좋습니다.</p>
+    <h2>코스별 안내</h2>
+    <p><strong>60분 코스(90,000원)</strong>는 가벼운 피로 회복과 전신 이완을 위한 기본 코스로, 짧은 시간에 뭉친 부위를 풀고 싶은 분께 적합합니다. <strong>90분 코스(150,000원)</strong>는 전신 균형과 깊은 이완까지 챙기는 인기 코스로, 어깨·허리 등 특정 부위와 전신을 함께 관리하고 싶을 때 선택하는 경우가 많습니다. <strong>120분 코스(180,000원)</strong>는 충분한 시간으로 머리부터 발끝까지 집중 관리하는 코스로, 여유 있게 전신을 꼼꼼히 관리하고 싶은 분께 적합합니다.</p>
+    <p>코스는 방문 후 상태에 따라 조정될 수 있으며, 인원이 둘 이상이거나 특정 부위 집중 관리가 필요한 경우 예약 시 미리 알려주시면 코스와 소요 시간을 함께 안내드립니다. 표시 요금은 1인 기준 정찰가로, 인원과 코스 구성에 따라 안내 금액이 달라질 수 있습니다.</p>
+    <h2>지역별 요금 참고</h2>
+    <p>경기남부는 수원·성남·안양·군포처럼 도심·역세권은 이동이 빨라 기본 정찰가로 안내되는 경우가 많습니다. 반면 용인 처인구, 화성 향남·남양, 안성·이천·여주, 평택 안중·포승 같은 외곽과 반월·시화·고덕 같은 산업권은 차량 이동 거리가 길어 코스 요금 외 추가 이동비가 발생할 수 있습니다. 방문 주소를 기준으로 이동 거리를 산정해 예약 전에 안내드리므로, 정확한 지역을 알려주시면 총 금액을 미리 확인하실 수 있습니다.</p>
+    <p>야간·심야 시간대나 예약이 몰리는 시간대에는 이동 조건이 달라질 수 있어, 예약 문의 시 방문 지역과 희망 시간을 함께 알려주시면 코스·시간·이동비를 종합해 안내드립니다. 개인정보는 예약 확인과 연락에 필요한 최소한만 받으며, 불법·선정적 서비스는 제공하거나 안내하지 않습니다.</p>
+    <h2>코스 선택이 고민된다면</h2>
+    <p>처음이거나 어떤 코스가 맞을지 고민된다면, 관리받고 싶은 부위와 사용 가능한 시간을 알려주세요. 가벼운 이완이 목적이면 60분, 전신 균형까지 챙기려면 90분, 여유 있게 집중 관리를 원하면 120분 코스가 무난합니다. 예약 문의 시 상태와 희망 사항을 말씀해주시면 코스와 소요 시간을 함께 안내드립니다.</p>
+    <p>표시 요금은 모든 지역 공통의 기본 정찰가로 안내하며, 지역·인원·시간대에 따른 차이는 예약 전에 투명하게 알려드립니다. 과장된 할인 문구나 즉시 최저가 보장 같은 표현은 사용하지 않으며, 정찰가와 추가 이동비 기준을 미리 확인하실 수 있도록 안내하는 것을 원칙으로 합니다.</p>
   </div>
   ${linkCluster("예약 전 확인 · 문의", [
     { href: "/check/travel-fee/", text: "추가 이동비 기준" },
