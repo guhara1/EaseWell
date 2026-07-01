@@ -5,7 +5,7 @@
   "locale": "ko_KR",
   "phone": "0508-202-4719",
   "phoneLabel": "전화예약",
-  "heroImage": "",
+  "heroImage": "/assets/hero.webp",
   "telegram": {
     "reservation": "https://t.me/gandago_reserve",
     "webBuild": "https://t.me/gandago_web",
