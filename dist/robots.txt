@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ganda-go.com/sitemap.xml
+Sitemap: https://easewell-massage.netlify.app/sitemap.xml

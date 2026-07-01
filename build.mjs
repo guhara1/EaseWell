@@ -202,7 +202,7 @@ function layout(p) {
   const schema = [orgSchema(), webPageSchema(p), breadcrumbSchema(p.breadcrumb), imageObjectSchema(ogImage, alt), ...(p.extraSchema || [])];
   const graph = { "@context": "https://schema.org", "@graph": schema };
   const canonicalAbs = site.baseUrl + p.canonical;
-  urls.push({ loc: canonicalAbs, noindex: !!p.noindex });
+  if (!p.skipSitemap) urls.push({ loc: canonicalAbs, noindex: !!p.noindex });
   return `<!doctype html>
 <html lang="ko">
 <head>
@@ -821,6 +821,29 @@ function buildContact() {
   }));
 }
 
+function buildNotFound() {
+  const body = `
+  <section class="hero" style="text-align:center">
+    <span class="eyebrow">404</span>
+    <h1 style="max-width:none">페이지를 찾을 수 없습니다</h1>
+    <p class="lead" style="margin-inline:auto">주소가 바뀌었거나 삭제된 페이지일 수 있습니다. 아래에서 원하는 지역 안내로 이동해 보세요.</p>
+    <div class="cta-row" style="justify-content:center">
+      <a class="btn btn-primary btn-lg" href="/gyeonggi-south/">경기남부 홈</a>
+      <a class="btn btn-ghost btn-lg" href="/gyeonggi-south/city/">도시 안내</a>
+      <a class="btn btn-ghost btn-lg" href="/gyeonggi-south/dong/">행정동 안내</a>
+      <a class="btn btn-ghost btn-lg" href="/gyeonggi-south/contact/">문의하기</a>
+    </div>
+  </section>`;
+  const html = layout({
+    title: "페이지를 찾을 수 없습니다 (404) | 간다GO",
+    description: "요청하신 페이지를 찾을 수 없습니다. 경기남부 지역 안내로 이동해 주세요.",
+    canonical: "/404.html", h1: "페이지를 찾을 수 없습니다",
+    breadcrumb: [{ name: "홈", href: "/gyeonggi-south/" }, { name: "404" }],
+    noindex: true, skipSitemap: true, body
+  });
+  writeFileSync(join(OUT, "404.html"), html);
+}
+
 function buildSitemapRobots() {
   const today = process.env.BUILD_DATE || "2026-07-01";
   const items = urls.filter(u => !u.noindex);
@@ -863,6 +886,7 @@ buildUseIndex(); buildUseCases();
 buildCheckIndex(); buildChecks();
 buildPolicies();
 buildContact();
+buildNotFound();
 buildSitemapRobots();
 
 const pageCount = countHtml(OUT);
