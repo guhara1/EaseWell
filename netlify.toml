@@ -6,10 +6,10 @@
 [build.environment]
   NODE_VERSION = "22"
 
-# 루트 → 경기남부 메인 (301)
+# 구 경로(/gyeonggi-south/*) → 루트로 301 (기존 링크 보존)
 [[redirects]]
-  from = "/"
-  to = "/gyeonggi-south/"
+  from = "/gyeonggi-south/*"
+  to = "/:splat"
   status = 301
   force = false
 

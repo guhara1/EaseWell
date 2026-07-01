@@ -76,16 +76,40 @@ p  { margin: 0 0 var(--space-4); }
   -webkit-backdrop-filter: saturate(160%) blur(12px);
   border-bottom: 1px solid var(--color-line);
 }
-.site-header .bar { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); padding-block: 14px; }
-.brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 900; font-size: var(--fs-lg); color: var(--color-ink-900); letter-spacing: -0.03em; }
+.site-header .bar { display: flex; align-items: center; gap: var(--space-4); padding-block: 12px; }
+.brand { display: inline-flex; align-items: center; gap: 8px; font-weight: 900; font-size: var(--fs-lg); color: var(--color-ink-900); letter-spacing: -0.03em; flex: 0 0 auto; }
 .brand:hover { text-decoration: none; }
 .brand .dot { color: var(--color-brand-500); }
-.nav { display: flex; gap: 2px; flex-wrap: wrap; }
-.nav a { color: var(--color-ink-700); font-size: var(--fs-sm); font-weight: 600; padding: 8px 12px; border-radius: var(--radius-pill); }
-.nav a:hover { background: var(--color-surface-100); text-decoration: none; }
-.header-cta { display: flex; align-items: center; gap: 10px; }
-.tel-pill { font-weight: 800; color: var(--color-ink-900); white-space: nowrap; }
-.tel-pill span { color: var(--color-brand-600); }
+
+/* 데스크톱 내비 — 한 줄, 중앙 정렬 */
+.nav-desktop { display: flex; align-items: center; gap: 2px; flex-wrap: nowrap; margin: 0 auto; }
+.nav-desktop a { color: var(--color-ink-700); font-size: var(--fs-sm); font-weight: 600; padding: 8px 11px; border-radius: var(--radius-pill); white-space: nowrap; }
+.nav-desktop a:hover { background: var(--color-surface-100); text-decoration: none; color: var(--color-ink-900); }
+
+.header-cta { display: flex; align-items: center; gap: 10px; flex: 0 0 auto; }
+.tel-pill { display: inline-flex; align-items: baseline; gap: 6px; font-weight: 800; color: var(--color-ink-900); white-space: nowrap; }
+.tel-pill:hover { text-decoration: none; }
+.tel-pill .tel-label { font-size: var(--fs-xs); font-weight: 700; color: var(--color-text-mute); }
+.tel-pill strong { color: var(--color-brand-600); font-size: var(--fs-md); letter-spacing: -0.01em; }
+
+/* 모바일 햄버거 메뉴 (JS 없이 details) */
+.nav-menu { position: relative; display: none; }
+.nav-menu > summary { list-style: none; cursor: pointer; width: 42px; height: 42px; display: grid; place-items: center; border: 1px solid var(--color-line); border-radius: var(--radius-md); background: var(--color-surface-0); }
+.nav-menu > summary::-webkit-details-marker { display: none; }
+.menu-ico, .menu-ico::before, .menu-ico::after { content: ""; display: block; width: 18px; height: 2px; border-radius: 2px; background: var(--color-ink-800); transition: transform .2s ease; }
+.menu-ico::before { transform: translateY(-6px); } .menu-ico::after { transform: translateY(4px); }
+.nav-menu[open] .menu-ico { background: transparent; }
+.nav-menu[open] .menu-ico::before { transform: rotate(45deg); } .nav-menu[open] .menu-ico::after { transform: rotate(-45deg) translateY(-1.5px) translateX(1px); }
+.nav-drawer { position: absolute; right: 0; top: calc(100% + 10px); width: min(78vw, 300px); background: var(--color-bg-elev); border: 1px solid var(--color-line); border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); padding: 8px; display: grid; gap: 2px; }
+.nav-drawer a { color: var(--color-ink-800); font-weight: 600; padding: 12px 14px; border-radius: var(--radius-md); }
+.nav-drawer a:hover { background: var(--color-surface-100); text-decoration: none; }
+
+@media (max-width: 960px) {
+  .nav-desktop, .btn-reserve-top { display: none; }
+  .nav-menu { display: block; }
+  .site-header .bar { justify-content: space-between; }
+  .tel-pill .tel-label { display: none; }
+}
 
 /* ---- Hero ---------------------------------------------------- */
 .hero {
@@ -174,14 +198,21 @@ a.card:hover { text-decoration: none; transform: translateY(-3px); box-shadow: v
 }
 .linkcluster a:hover { background: var(--color-brand-50); border-color: var(--color-brand-200); color: var(--color-brand-700); text-decoration: none; }
 
-/* ---- Sticky bottom reservation bar (mobile) ----------------- */
-.sticky-cta {
-  position: fixed; left: 0; right: 0; bottom: 0; z-index: 90;
-  display: none; gap: 10px; padding: 10px 14px;
-  background: var(--overlay-glass); backdrop-filter: blur(12px);
-  border-top: 1px solid var(--color-line);
+/* ---- Floating reservation button (모바일 하단 우측 고정) ----- */
+.fab-reserve {
+  position: fixed; right: 16px; bottom: 16px; z-index: 95;
+  display: none; align-items: center; gap: 8px;
+  padding: 0; width: 62px; height: 62px; border-radius: 50%;
+  background: var(--grad-brand); color: #fff; font-weight: 800; font-size: var(--fs-xs);
+  line-height: 1.05; text-align: center; justify-content: center;
+  box-shadow: var(--shadow-brand), 0 10px 24px rgba(20,17,14,.28);
+  border: 2px solid rgba(255,255,255,.28);
 }
-@media (max-width: 720px) { .sticky-cta { display: flex; } body { padding-bottom: 72px; } }
+.fab-reserve:hover { color: #fff; text-decoration: none; }
+.fab-reserve .tg-ico { width: 15px; height: 15px; }
+.fab-reserve span { display: block; }
+@media (max-width: 960px) { .fab-reserve { display: inline-flex; flex-direction: column; gap: 2px; } body { padding-bottom: 84px; } }
+@media (min-width: 961px) { .fab-reserve { display: none; } }
 
 /* ---- Footer -------------------------------------------------- */
 .site-footer {

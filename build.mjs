@@ -28,7 +28,7 @@ function cityBy(slug) { return cities.find(c => c.slug === slug); }
 function stationBy(slug) { return stations.find(s => s.slug === slug); }
 function lifeBy(slug) { return lifeAreas.find(l => l.slug === slug); }
 function dongBy(slug) { return adminDongs.find(d => d.slug === slug); }
-function dongUrl(d) { return d.districtSlug ? `/gyeonggi-south/city/${d.city}/${d.districtSlug}/${d.slug}/` : `/gyeonggi-south/city/${d.city}/dong/${d.slug}/`; }
+function dongUrl(d) { return d.districtSlug ? `/city/${d.city}/${d.districtSlug}/${d.slug}/` : `/city/${d.city}/dong/${d.slug}/`; }
 function dongsInCity(citySlug, districtSlug) { return adminDongs.filter(d => d.city === citySlug && (districtSlug === undefined || d.districtSlug === districtSlug)); }
 // 인접 행정동 이름 → 실제 페이지가 있는 동으로 연결 (없으면 텍스트만)
 function adjacentDongLinks(d) {
@@ -78,12 +78,17 @@ function linkCluster(title, links) {
 const TG_ICON = `<svg class="tg-ico" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M9.8 15.6 9.6 19c.4 0 .6-.2.8-.4l1.9-1.8 3.9 2.9c.7.4 1.2.2 1.4-.7l2.6-12.2c.3-1.2-.5-1.7-1.2-1.4L3.3 10.1c-1.1.4-1.1 1-.2 1.3l4.1 1.3 9.5-6c.4-.3.8-.1.5.2z"/></svg>`;
 
 function header() {
+  const navLinks = site.nav.map(n => `<a href="${n.href}">${esc(n.label)}</a>`).join("");
+  const tel = site.phone.replace(/-/g, "");
   return `<header class="site-header"><div class="container bar">
-    <a class="brand" href="/gyeonggi-south/">간다<span class="dot">GO</span></a>
-    <nav class="nav" aria-label="주요 메뉴">${site.nav.map(n => `<a href="${n.href}">${esc(n.label)}</a>`).join("")}</nav>
+    <a class="brand" href="/">간다<span class="dot">GO</span></a>
+    <nav class="nav nav-desktop" aria-label="주요 메뉴">${navLinks}</nav>
     <div class="header-cta">
-      <span class="tel-pill">${esc(site.phoneLabel)} <span><a href="tel:${site.phone.replace(/-/g, "")}">${esc(site.phone)}</a></span></span>
-      <a class="btn btn-primary" href="${site.telegram.reservation}" rel="noopener" target="_blank">${TG_ICON} 예약 문의</a>
+      <a class="tel-pill" href="tel:${tel}"><span class="tel-label">${esc(site.phoneLabel)}</span> <strong>${esc(site.phone)}</strong></a>
+      <a class="btn btn-primary btn-reserve-top" href="${site.telegram.reservation}" rel="noopener" target="_blank">${TG_ICON} 예약 문의</a>
+      <details class="nav-menu"><summary aria-label="메뉴 열기"><span class="menu-ico" aria-hidden="true"></span></summary>
+        <nav class="nav-drawer" aria-label="모바일 메뉴">${navLinks}</nav>
+      </details>
     </div>
   </div></header>`;
 }
@@ -109,34 +114,31 @@ function footer() {
       <div>
         <h4>바로가기</h4>
         <ul>
-          <li><a href="/gyeonggi-south/area/">권역 안내</a></li>
-          <li><a href="/gyeonggi-south/city/">도시 안내</a></li>
-          <li><a href="/gyeonggi-south/life/">생활권</a></li>
-          <li><a href="/gyeonggi-south/station/">지하철역</a></li>
-          <li><a href="/gyeonggi-south/use/">이용 장소</a></li>
+          <li><a href="/area/">권역 안내</a></li>
+          <li><a href="/city/">도시 안내</a></li>
+          <li><a href="/life/">생활권</a></li>
+          <li><a href="/station/">지하철역</a></li>
+          <li><a href="/use/">이용 장소</a></li>
         </ul>
       </div>
       <div>
         <h4>이용 안내</h4>
         <ul>
-          <li><a href="/gyeonggi-south/check/">예약 전 확인</a></li>
-          <li><a href="/gyeonggi-south/policy/privacy-policy/">개인정보 처리방침</a></li>
-          <li><a href="/gyeonggi-south/policy/service-standard/">불법·선정적 서비스 불가 안내</a></li>
-          <li><a href="/gyeonggi-south/policy/authors/">작성자·검수자 안내</a></li>
-          <li><a href="/gyeonggi-south/contact/">문의하기</a></li>
+          <li><a href="/check/">예약 전 확인</a></li>
+          <li><a href="/policy/privacy-policy/">개인정보 처리방침</a></li>
+          <li><a href="/policy/service-standard/">불법·선정적 서비스 불가 안내</a></li>
+          <li><a href="/policy/authors/">작성자·검수자 안내</a></li>
+          <li><a href="/contact/">문의하기</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-legal">
       © ${site.name} · 경기남부 지역 안내 · 전화예약 ${esc(site.phone)} ·
-      <a href="/gyeonggi-south/policy/privacy-policy/">개인정보처리방침</a> ·
-      <a href="/gyeonggi-south/policy/service-standard/">서비스 정책</a>
+      <a href="/policy/privacy-policy/">개인정보처리방침</a> ·
+      <a href="/policy/service-standard/">서비스 정책</a>
     </div>
   </div></footer>
-  <div class="sticky-cta">
-    <a class="btn btn-ghost btn-block" href="tel:${site.phone.replace(/-/g, "")}">📞 ${esc(site.phone)}</a>
-    <a class="btn btn-primary btn-block" href="${site.telegram.reservation}" rel="noopener" target="_blank">${TG_ICON} 예약 문의</a>
-  </div>`;
+  <a class="fab-reserve" href="${site.telegram.reservation}" rel="noopener" target="_blank" aria-label="예약 문의">${TG_ICON}<span>예약<br>문의</span></a>`;
 }
 
 // ---- Schema (JSON-LD) -----------------------------------------
@@ -146,7 +148,7 @@ function orgSchema() {
     "@id": site.baseUrl + "/#organization",
     name: site.name,
     description: site.org.description,
-    url: site.baseUrl + "/gyeonggi-south/",
+    url: site.baseUrl + "/",
     telephone: site.phone,
     areaServed: site.org.areaServed,
     sameAs: [site.telegram.reservation]
@@ -247,19 +249,20 @@ function write(path, html) {
 
 // ---- 페이지 생성 ----------------------------------------------
 function buildHome() {
-  const areaCards = areas.map(a => `<a class="card" href="/gyeonggi-south/area/${a.slug}/"><h3>${esc(a.name)}</h3><p>${esc(a.lead)}</p><div class="meta">${a.cityNames.slice(0, 4).map(n => `<span class="tag">${esc(n)}</span>`).join("")}</div></a>`).join("");
-  const cityCards = cities.map(c => `<a class="card" href="/gyeonggi-south/city/${c.slug}/"><h3>${esc(c.name)}</h3><p>${esc(c.lifeAreas.slice(0, 3).join(" · "))}</p><div class="meta">${c.stations.slice(0, 3).map(s => `<span class="tag">${esc(s)}</span>`).join("")}</div></a>`).join("");
-  const lifeCards = lifeAreas.slice(0, 12).map(l => `<a class="card" href="/gyeonggi-south/life/${l.slug}/"><h3>${esc(l.name)}</h3><p>${esc(l.type)} · ${esc(l.cityName)}</p></a>`).join("");
+  const areaCards = areas.map(a => `<a class="card" href="/area/${a.slug}/"><h3>${esc(a.name)}</h3><p>${esc(a.lead)}</p><div class="meta">${a.cityNames.slice(0, 4).map(n => `<span class="tag">${esc(n)}</span>`).join("")}</div></a>`).join("");
+  const cityCards = cities.map(c => `<a class="card" href="/city/${c.slug}/"><h3>${esc(c.name)}</h3><p>${esc(c.lifeAreas.slice(0, 3).join(" · "))}</p><div class="meta">${c.stations.slice(0, 3).map(s => `<span class="tag">${esc(s)}</span>`).join("")}</div></a>`).join("");
+  const lifeCards = lifeAreas.slice(0, 12).map(l => `<a class="card" href="/life/${l.slug}/"><h3>${esc(l.name)}</h3><p>${esc(l.type)} · ${esc(l.cityName)}</p></a>`).join("");
+  const heroStyle = site.heroImage ? ` style="background-image: var(--overlay-hero), url('${site.heroImage}'); background-size: cover; background-position: center;"` : "";
   const body = `
-  <section class="hero">
+  <section class="hero${site.heroImage ? " hero-photo" : ""}"${heroStyle}>
     <span class="eyebrow">경기남부 · 도시별 생활권 안내</span>
     <h1>경기남부 출장마사지 · 도시별·생활권별 지역 안내</h1>
     <p class="lead">수원, 성남, 용인, 화성, 오산, 평택, 안양, 안산, 시흥 등 경기남부 주요 도시와 생활권, 지하철역, 자택·호텔·오피스텔 이용 전 확인사항을 안내합니다.</p>
     <div class="cta-row">
-      <a class="btn btn-primary btn-lg" href="/gyeonggi-south/city/">도시 안내</a>
-      <a class="btn btn-ghost btn-lg" href="/gyeonggi-south/life/">생활권 보기</a>
-      <a class="btn btn-ghost btn-lg" href="/gyeonggi-south/station/">지하철역 보기</a>
-      <a class="btn btn-ghost btn-lg" href="/gyeonggi-south/check/">예약 전 확인</a>
+      <a class="btn btn-primary btn-lg" href="/city/">도시 안내</a>
+      <a class="btn btn-ghost btn-lg" href="/life/">생활권 보기</a>
+      <a class="btn btn-ghost btn-lg" href="/station/">지하철역 보기</a>
+      <a class="btn btn-ghost btn-lg" href="/check/">예약 전 확인</a>
     </div>
   </section>
 
@@ -282,7 +285,7 @@ function buildHome() {
   <section class="section">
     <h2>경기남부 주요 생활권</h2>
     <div class="grid grid-4">${lifeCards}</div>
-    <p style="margin-top:16px"><a href="/gyeonggi-south/life/">생활권 전체 보기 →</a></p>
+    <p style="margin-top:16px"><a href="/life/">생활권 전체 보기 →</a></p>
   </section>
 
   ${checklistBlock([
@@ -294,11 +297,11 @@ function buildHome() {
   ], "예약 전 확인해야 할 내용")}
 
   ${linkCluster("도움되는 정보 · 관련 링크", [
-    { href: "/gyeonggi-south/use/home/", text: "자택 이용 전 확인" },
-    { href: "/gyeonggi-south/use/officetel/", text: "오피스텔 이용 전 확인" },
-    { href: "/gyeonggi-south/use/hotel/", text: "호텔·숙소 이용 전 확인" },
-    { href: "/gyeonggi-south/check/travel-fee/", text: "추가 이동비 기준" },
-    { href: "/gyeonggi-south/policy/service-standard/", text: "불법·선정적 서비스 불가 안내" },
+    { href: "/use/home/", text: "자택 이용 전 확인" },
+    { href: "/use/officetel/", text: "오피스텔 이용 전 확인" },
+    { href: "/use/hotel/", text: "호텔·숙소 이용 전 확인" },
+    { href: "/check/travel-fee/", text: "추가 이동비 기준" },
+    { href: "/policy/service-standard/", text: "불법·선정적 서비스 불가 안내" },
     { href: "https://www.google.com/maps/place/경기도", text: "경기도 지도(구글) 위치 확인" }
   ])}
 
@@ -308,44 +311,35 @@ function buildHome() {
   const page = {
     title: `경기남부 출장마사지｜수원·성남·용인·화성·오산 홈타이 생활권 안내`,
     description: "경기남부 출장마사지·홈타이 예약 전 주요 도시·생활권·지하철역 확인사항 안내.",
-    canonical: "/gyeonggi-south/",
+    canonical: "/",
     h1: "경기남부 출장마사지",
-    breadcrumb: [{ name: "경기남부 홈", href: "/gyeonggi-south/" }],
+    breadcrumb: [{ name: "경기남부 홈", href: "/" }],
     extraSchema: [faqSchema(SHARED_FAQ)],
     body
   };
   const html = layout(page);
-  write("gyeonggi-south", html);
-  // 루트 index → 메인으로 canonical 지정 후 이동 (중복 색인 방지)
-  const root = `<!doctype html><html lang="ko"><head><meta charset="utf-8">
-<title>${esc(page.title)}</title>
-<link rel="canonical" href="${site.baseUrl}/gyeonggi-south/">
-<meta http-equiv="refresh" content="0; url=/gyeonggi-south/">
-<meta name="robots" content="noindex,follow"></head>
-<body><p><a href="/gyeonggi-south/">경기남부 출장마사지 안내로 이동</a></p></body></html>`;
-  const rootFull = join(OUT, "index.html");
-  writeFileSync(rootFull, root);
+  write(".", html); // 홈을 사이트 루트(/)에 게시
 }
 
 function buildAreaIndex() {
   const body = `<div class="section"><span class="eyebrow">권역 안내</span><h1>경기남부 권역 안내</h1>
     <p class="lead">경기남부를 생활권 중심으로 9개 권역으로 나누어 안내합니다. 포함 도시와 대표 생활권, 이동 기준을 확인하세요.</p>
-    <div class="grid grid-3">${areas.map(a => `<a class="card" href="/gyeonggi-south/area/${a.slug}/"><h3>${esc(a.name)}</h3><p>${esc(a.lead)}</p><div class="meta">${a.cityNames.slice(0, 4).map(n => `<span class="tag">${esc(n)}</span>`).join("")}</div></a>`).join("")}</div>
+    <div class="grid grid-3">${areas.map(a => `<a class="card" href="/area/${a.slug}/"><h3>${esc(a.name)}</h3><p>${esc(a.lead)}</p><div class="meta">${a.cityNames.slice(0, 4).map(n => `<span class="tag">${esc(n)}</span>`).join("")}</div></a>`).join("")}</div>
     </div>${whoHowWhy("경기남부 권역별 포함 도시와 대표 생활권, 이동 기준")}`;
-  write("gyeonggi-south/area", layout({
+  write("area", layout({
     title: "경기남부 권역 안내｜9개 생활권 권역 | 간다GO",
     description: "경기남부 출장마사지 9개 권역별 포함 도시·대표 생활권·이동 기준 안내.",
-    canonical: "/gyeonggi-south/area/", h1: "경기남부 권역 안내",
-    breadcrumb: [{ name: "홈", href: "/gyeonggi-south/" }, { name: "권역 안내", href: "/gyeonggi-south/area/" }],
+    canonical: "/area/", h1: "경기남부 권역 안내",
+    breadcrumb: [{ name: "홈", href: "/" }, { name: "권역 안내", href: "/area/" }],
     body
   }));
 }
 
 function buildAreas() {
   for (const a of areas) {
-    const cityLinks = a.cities.map(cityBy).filter(Boolean).map(c => ({ href: `/gyeonggi-south/city/${c.slug}/`, text: `${c.name} 안내` }));
-    const lifeLinks = lifeAreas.filter(l => a.cities.includes(l.city)).map(l => ({ href: `/gyeonggi-south/life/${l.slug}/`, text: `${l.name} 생활권` }));
-    const stationLinks = stations.filter(s => a.cities.includes(s.city)).slice(0, 8).map(s => ({ href: `/gyeonggi-south/station/${s.slug}/`, text: s.name }));
+    const cityLinks = a.cities.map(cityBy).filter(Boolean).map(c => ({ href: `/city/${c.slug}/`, text: `${c.name} 안내` }));
+    const lifeLinks = lifeAreas.filter(l => a.cities.includes(l.city)).map(l => ({ href: `/life/${l.slug}/`, text: `${l.name} 생활권` }));
+    const stationLinks = stations.filter(s => a.cities.includes(s.city)).slice(0, 8).map(s => ({ href: `/station/${s.slug}/`, text: s.name }));
     const body = `
     <div class="prose section">
       <span class="eyebrow">${esc(a.name)}</span>
@@ -359,18 +353,18 @@ function buildAreas() {
     ${linkCluster("가까운 지하철역", stationLinks)}
     ${checklistBlock(["방문 주소와 행정구·행정동을 확인했나요?", "신도시·산업지구·외곽 중 어디인가요?", "가까운 생활권과 지하철역을 확인했나요?", "외곽 지역 추가 이동비가 필요한가요?", "개인정보 처리 기준을 확인했나요?"])}
     ${linkCluster("이용 장소 · 예약 전 확인", [
-      { href: "/gyeonggi-south/use/officetel/", text: "오피스텔 이용 전 확인" },
-      { href: "/gyeonggi-south/use/hotel/", text: "호텔·숙소 이용 전 확인" },
-      { href: "/gyeonggi-south/check/address/", text: "방문 주소 확인" },
-      { href: "/gyeonggi-south/contact/", text: "문의하기" }
+      { href: "/use/officetel/", text: "오피스텔 이용 전 확인" },
+      { href: "/use/hotel/", text: "호텔·숙소 이용 전 확인" },
+      { href: "/check/address/", text: "방문 주소 확인" },
+      { href: "/contact/", text: "문의하기" }
     ])}
     ${faqBlock(SHARED_FAQ.slice(0, 4))}
     ${whoHowWhy(`${a.name} 포함 도시, 대표 생활권, 지하철역, 이동 기준`)}`;
-    write(`gyeonggi-south/area/${a.slug}`, layout({
+    write(`area/${a.slug}`, layout({
       title: `${a.name} 출장마사지·홈타이 생활권 안내 | 간다GO`,
       description: a.metaDescription,
-      canonical: `/gyeonggi-south/area/${a.slug}/`, h1: `${a.name} 출장마사지`,
-      breadcrumb: [{ name: "홈", href: "/gyeonggi-south/" }, { name: "권역 안내", href: "/gyeonggi-south/area/" }, { name: a.name, href: `/gyeonggi-south/area/${a.slug}/` }],
+      canonical: `/area/${a.slug}/`, h1: `${a.name} 출장마사지`,
+      breadcrumb: [{ name: "홈", href: "/" }, { name: "권역 안내", href: "/area/" }, { name: a.name, href: `/area/${a.slug}/` }],
       body
     }));
   }
@@ -379,25 +373,25 @@ function buildAreas() {
 function buildCityIndex() {
   const body = `<div class="section"><span class="eyebrow">도시 안내</span><h1>경기남부 도시 안내</h1>
     <p class="lead">경기남부 18개 주요 도시를 안내합니다. 행정구가 있는 도시는 도시 → 행정구 → 생활권 구조로 확인하세요.</p>
-    <div class="grid grid-3">${cities.map(c => `<a class="card" href="/gyeonggi-south/city/${c.slug}/"><h3>${esc(c.name)}</h3><p>${esc(c.region)} · ${esc(c.lifeAreas.slice(0, 2).join(", "))}</p><div class="meta">${(c.districts.length ? c.districts.map(d => `<span class="tag">${esc(d.name)}</span>`) : c.lifeAreas.slice(0, 3).map(l => `<span class="tag">${esc(l)}</span>`)).join("")}</div></a>`).join("")}</div>
+    <div class="grid grid-3">${cities.map(c => `<a class="card" href="/city/${c.slug}/"><h3>${esc(c.name)}</h3><p>${esc(c.region)} · ${esc(c.lifeAreas.slice(0, 2).join(", "))}</p><div class="meta">${(c.districts.length ? c.districts.map(d => `<span class="tag">${esc(d.name)}</span>`) : c.lifeAreas.slice(0, 3).map(l => `<span class="tag">${esc(l)}</span>`)).join("")}</div></a>`).join("")}</div>
     </div>${whoHowWhy("경기남부 18개 도시별 행정구·생활권·역세권 안내")}`;
-  write("gyeonggi-south/city", layout({
+  write("city", layout({
     title: "경기남부 도시 안내｜18개 주요 도시 | 간다GO",
     description: "경기남부 출장마사지 수원·성남·용인 등 18개 도시별 행정구·생활권 안내.",
-    canonical: "/gyeonggi-south/city/", h1: "경기남부 도시 안내",
-    breadcrumb: [{ name: "홈", href: "/gyeonggi-south/" }, { name: "도시 안내", href: "/gyeonggi-south/city/" }],
+    canonical: "/city/", h1: "경기남부 도시 안내",
+    breadcrumb: [{ name: "홈", href: "/" }, { name: "도시 안내", href: "/city/" }],
     body
   }));
 }
 
 function buildCities() {
   for (const c of cities) {
-    const districtLinks = c.districts.map(d => ({ href: `/gyeonggi-south/city/${c.slug}/${d.slug}/`, text: `${c.name} ${d.name}` }));
-    const lifeLinks = lifeAreas.filter(l => l.city === c.slug).map(l => ({ href: `/gyeonggi-south/life/${l.slug}/`, text: `${l.name} 생활권` }));
-    const stationLinks = stations.filter(s => s.city === c.slug).map(s => ({ href: `/gyeonggi-south/station/${s.slug}/`, text: s.name }));
-    const adjLinks = c.adjacent.map(a => ({ href: `/gyeonggi-south/city/${a.slug}/`, text: `${a.name} 안내` }));
+    const districtLinks = c.districts.map(d => ({ href: `/city/${c.slug}/${d.slug}/`, text: `${c.name} ${d.name}` }));
+    const lifeLinks = lifeAreas.filter(l => l.city === c.slug).map(l => ({ href: `/life/${l.slug}/`, text: `${l.name} 생활권` }));
+    const stationLinks = stations.filter(s => s.city === c.slug).map(s => ({ href: `/station/${s.slug}/`, text: s.name }));
+    const adjLinks = c.adjacent.map(a => ({ href: `/city/${a.slug}/`, text: `${a.name} 안내` }));
     const cityDongLinks = dongsInCity(c.slug).map(x => ({ href: dongUrl(x), text: x.district ? `${x.district} ${x.name}` : x.name }));
-    const districtSection = c.districts.length ? `<h2>행정구별 생활권</h2><ul>${c.districts.map(d => `<li><a href="/gyeonggi-south/city/${c.slug}/${d.slug}/"><strong>${esc(d.name)}</strong></a> — ${esc(d.note)}</li>`).join("")}</ul>` : "";
+    const districtSection = c.districts.length ? `<h2>행정구별 생활권</h2><ul>${c.districts.map(d => `<li><a href="/city/${c.slug}/${d.slug}/"><strong>${esc(d.name)}</strong></a> — ${esc(d.note)}</li>`).join("")}</ul>` : "";
     const body = `
     <div class="prose section">
       <span class="eyebrow">${esc(c.region)}</span>
@@ -413,7 +407,7 @@ function buildCities() {
     ${linkCluster("대표 행정동 안내", cityDongLinks)}
     ${linkCluster("대표 생활권 바로가기", lifeLinks)}
     ${linkCluster("가까운 지하철역", stationLinks)}
-    ${linkCluster("인접 도시", adjLinks.concat([{ href: `/gyeonggi-south/area/${c.regionSlug}/`, text: `${c.region} 권역` }]))}
+    ${linkCluster("인접 도시", adjLinks.concat([{ href: `/area/${c.regionSlug}/`, text: `${c.region} 권역` }]))}
     ${checklistBlock([
       `${c.name}의 정확한 방문 주소를 확인했나요?`,
       c.districts.length ? "행정구와 행정동이 정확한가요?" : "행정동과 생활권이 정확한가요?",
@@ -424,21 +418,21 @@ function buildCities() {
       "개인정보 처리 기준과 서비스 정책을 확인했나요?"
     ])}
     ${linkCluster("이용 장소 · 예약 전 확인", [
-      { href: "/gyeonggi-south/use/home/", text: "자택 이용 전 확인" },
-      { href: "/gyeonggi-south/use/officetel/", text: "오피스텔 이용 전 확인" },
-      { href: "/gyeonggi-south/use/hotel/", text: "호텔·숙소 이용 전 확인" },
-      { href: "/gyeonggi-south/check/address/", text: "방문 주소 확인" },
-      { href: "/gyeonggi-south/check/service-policy/", text: "불법·선정적 서비스 불가 안내" },
-      { href: "/gyeonggi-south/contact/", text: "문의하기" }
+      { href: "/use/home/", text: "자택 이용 전 확인" },
+      { href: "/use/officetel/", text: "오피스텔 이용 전 확인" },
+      { href: "/use/hotel/", text: "호텔·숙소 이용 전 확인" },
+      { href: "/check/address/", text: "방문 주소 확인" },
+      { href: "/check/service-policy/", text: "불법·선정적 서비스 불가 안내" },
+      { href: "/contact/", text: "문의하기" }
     ])}
     ${faqBlock(SHARED_FAQ)}
     ${whoHowWhy(`${c.name} 행정구·행정동·생활권·역세권과 이용 장소별 확인사항`)}`;
-    write(`gyeonggi-south/city/${c.slug}`, layout({
+    write(`city/${c.slug}`, layout({
       title: `${c.name} 출장마사지·홈타이 생활권 안내 | 간다GO`,
       description: c.metaDescription,
-      canonical: `/gyeonggi-south/city/${c.slug}/`, h1: `${c.name} 출장마사지`,
+      canonical: `/city/${c.slug}/`, h1: `${c.name} 출장마사지`,
       ogAlt: `${c.name} ${c.lifeAreas[0]} 생활권 방문형 관리 안내 이미지`,
-      breadcrumb: [{ name: "홈", href: "/gyeonggi-south/" }, { name: "도시 안내", href: "/gyeonggi-south/city/" }, { name: c.name, href: `/gyeonggi-south/city/${c.slug}/` }],
+      breadcrumb: [{ name: "홈", href: "/" }, { name: "도시 안내", href: "/city/" }, { name: c.name, href: `/city/${c.slug}/` }],
       body
     }));
     // 행정구 페이지
@@ -447,36 +441,36 @@ function buildCities() {
 }
 
 function buildDistrict(c, d) {
-  const siblingLinks = c.districts.filter(x => x.slug !== d.slug).map(x => ({ href: `/gyeonggi-south/city/${c.slug}/${x.slug}/`, text: `${c.name} ${x.name}` }));
-  const lifeLinks = lifeAreas.filter(l => l.city === c.slug && (l.districts || []).includes(d.name)).map(l => ({ href: `/gyeonggi-south/life/${l.slug}/`, text: `${l.name} 생활권` }));
-  const stationLinks = stations.filter(s => s.city === c.slug && s.district === d.name).map(s => ({ href: `/gyeonggi-south/station/${s.slug}/`, text: s.name }));
+  const siblingLinks = c.districts.filter(x => x.slug !== d.slug).map(x => ({ href: `/city/${c.slug}/${x.slug}/`, text: `${c.name} ${x.name}` }));
+  const lifeLinks = lifeAreas.filter(l => l.city === c.slug && (l.districts || []).includes(d.name)).map(l => ({ href: `/life/${l.slug}/`, text: `${l.name} 생활권` }));
+  const stationLinks = stations.filter(s => s.city === c.slug && s.district === d.name).map(s => ({ href: `/station/${s.slug}/`, text: s.name }));
   const dongLinks = dongsInCity(c.slug, d.slug).map(x => ({ href: dongUrl(x), text: x.name }));
   const body = `
   <div class="prose section">
     <span class="eyebrow">${esc(c.name)} · 행정구 안내</span>
     <h1>${esc(c.name)} ${esc(d.name)} 출장마사지 · ${esc(d.note.split(" ")[0])} 생활권 안내</h1>
     <p class="lead">${esc(c.name)} ${esc(d.name)}은(는) ${esc(d.note)}을(를) 중심으로 하는 생활권입니다. 같은 ${esc(c.name)} 안에서도 행정구별로 이동 기준과 이용 환경이 달라, 방문 주소와 함께 행정구·생활권을 확인하는 것이 정확합니다.</p>
-    <h2>상위 도시</h2><p><a href="/gyeonggi-south/city/${c.slug}/">${esc(c.name)} 전체 안내</a>에서 다른 행정구와 도시 전체 생활권을 함께 확인할 수 있습니다. ${esc(c.name)}은(는) ${esc(c.region)}에 속합니다.</p>
+    <h2>상위 도시</h2><p><a href="/city/${c.slug}/">${esc(c.name)} 전체 안내</a>에서 다른 행정구와 도시 전체 생활권을 함께 확인할 수 있습니다. ${esc(c.name)}은(는) ${esc(c.region)}에 속합니다.</p>
     <h2>대표 생활권</h2><p>${esc(d.note)} 생활권을 중심으로 오피스텔·상권·주거지가 형성되어 있습니다. 이용 장소가 자택·오피스텔·숙소인지에 따라 공동현관과 출입 방식 확인이 먼저 필요합니다.</p>
     <h2>이용 장소별 기준</h2><p>오피스텔은 공동현관·엘리베이터·관리 규정과 방문 가능 시간을, 상권·업무지구는 건물 보안 규정과 예약 가능 시간을, 주거지는 공동현관 출입 방식을 확인하는 것이 좋습니다.</p>
   </div>
   ${linkCluster("대표 행정동", dongLinks)}
   ${linkCluster("같은 도시 다른 행정구", siblingLinks)}
-  ${linkCluster("관련 생활권", lifeLinks.length ? lifeLinks : lifeAreas.filter(l => l.city === c.slug).slice(0, 3).map(l => ({ href: `/gyeonggi-south/life/${l.slug}/`, text: `${l.name} 생활권` })))}
+  ${linkCluster("관련 생활권", lifeLinks.length ? lifeLinks : lifeAreas.filter(l => l.city === c.slug).slice(0, 3).map(l => ({ href: `/life/${l.slug}/`, text: `${l.name} 생활권` })))}
   ${linkCluster("가까운 지하철역", stationLinks)}
   ${checklistBlock(["방문 주소와 행정동을 확인했나요?", "가까운 생활권과 지하철역을 확인했나요?", "공동현관·건물 출입 방식을 확인했나요?", "예약 가능 시간을 확인했나요?", "개인정보 처리 기준을 확인했나요?"])}
   ${linkCluster("예약 전 확인", [
-    { href: "/gyeonggi-south/check/address/", text: "방문 주소 확인" },
-    { href: "/gyeonggi-south/check/building-access/", text: "건물 출입 방식" },
-    { href: "/gyeonggi-south/contact/", text: "문의하기" }
+    { href: "/check/address/", text: "방문 주소 확인" },
+    { href: "/check/building-access/", text: "건물 출입 방식" },
+    { href: "/contact/", text: "문의하기" }
   ])}
   ${faqBlock(SHARED_FAQ.slice(0, 4))}
   ${whoHowWhy(`${c.name} ${d.name} 대표 행정동·생활권·역세권과 이용 장소별 확인사항`)}`;
-  write(`gyeonggi-south/city/${c.slug}/${d.slug}`, layout({
+  write(`city/${c.slug}/${d.slug}`, layout({
     title: `${c.name} ${d.name} 출장마사지·홈타이 생활권 안내 | 간다GO`,
     description: clampDesc(`${c.name} ${d.name} 출장마사지·홈타이 예약 전 ${d.note} 생활권 확인 안내.`),
-    canonical: `/gyeonggi-south/city/${c.slug}/${d.slug}/`, h1: `${c.name} ${d.name} 출장마사지`,
-    breadcrumb: [{ name: "홈", href: "/gyeonggi-south/" }, { name: "도시 안내", href: "/gyeonggi-south/city/" }, { name: c.name, href: `/gyeonggi-south/city/${c.slug}/` }, { name: d.name, href: `/gyeonggi-south/city/${c.slug}/${d.slug}/` }],
+    canonical: `/city/${c.slug}/${d.slug}/`, h1: `${c.name} ${d.name} 출장마사지`,
+    breadcrumb: [{ name: "홈", href: "/" }, { name: "도시 안내", href: "/city/" }, { name: c.name, href: `/city/${c.slug}/` }, { name: d.name, href: `/city/${c.slug}/${d.slug}/` }],
     body
   }));
 }
@@ -486,7 +480,7 @@ function buildDongIndex() {
   for (const d of adminDongs) (byCity[d.city] ||= []).push(d);
   const groups = cities.filter(c => byCity[c.slug]).map(c => {
     const list = byCity[c.slug];
-    return `<div class="card"><h3><a href="/gyeonggi-south/city/${c.slug}/">${esc(c.name)}</a></h3><nav class="linkcluster">${list.map(d => `<a href="${dongUrl(d)}">${esc(d.district ? d.district + " " : "")}${esc(d.name)}${d.index ? "" : " ·"}</a>`).join("")}</nav></div>`;
+    return `<div class="card"><h3><a href="/city/${c.slug}/">${esc(c.name)}</a></h3><nav class="linkcluster">${list.map(d => `<a href="${dongUrl(d)}">${esc(d.district ? d.district + " " : "")}${esc(d.name)}${d.index ? "" : " ·"}</a>`).join("")}</nav></div>`;
   }).join("");
   const idx = adminDongs.filter(d => d.index).length;
   const body = `<div class="section"><span class="eyebrow">행정동 안내</span><h1>경기남부 대표 행정동 안내</h1>
@@ -494,11 +488,11 @@ function buildDongIndex() {
     <div class="grid grid-2">${groups}</div>
     <p style="margin-top:16px;color:var(--color-text-mute);font-size:var(--fs-sm)">· 표시는 다른 생활권·역세권 안내와 내용이 겹칠 수 있어 색인에서 제외(noindex)하고 내부 이동용으로만 유지하는 행정동입니다. 대표 색인 행정동 ${idx}곳.</p>
     </div>${whoHowWhy("경기남부 도시·행정구별 대표 행정동과 인접 동·생활권·역세권 안내")}`;
-  write("gyeonggi-south/dong", layout({
+  write("dong", layout({
     title: "경기남부 행정동 안내｜대표 행정동 | 간다GO",
     description: "경기남부 출장마사지 도시·행정구별 대표 행정동과 인접 동·생활권 안내.",
-    canonical: "/gyeonggi-south/dong/", h1: "경기남부 대표 행정동 안내",
-    breadcrumb: [{ name: "홈", href: "/gyeonggi-south/" }, { name: "행정동", href: "/gyeonggi-south/dong/" }],
+    canonical: "/dong/", h1: "경기남부 대표 행정동 안내",
+    breadcrumb: [{ name: "홈", href: "/" }, { name: "행정동", href: "/dong/" }],
     body
   }));
 }
@@ -511,10 +505,10 @@ function buildDongs() {
     const station = d.station ? stationBy(d.station) : null;
     const url = dongUrl(d);
     const adjLinks = adjacentDongLinks(d);
-    const parentLinks = [{ href: `/gyeonggi-south/city/${c.slug}/`, text: `${c.name} 안내` }];
-    if (district) parentLinks.push({ href: `/gyeonggi-south/city/${c.slug}/${district.slug}/`, text: `${c.name} ${district.name}` });
-    const stationLinks = station ? [{ href: `/gyeonggi-south/station/${station.slug}/`, text: station.name }] : [];
-    const lifeLinks = life ? [{ href: `/gyeonggi-south/life/${life.slug}/`, text: `${life.name} 생활권` }] : [];
+    const parentLinks = [{ href: `/city/${c.slug}/`, text: `${c.name} 안내` }];
+    if (district) parentLinks.push({ href: `/city/${c.slug}/${district.slug}/`, text: `${c.name} ${district.name}` });
+    const stationLinks = station ? [{ href: `/station/${station.slug}/`, text: station.name }] : [];
+    const lifeLinks = life ? [{ href: `/life/${life.slug}/`, text: `${life.name} 생활권` }] : [];
     const posDesc = district ? `${c.name} ${d.district}에 속한 행정동` : `${c.name}의 행정동`;
     const h1 = `${d.name} 출장마사지 · ${district ? d.district + " " : c.name + " "}생활권 안내`;
     const body = `
@@ -525,9 +519,9 @@ function buildDongs() {
       <h2>행정동 위치</h2>
       <p>${esc(d.name)}은(는) ${esc(posDesc)}으로, ${esc((d.adjacent || []).join(", "))} 등과 인접합니다.${life ? ` 생활권으로는 ${esc(life.name)}과(와) 이어집니다.` : ""} 같은 이름의 동이 다른 도시에 있을 수 있어, 방문 주소는 도시·행정구·행정동을 함께 확인하는 것이 정확합니다.</p>
       <h2>상위 도시·행정구</h2>
-      <p><a href="/gyeonggi-south/city/${c.slug}/">${esc(c.name)} 전체 안내</a>${district ? `와 <a href="/gyeonggi-south/city/${c.slug}/${district.slug}/">${esc(c.name)} ${esc(district.name)} 안내</a>` : ""}에서 인접 지역과 도시 전체 생활권을 함께 확인할 수 있습니다. ${esc(c.name)}은(는) ${esc(c.region)}에 속합니다.</p>
+      <p><a href="/city/${c.slug}/">${esc(c.name)} 전체 안내</a>${district ? `와 <a href="/city/${c.slug}/${district.slug}/">${esc(c.name)} ${esc(district.name)} 안내</a>` : ""}에서 인접 지역과 도시 전체 생활권을 함께 확인할 수 있습니다. ${esc(c.name)}은(는) ${esc(c.region)}에 속합니다.</p>
       <h2>가까운 역·생활권</h2>
-      <p>${station ? `가까운 역은 <a href="/gyeonggi-south/station/${station.slug}/">${esc(station.name)}</a>이며, 역명은 위치 참고용이고 실제 방문 가능 여부는 정확한 주소로 확인합니다. ` : "지하철 접근보다 차량 이동 기준이 중요한 지역으로, 방문 주소와 이동 거리를 먼저 확인합니다. "}${life ? `<a href="/gyeonggi-south/life/${life.slug}/">${esc(life.name)} 생활권</a> 안내에서 인근 이용 기준을 함께 확인할 수 있습니다.` : ""}</p>
+      <p>${station ? `가까운 역은 <a href="/station/${station.slug}/">${esc(station.name)}</a>이며, 역명은 위치 참고용이고 실제 방문 가능 여부는 정확한 주소로 확인합니다. ` : "지하철 접근보다 차량 이동 기준이 중요한 지역으로, 방문 주소와 이동 거리를 먼저 확인합니다. "}${life ? `<a href="/life/${life.slug}/">${esc(life.name)} 생활권</a> 안내에서 인근 이용 기준을 함께 확인할 수 있습니다.` : ""}</p>
       <h2>이용 장소별 기준</h2>
       <p>자택은 공동현관·엘리베이터·주차 여부를, 오피스텔은 방문자 등록과 관리 규정을, 숙소는 외부인 방문 정책과 객실 출입 방식을 먼저 확인합니다. ${d.note.includes("외곽") || d.note.includes("차량") ? "외곽·산업권은 차량 이동 거리와 추가 이동비, 예약 가능 시간을 확인하는 것이 좋습니다." : "신규 단지가 많은 지역은 정확한 단지명과 동·호수를 확인하는 것이 좋습니다."}</p>
     </div>
@@ -542,16 +536,16 @@ function buildDongs() {
       "예약 가능 시간과 개인정보 처리 기준을 확인했나요?"
     ])}
     ${linkCluster("이용 장소 · 예약 전 확인", [
-      { href: "/gyeonggi-south/use/home/", text: "자택 이용 전 확인" },
-      { href: "/gyeonggi-south/use/officetel/", text: "오피스텔 이용 전 확인" },
-      { href: "/gyeonggi-south/check/address/", text: "방문 주소 확인" },
-      { href: "/gyeonggi-south/check/service-policy/", text: "불법·선정적 서비스 불가 안내" },
-      { href: "/gyeonggi-south/contact/", text: "문의하기" }
+      { href: "/use/home/", text: "자택 이용 전 확인" },
+      { href: "/use/officetel/", text: "오피스텔 이용 전 확인" },
+      { href: "/check/address/", text: "방문 주소 확인" },
+      { href: "/check/service-policy/", text: "불법·선정적 서비스 불가 안내" },
+      { href: "/contact/", text: "문의하기" }
     ])}
     ${faqBlock(SHARED_FAQ.slice(0, 4))}
     ${whoHowWhy(`${c.name} ${d.name} 위치·인접 행정동·생활권·역세권과 이용 장소별 확인사항`)}`;
-    const crumb = [{ name: "홈", href: "/gyeonggi-south/" }, { name: "도시 안내", href: "/gyeonggi-south/city/" }, { name: c.name, href: `/gyeonggi-south/city/${c.slug}/` }];
-    if (district) crumb.push({ name: district.name, href: `/gyeonggi-south/city/${c.slug}/${district.slug}/` });
+    const crumb = [{ name: "홈", href: "/" }, { name: "도시 안내", href: "/city/" }, { name: c.name, href: `/city/${c.slug}/` }];
+    if (district) crumb.push({ name: district.name, href: `/city/${c.slug}/${district.slug}/` });
     crumb.push({ name: d.name, href: url });
     write(url.replace(/^\/|\/$/g, ""), layout({
       title: `${d.name} 출장마사지·홈타이 생활권 안내 | 간다GO`,
@@ -568,13 +562,13 @@ function buildDongs() {
 function buildLifeIndex() {
   const body = `<div class="section"><span class="eyebrow">생활권</span><h1>경기남부 주요 생활권</h1>
     <p class="lead">신도시·역세권·업무지구·산업지구·주거·외곽 생활권을 도시와 함께 안내합니다.</p>
-    <div class="grid grid-3">${lifeAreas.map(l => `<a class="card" href="/gyeonggi-south/life/${l.slug}/"><h3>${esc(l.name)}</h3><p>${esc(l.type)} · ${esc(l.cityName)}</p></a>`).join("")}</div>
+    <div class="grid grid-3">${lifeAreas.map(l => `<a class="card" href="/life/${l.slug}/"><h3>${esc(l.name)}</h3><p>${esc(l.type)} · ${esc(l.cityName)}</p></a>`).join("")}</div>
     </div>${whoHowWhy("경기남부 신도시·역세권·산업지구·외곽 생활권 안내")}`;
-  write("gyeonggi-south/life", layout({
+  write("life", layout({
     title: "경기남부 생활권 안내｜신도시·역세권·산업권 | 간다GO",
     description: "경기남부 출장마사지 신도시·역세권·산업지구·외곽 생활권별 확인 안내.",
-    canonical: "/gyeonggi-south/life/", h1: "경기남부 주요 생활권",
-    breadcrumb: [{ name: "홈", href: "/gyeonggi-south/" }, { name: "생활권", href: "/gyeonggi-south/life/" }],
+    canonical: "/life/", h1: "경기남부 주요 생활권",
+    breadcrumb: [{ name: "홈", href: "/" }, { name: "생활권", href: "/life/" }],
     body
   }));
 }
@@ -582,8 +576,8 @@ function buildLifeIndex() {
 function buildLifeAreas() {
   for (const l of lifeAreas) {
     const c = cityBy(l.city);
-    const stationLinks = (l.stations || []).map(stationBy).filter(Boolean).map(s => ({ href: `/gyeonggi-south/station/${s.slug}/`, text: s.name }));
-    const neighbors = lifeAreas.filter(x => x.city === l.city && x.slug !== l.slug).slice(0, 4).map(x => ({ href: `/gyeonggi-south/life/${x.slug}/`, text: `${x.name} 생활권` }));
+    const stationLinks = (l.stations || []).map(stationBy).filter(Boolean).map(s => ({ href: `/station/${s.slug}/`, text: s.name }));
+    const neighbors = lifeAreas.filter(x => x.city === l.city && x.slug !== l.slug).slice(0, 4).map(x => ({ href: `/life/${x.slug}/`, text: `${x.name} 생활권` }));
     const dongTags = (l.dongs || []).map(d => `<span class="tag">${esc(d)}</span>`).join("");
     const body = `
     <div class="prose section">
@@ -598,27 +592,27 @@ function buildLifeAreas() {
       <h2>이용 장소별 기준</h2>
       <p>신도시·오피스텔은 동·호수와 공동현관·관리 규정을, 역세권 상권은 숙소·건물 출입 방식을, 산업·외곽은 차량 이동 거리와 추가 이동비를 확인합니다.</p>
     </div>
-    ${linkCluster("포함 도시·행정구", [{ href: `/gyeonggi-south/city/${l.city}/`, text: `${l.cityName} 안내` }].concat((l.districts || []).map(d => {
+    ${linkCluster("포함 도시·행정구", [{ href: `/city/${l.city}/`, text: `${l.cityName} 안내` }].concat((l.districts || []).map(d => {
       const dobj = (c?.districts || []).find(x => x.name === d);
-      return dobj ? { href: `/gyeonggi-south/city/${l.city}/${dobj.slug}/`, text: `${l.cityName} ${d}` } : null;
+      return dobj ? { href: `/city/${l.city}/${dobj.slug}/`, text: `${l.cityName} ${d}` } : null;
     })))}
     ${linkCluster("가까운 지하철역", stationLinks)}
     ${linkCluster("인접 생활권", neighbors)}
     ${checklistBlock(["방문 주소와 동·호수를 확인했나요?", "공동현관·건물 출입 방식을 확인했나요?", "가까운 지하철역·이동 기준을 확인했나요?", "신도시·산업·외곽 중 어디인가요?", "예약 가능 시간과 추가 이동비를 확인했나요?"])}
     ${linkCluster("이용 장소 · 예약 전 확인", [
-      { href: "/gyeonggi-south/use/officetel/", text: "오피스텔 이용" },
-      { href: "/gyeonggi-south/use/newtown/", text: "신도시 생활권 이용" },
-      { href: "/gyeonggi-south/check/address/", text: "방문 주소 확인" },
-      { href: "/gyeonggi-south/contact/", text: "문의하기" }
+      { href: "/use/officetel/", text: "오피스텔 이용" },
+      { href: "/use/newtown/", text: "신도시 생활권 이용" },
+      { href: "/check/address/", text: "방문 주소 확인" },
+      { href: "/contact/", text: "문의하기" }
     ])}
     ${faqBlock(SHARED_FAQ.slice(0, 4))}
     ${whoHowWhy(`${l.name} 포함 도시·행정동·역세권과 이용 장소별 확인사항`)}`;
-    write(`gyeonggi-south/life/${l.slug}`, layout({
+    write(`life/${l.slug}`, layout({
       title: `${l.name} 출장마사지 생활권 안내 | 간다GO`,
       description: clampDesc(`${l.name} 출장마사지·홈타이 예약 전 ${l.cityName} ${l.type} 생활권 확인 안내.`),
-      canonical: `/gyeonggi-south/life/${l.slug}/`, h1: `${l.name} 생활권`,
+      canonical: `/life/${l.slug}/`, h1: `${l.name} 생활권`,
       ogAlt: `${l.name} 생활권 예약 전 확인 이미지`,
-      breadcrumb: [{ name: "홈", href: "/gyeonggi-south/" }, { name: "생활권", href: "/gyeonggi-south/life/" }, { name: l.name, href: `/gyeonggi-south/life/${l.slug}/` }],
+      breadcrumb: [{ name: "홈", href: "/" }, { name: "생활권", href: "/life/" }, { name: l.name, href: `/life/${l.slug}/` }],
       body
     }));
   }
@@ -627,16 +621,16 @@ function buildLifeAreas() {
 function buildStationIndex() {
   const byCity = {};
   for (const s of stations) (byCity[s.cityName] ||= []).push(s);
-  const groups = Object.entries(byCity).map(([city, list]) => `<div class="card"><h3>${esc(city)}</h3><nav class="linkcluster">${list.map(s => `<a href="/gyeonggi-south/station/${s.slug}/">${esc(s.name)}</a>`).join("")}</nav></div>`).join("");
+  const groups = Object.entries(byCity).map(([city, list]) => `<div class="card"><h3>${esc(city)}</h3><nav class="linkcluster">${list.map(s => `<a href="/station/${s.slug}/">${esc(s.name)}</a>`).join("")}</nav></div>`).join("");
   const body = `<div class="section"><span class="eyebrow">지하철역</span><h1>경기남부 주요 지하철역</h1>
     <p class="lead">역명 기준으로 위치를 안내합니다. 환승역도 노선별로 나누지 않고 역명 기준 1개 페이지로 관리합니다.</p>
     <div class="grid grid-2">${groups}</div></div>
     ${whoHowWhy("경기남부 도시별 주요 지하철역과 인접 생활권 안내")}`;
-  write("gyeonggi-south/station", layout({
+  write("station", layout({
     title: "경기남부 지하철역 안내｜역세권 생활권 | 간다GO",
     description: "경기남부 출장마사지 주요 지하철역별 역세권 생활권·이동 기준 안내.",
-    canonical: "/gyeonggi-south/station/", h1: "경기남부 주요 지하철역",
-    breadcrumb: [{ name: "홈", href: "/gyeonggi-south/" }, { name: "지하철역", href: "/gyeonggi-south/station/" }],
+    canonical: "/station/", h1: "경기남부 주요 지하철역",
+    breadcrumb: [{ name: "홈", href: "/" }, { name: "지하철역", href: "/station/" }],
     body
   }));
 }
@@ -645,7 +639,7 @@ function buildStations() {
   for (const s of stations) {
     const c = cityBy(s.city);
     const life = lifeAreas.find(l => l.name === s.life);
-    const sameCity = stations.filter(x => x.city === s.city && x.slug !== s.slug).slice(0, 5).map(x => ({ href: `/gyeonggi-south/station/${x.slug}/`, text: x.name }));
+    const sameCity = stations.filter(x => x.city === s.city && x.slug !== s.slug).slice(0, 5).map(x => ({ href: `/station/${x.slug}/`, text: x.name }));
     const transferNote = s.transfer ? `${s.name}은(는) 환승 성격이 있는 역이지만, 출구별·노선별로 페이지를 나누지 않고 역명 기준 한 곳으로 안내해 중복을 줄입니다.` : `${s.name}은(는) 역명 기준으로 위치를 안내합니다.`;
     const body = `
     <div class="prose section">
@@ -658,23 +652,23 @@ function buildStations() {
       <h2>이용 장소별 기준</h2>
       <p>역 주변 오피스텔은 공동현관·관리 규정을, 숙소는 외부인 방문 정책과 객실 출입 방식을, 상권 건물은 보안·예약 가능 시간을 확인합니다.</p>
     </div>
-    ${linkCluster("상위 도시·생활권", [{ href: `/gyeonggi-south/city/${s.city}/`, text: `${s.cityName} 안내` }, life ? { href: `/gyeonggi-south/life/${life.slug}/`, text: `${life.name} 생활권` } : null])}
+    ${linkCluster("상위 도시·생활권", [{ href: `/city/${s.city}/`, text: `${s.cityName} 안내` }, life ? { href: `/life/${life.slug}/`, text: `${life.name} 생활권` } : null])}
     ${linkCluster("같은 도시 다른 역", sameCity)}
     ${checklistBlock(["역명이 아닌 정확한 방문 주소를 확인했나요?", "건물 공동현관·출입 방식을 확인했나요?", "가까운 생활권을 확인했나요?", "예약 가능 시간을 확인했나요?", "개인정보 처리 기준을 확인했나요?"])}
     ${linkCluster("이용 장소 · 예약 전 확인", [
-      { href: "/gyeonggi-south/use/station-area/", text: "역세권 이용" },
-      { href: "/gyeonggi-south/use/hotel/", text: "호텔·숙소 이용" },
-      { href: "/gyeonggi-south/check/building-access/", text: "건물 출입 방식" },
-      { href: "/gyeonggi-south/contact/", text: "문의하기" }
+      { href: "/use/station-area/", text: "역세권 이용" },
+      { href: "/use/hotel/", text: "호텔·숙소 이용" },
+      { href: "/check/building-access/", text: "건물 출입 방식" },
+      { href: "/contact/", text: "문의하기" }
     ])}
     ${faqBlock(SHARED_FAQ.slice(3, 6))}
     ${whoHowWhy(`${s.name} 인접 생활권·행정동과 이용 장소별 확인사항`)}`;
-    write(`gyeonggi-south/station/${s.slug}`, layout({
+    write(`station/${s.slug}`, layout({
       title: `${s.name} 출장마사지 역세권 안내 | 간다GO`,
       description: clampDesc(`${s.name} 출장마사지·홈타이 예약 전 ${s.cityName} ${s.life} 역세권 확인 안내.`),
-      canonical: `/gyeonggi-south/station/${s.slug}/`, h1: `${s.name} 출장마사지`,
+      canonical: `/station/${s.slug}/`, h1: `${s.name} 출장마사지`,
       ogAlt: `${s.name} 역세권 생활권 안내 이미지`,
-      breadcrumb: [{ name: "홈", href: "/gyeonggi-south/" }, { name: "지하철역", href: "/gyeonggi-south/station/" }, { name: s.name, href: `/gyeonggi-south/station/${s.slug}/` }],
+      breadcrumb: [{ name: "홈", href: "/" }, { name: "지하철역", href: "/station/" }, { name: s.name, href: `/station/${s.slug}/` }],
       body
     }));
   }
@@ -683,20 +677,20 @@ function buildStations() {
 function buildUseIndex() {
   const body = `<div class="section"><span class="eyebrow">이용 장소</span><h1>이용 장소별 안내</h1>
     <p class="lead">자택·호텔·오피스텔·업무지구·역세권·신도시·산업지구·야간·외곽 이용 전 확인사항을 안내합니다.</p>
-    <div class="grid grid-3">${useCases.map(u => `<a class="card" href="/gyeonggi-south/use/${u.slug}/"><h3>${esc(u.name)}</h3><p>${esc(u.why)}</p></a>`).join("")}</div></div>
+    <div class="grid grid-3">${useCases.map(u => `<a class="card" href="/use/${u.slug}/"><h3>${esc(u.name)}</h3><p>${esc(u.why)}</p></a>`).join("")}</div></div>
     ${whoHowWhy("이용 장소별 방문 전 확인사항 안내")}`;
-  write("gyeonggi-south/use", layout({
+  write("use", layout({
     title: "경기남부 이용 장소별 안내｜자택·호텔·오피스텔 | 간다GO",
     description: "경기남부 출장마사지 자택·호텔·오피스텔·업무지구 등 이용 장소별 확인 안내.",
-    canonical: "/gyeonggi-south/use/", h1: "이용 장소별 안내",
-    breadcrumb: [{ name: "홈", href: "/gyeonggi-south/" }, { name: "이용 장소", href: "/gyeonggi-south/use/" }],
+    canonical: "/use/", h1: "이용 장소별 안내",
+    breadcrumb: [{ name: "홈", href: "/" }, { name: "이용 장소", href: "/use/" }],
     body
   }));
 }
 
 function buildUseCases() {
   for (const u of useCases) {
-    const cityLinks = cities.slice(0, 9).map(c => ({ href: `/gyeonggi-south/city/${c.slug}/`, text: `${c.name} 안내` }));
+    const cityLinks = cities.slice(0, 9).map(c => ({ href: `/city/${c.slug}/`, text: `${c.name} 안내` }));
     const body = `
     <div class="prose section">
       <span class="eyebrow">이용 장소</span>
@@ -708,15 +702,15 @@ function buildUseCases() {
       <p>경기남부는 도시와 생활권에 따라 이용 환경이 다릅니다. 판교·광교·동탄·미사·배곧 등 신도시 오피스텔권과 수원역·평택역 등 상권, 반월·시화·고덕 산업권은 확인 항목이 서로 다르므로 방문 지역의 생활권을 함께 확인하는 것이 좋습니다.</p>
     </div>
     ${linkCluster("도시별 안내", cityLinks)}
-    ${linkCluster("예약 전 확인", checks.slice(0, 5).map(ch => ({ href: `/gyeonggi-south/check/${ch.slug}/`, text: ch.name })))}
+    ${linkCluster("예약 전 확인", checks.slice(0, 5).map(ch => ({ href: `/check/${ch.slug}/`, text: ch.name })))}
     ${faqBlock(SHARED_FAQ.slice(0, 4))}
     ${whoHowWhy(`${u.name} 방문 전 확인사항과 경기남부 지역별 이용 기준`)}`;
-    write(`gyeonggi-south/use/${u.slug}`, layout({
+    write(`use/${u.slug}`, layout({
       title: `${u.h1} | 간다GO`,
       description: u.metaDescription,
-      canonical: `/gyeonggi-south/use/${u.slug}/`, h1: u.h1,
+      canonical: `/use/${u.slug}/`, h1: u.h1,
       ogAlt: `${u.name} 이용 기준 안내 이미지`,
-      breadcrumb: [{ name: "홈", href: "/gyeonggi-south/" }, { name: "이용 장소", href: "/gyeonggi-south/use/" }, { name: u.name, href: `/gyeonggi-south/use/${u.slug}/` }],
+      breadcrumb: [{ name: "홈", href: "/" }, { name: "이용 장소", href: "/use/" }, { name: u.name, href: `/use/${u.slug}/` }],
       body
     }));
   }
@@ -725,20 +719,20 @@ function buildUseCases() {
 function buildCheckIndex() {
   const body = `<div class="section"><span class="eyebrow">예약 전 확인</span><h1>예약 전 확인 안내</h1>
     <p class="lead">방문 주소·건물 출입·추가 이동비·예약 시간·개인정보·서비스 정책을 예약 전에 확인하세요.</p>
-    <div class="grid grid-3">${checks.map(ch => `<a class="card" href="/gyeonggi-south/check/${ch.slug}/"><h3>${esc(ch.name)}</h3><p>${esc(ch.metaDescription)}</p></a>`).join("")}</div></div>
+    <div class="grid grid-3">${checks.map(ch => `<a class="card" href="/check/${ch.slug}/"><h3>${esc(ch.name)}</h3><p>${esc(ch.metaDescription)}</p></a>`).join("")}</div></div>
     ${whoHowWhy("예약 전 확인 항목과 경기남부 지역별 차이 안내")}`;
-  write("gyeonggi-south/check", layout({
+  write("check", layout({
     title: "경기남부 출장마사지 예약 전 확인 안내 | 간다GO",
     description: "경기남부 출장마사지 예약 전 방문 주소·출입·이동비·개인정보 확인 안내.",
-    canonical: "/gyeonggi-south/check/", h1: "예약 전 확인 안내",
-    breadcrumb: [{ name: "홈", href: "/gyeonggi-south/" }, { name: "예약 전 확인", href: "/gyeonggi-south/check/" }],
+    canonical: "/check/", h1: "예약 전 확인 안내",
+    breadcrumb: [{ name: "홈", href: "/" }, { name: "예약 전 확인", href: "/check/" }],
     body
   }));
 }
 
 function buildChecks() {
   for (const ch of checks) {
-    const others = checks.filter(x => x.slug !== ch.slug).map(x => ({ href: `/gyeonggi-south/check/${x.slug}/`, text: x.name }));
+    const others = checks.filter(x => x.slug !== ch.slug).map(x => ({ href: `/check/${x.slug}/`, text: x.name }));
     const body = `
     <div class="prose section">
       <span class="eyebrow">예약 전 확인</span>
@@ -748,14 +742,14 @@ function buildChecks() {
       <ul class="checklist">${ch.points.map(p => `<li>${esc(p)}</li>`).join("")}</ul>
     </div>
     ${linkCluster("다른 확인 항목", others)}
-    ${linkCluster("이용 장소", useCases.slice(0, 5).map(u => ({ href: `/gyeonggi-south/use/${u.slug}/`, text: u.name })))}
+    ${linkCluster("이용 장소", useCases.slice(0, 5).map(u => ({ href: `/use/${u.slug}/`, text: u.name })))}
     ${faqBlock(SHARED_FAQ.slice(0, 4))}
     ${whoHowWhy(`${ch.name} 항목과 경기남부 도시·생활권별 차이`)}`;
-    write(`gyeonggi-south/check/${ch.slug}`, layout({
+    write(`check/${ch.slug}`, layout({
       title: `${ch.h1} | 간다GO`,
       description: ch.metaDescription,
-      canonical: `/gyeonggi-south/check/${ch.slug}/`, h1: ch.h1,
-      breadcrumb: [{ name: "홈", href: "/gyeonggi-south/" }, { name: "예약 전 확인", href: "/gyeonggi-south/check/" }, { name: ch.name, href: `/gyeonggi-south/check/${ch.slug}/` }],
+      canonical: `/check/${ch.slug}/`, h1: ch.h1,
+      breadcrumb: [{ name: "홈", href: "/" }, { name: "예약 전 확인", href: "/check/" }, { name: ch.name, href: `/check/${ch.slug}/` }],
       body
     }));
   }
@@ -763,19 +757,19 @@ function buildChecks() {
 
 function buildPolicies() {
   for (const po of policies) {
-    const others = policies.filter(x => x.slug !== po.slug).map(x => ({ href: `/gyeonggi-south/policy/${x.slug}/`, text: x.name }));
+    const others = policies.filter(x => x.slug !== po.slug).map(x => ({ href: `/policy/${x.slug}/`, text: x.name }));
     const body = `
     <div class="prose section">
       <span class="eyebrow">운영 기준</span>
       <h1>${esc(po.h1)}</h1>
       ${po.sections.map(s => `<h2>${esc(s.h)}</h2><p>${esc(s.p)}</p>`).join("")}
     </div>
-    ${linkCluster("운영 기준 · 안내", others.concat([{ href: "/gyeonggi-south/contact/", text: "문의하기" }]))}`;
-    write(`gyeonggi-south/policy/${po.slug}`, layout({
+    ${linkCluster("운영 기준 · 안내", others.concat([{ href: "/contact/", text: "문의하기" }]))}`;
+    write(`policy/${po.slug}`, layout({
       title: `${po.h1} | 간다GO`,
       description: po.metaDescription,
-      canonical: `/gyeonggi-south/policy/${po.slug}/`, h1: po.h1,
-      breadcrumb: [{ name: "홈", href: "/gyeonggi-south/" }, { name: "운영 기준", href: "/gyeonggi-south/policy/authors/" }, { name: po.name, href: `/gyeonggi-south/policy/${po.slug}/` }],
+      canonical: `/policy/${po.slug}/`, h1: po.h1,
+      breadcrumb: [{ name: "홈", href: "/" }, { name: "운영 기준", href: "/policy/authors/" }, { name: po.name, href: `/policy/${po.slug}/` }],
       body
     }));
   }
@@ -804,18 +798,18 @@ function buildContact() {
     <p>불법·선정적 서비스는 제공하거나 안내하지 않습니다. 개인정보는 예약 확인에 필요한 최소 정보만 안내받습니다.</p>
   </div>
   ${linkCluster("이용 안내", [
-    { href: "/gyeonggi-south/policy/privacy-policy/", text: "개인정보 처리방침" },
-    { href: "/gyeonggi-south/policy/service-standard/", text: "불법·선정적 서비스 불가 안내" },
-    { href: "/gyeonggi-south/check/customer-notice/", text: "고객 유의사항" }
+    { href: "/policy/privacy-policy/", text: "개인정보 처리방침" },
+    { href: "/policy/service-standard/", text: "불법·선정적 서비스 불가 안내" },
+    { href: "/check/customer-notice/", text: "고객 유의사항" }
   ])}`;
-  write("gyeonggi-south/contact", layout({
+  write("contact", layout({
     title: "간다GO 문의하기｜예약·제작·제휴 문의",
     description: `간다GO 예약 문의 ${site.phone}. 웹사이트 제작·제휴 문의는 텔레그램으로 접수합니다.`,
-    canonical: "/gyeonggi-south/contact/", h1: "간다GO 문의하기",
-    breadcrumb: [{ name: "홈", href: "/gyeonggi-south/" }, { name: "문의하기", href: "/gyeonggi-south/contact/" }],
+    canonical: "/contact/", h1: "간다GO 문의하기",
+    breadcrumb: [{ name: "홈", href: "/" }, { name: "문의하기", href: "/contact/" }],
     extraSchema: [{
-      "@type": "ContactPage", "@id": site.baseUrl + "/gyeonggi-south/contact/#contact",
-      url: site.baseUrl + "/gyeonggi-south/contact/"
+      "@type": "ContactPage", "@id": site.baseUrl + "/contact/#contact",
+      url: site.baseUrl + "/contact/"
     }],
     body
   }));
@@ -828,17 +822,17 @@ function buildNotFound() {
     <h1 style="max-width:none">페이지를 찾을 수 없습니다</h1>
     <p class="lead" style="margin-inline:auto">주소가 바뀌었거나 삭제된 페이지일 수 있습니다. 아래에서 원하는 지역 안내로 이동해 보세요.</p>
     <div class="cta-row" style="justify-content:center">
-      <a class="btn btn-primary btn-lg" href="/gyeonggi-south/">경기남부 홈</a>
-      <a class="btn btn-ghost btn-lg" href="/gyeonggi-south/city/">도시 안내</a>
-      <a class="btn btn-ghost btn-lg" href="/gyeonggi-south/dong/">행정동 안내</a>
-      <a class="btn btn-ghost btn-lg" href="/gyeonggi-south/contact/">문의하기</a>
+      <a class="btn btn-primary btn-lg" href="/">경기남부 홈</a>
+      <a class="btn btn-ghost btn-lg" href="/city/">도시 안내</a>
+      <a class="btn btn-ghost btn-lg" href="/dong/">행정동 안내</a>
+      <a class="btn btn-ghost btn-lg" href="/contact/">문의하기</a>
     </div>
   </section>`;
   const html = layout({
     title: "페이지를 찾을 수 없습니다 (404) | 간다GO",
     description: "요청하신 페이지를 찾을 수 없습니다. 경기남부 지역 안내로 이동해 주세요.",
     canonical: "/404.html", h1: "페이지를 찾을 수 없습니다",
-    breadcrumb: [{ name: "홈", href: "/gyeonggi-south/" }, { name: "404" }],
+    breadcrumb: [{ name: "홈", href: "/" }, { name: "404" }],
     noindex: true, skipSitemap: true, body
   });
   writeFileSync(join(OUT, "404.html"), html);
@@ -857,6 +851,9 @@ ${items.map(u => `  <url><loc>${u.loc}</loc><lastmod>${today}</lastmod></url>`).
 
 function buildAssets() {
   mkdirSync(join(OUT, "assets"), { recursive: true });
+  // public/ 폴더가 있으면 dist/ 루트로 복사 (직접 올린 이미지 등)
+  const pub = join(__dirname, "public");
+  if (existsSync(pub)) cpSync(pub, OUT, { recursive: true });
   const css = readFileSync(join(__dirname, "src/styles/tokens.css"), "utf8") + "\n" + readFileSync(join(__dirname, "src/styles/overlay.css"), "utf8");
   writeFileSync(join(OUT, "assets/styles.css"), css);
   // 기본 OG 이미지 (SVG)
