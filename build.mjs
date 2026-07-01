@@ -74,6 +74,81 @@ function linkCluster(title, links) {
   return `<section class="section"><h2>${esc(title)}</h2><nav class="linkcluster" aria-label="${esc(title)}">${valid.map(l => `<a href="${l.href}">${esc(l.text)}</a>`).join("")}</nav></section>`;
 }
 
+// ---- 데이터 기반 상세 블록 (페이지별 고유 본문 확장, 도어웨이 방지) ----
+// 각 블록은 해당 페이지의 고유 데이터(행정구·행정동·역·생활권 노트)를 렌더링하므로
+// 지역명만 바꾼 반복 문장이 아니라 페이지마다 내용이 달라진다.
+function cityDetailSections(c) {
+  let html = "";
+  if (c.districts.length) {
+    html += `<h2>${esc(c.name)} 행정구별 안내</h2>`;
+    for (const d of c.districts) {
+      const dongs = dongsInCity(c.slug, d.slug);
+      const dsta = stations.filter(s => s.city === c.slug && s.district === d.name);
+      html += `<h3><a href="/city/${c.slug}/${d.slug}/">${esc(c.name)} ${esc(d.name)}</a></h3><p>${esc(d.note)}을(를) 중심으로 하는 생활권입니다. ${dongs.length ? `대표 행정동으로는 ${dongs.map(x => `<a href="${dongUrl(x)}">${esc(x.name)}</a>`).join(", ")} 등이 있습니다. ` : ""}${dsta.length ? `가까운 역은 ${dsta.map(s => esc(s.name)).join(", ")}이며 역세권 상권과 주거지가 함께 형성되어 있습니다. ` : ""}이용 장소가 자택·오피스텔·숙소·업무지구인지에 따라 공동현관과 출입 방식, 예약 가능 시간을 먼저 확인하는 것이 좋습니다.</p>`;
+    }
+  }
+  const lifes = lifeAreas.filter(l => l.city === c.slug);
+  if (lifes.length) {
+    html += `<h2>${esc(c.name)} 대표 생활권 자세히</h2>`;
+    for (const l of lifes) html += `<h3><a href="/life/${l.slug}/">${esc(l.name)}</a> · ${esc(l.type)}</h3><p>${esc(l.note)}</p>`;
+  }
+  const sts = stations.filter(s => s.city === c.slug);
+  if (sts.length) {
+    html += `<h2>${esc(c.name)} 지하철역·역세권 안내</h2><ul>${sts.map(s => `<li><a href="/station/${s.slug}/"><strong>${esc(s.name)}</strong></a> — ${esc(s.note)}</li>`).join("")}</ul>`;
+  }
+  return html ? `<div class="prose section" style="max-width:none">${html}</div>` : "";
+}
+
+function areaDetail(a) {
+  let html = `<h2>${esc(a.name)} 도시별 안내</h2>`;
+  for (const cs of a.cities) {
+    const c = cityBy(cs); if (!c) continue;
+    const lifes = lifeAreas.filter(l => l.city === c.slug).slice(0, 4);
+    const sts = stations.filter(s => s.city === c.slug).slice(0, 4);
+    html += `<h3><a href="/city/${c.slug}/">${esc(c.name)}</a></h3><p>${esc(c.intro)} ${lifes.length ? `대표 생활권은 ${lifes.map(l => `<a href="/life/${l.slug}/">${esc(l.name)}</a>`).join(", ")} 등이며, ` : ""}${sts.length ? `가까운 역은 ${sts.map(s => `<a href="/station/${s.slug}/">${esc(s.name)}</a>`).join(", ")} 등입니다.` : "지하철보다 차량 이동 기준이 중요한 지역입니다."}</p>`;
+  }
+  return `<div class="prose section" style="max-width:none">${html}</div>`;
+}
+
+function stationDetail(s) {
+  const c = cityBy(s.city);
+  const life = lifeAreas.find(l => l.name === s.life);
+  const sameLife = stations.filter(x => x.life === s.life && x.slug !== s.slug);
+  let html = `<h2>${esc(s.name)} 주변 생활권</h2>`;
+  html += `<p>${esc(s.name)}은(는) ${esc(s.cityName)}${s.district ? " " + esc(s.district) : ""} ${esc((s.dongs || []).join("·"))} 일대를 아우르며, ${life ? `<a href="/life/${life.slug}/">${esc(life.name)}</a> 생활권과 이어집니다. ${esc(life.note)}` : "인근 주거·상권 생활권과 이어집니다."}</p>`;
+  if (sameLife.length) html += `<p>같은 생활권의 다른 역으로는 ${sameLife.map(x => `<a href="/station/${x.slug}/">${esc(x.name)}</a>`).join(", ")}이(가) 있습니다. 역명은 위치 참고용이며, 실제 방문 가능 여부는 정확한 주소와 건물 출입 방식으로 확인합니다.</p>`;
+  html += `<h2>${esc(s.name)} 이용 장소별 확인</h2><p>역 주변 오피스텔은 공동현관·엘리베이터·관리 규정과 방문 가능 시간을, 숙소는 외부인 방문 정책과 객실 출입 방식을, 상권 건물은 보안 규정과 예약 가능 시간을 확인하는 것이 좋습니다. 자택 방문은 정확한 동·호수와 공동현관 출입 방식을 미리 확인하면 이동과 예약이 원활합니다.</p>`;
+  return `<div class="prose section" style="max-width:none">${html}</div>`;
+}
+
+function dongDetail(d) {
+  const adj = (d.adjacent || []).map(name => {
+    const t = adminDongs.find(x => x.city === d.city && x.name === name);
+    return t ? `<a href="${dongUrl(t)}">${esc(name)}</a>` : esc(name);
+  });
+  const life = d.life ? lifeBy(d.life) : null;
+  let html = `<h2>${esc(d.name)} 주변 지역</h2><p>${esc(d.name)}은(는) ${adj.length ? `${adj.join(", ")} 등과 인접하며, ` : ""}${life ? `<a href="/life/${life.slug}/">${esc(life.name)}</a> 생활권에 포함됩니다. ${esc(life.note)}` : "인근 생활권과 이어지는 주거·상업 지역입니다."} 같은 이름의 동이 다른 도시에 있을 수 있어, 방문 주소는 도시·행정구·행정동을 함께 확인하는 것이 정확합니다.</p>`;
+  html += `<h2>${esc(d.name)} 이용 장소별 확인</h2><p>자택은 공동현관·엘리베이터·주차 여부를, 오피스텔은 방문자 등록과 관리 규정, 방문 가능 시간을, 숙소는 외부인 방문 정책과 객실 출입 방식을 먼저 확인합니다. 신규 아파트·오피스텔 단지가 많은 지역은 정확한 단지명과 동·호수를, 외곽 지역은 차량 이동 거리와 추가 이동비를 함께 확인하는 것이 좋습니다.</p>`;
+  return `<div class="prose section" style="max-width:none">${html}</div>`;
+}
+
+function districtDetail(c, d) {
+  const dongs = dongsInCity(c.slug, d.slug);
+  if (!dongs.length) return "";
+  const html = `<h2>${esc(c.name)} ${esc(d.name)} 대표 행정동 자세히</h2>` +
+    dongs.map(x => `<h3><a href="${dongUrl(x)}">${esc(x.name)}</a></h3><p>${esc(x.note)}</p>`).join("");
+  return `<div class="prose section" style="max-width:none">${html}</div>`;
+}
+
+function lifeDetail(l) {
+  let html = "";
+  const sts = (l.stations || []).map(stationBy).filter(Boolean);
+  if (sts.length) html += `<h2>${esc(l.name)} 가까운 지하철역</h2><ul>${sts.map(s => `<li><a href="/station/${s.slug}/"><strong>${esc(s.name)}</strong></a> — ${esc(s.note)}</li>`).join("")}</ul>`;
+  const dongs = (l.dongs || []).map(n => adminDongs.find(x => x.city === l.city && x.name === n)).filter(Boolean);
+  if (dongs.length) html += `<h2>${esc(l.name)} 포함 행정동</h2>${dongs.map(x => `<h3><a href="${dongUrl(x)}">${esc(x.name)}</a></h3><p>${esc(x.note)}</p>`).join("")}`;
+  return html ? `<div class="prose section" style="max-width:none">${html}</div>` : "";
+}
+
 // ---- 헤더/푸터 -------------------------------------------------
 const TG_ICON = `<svg class="tg-ico" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M9.8 15.6 9.6 19c.4 0 .6-.2.8-.4l1.9-1.8 3.9 2.9c.7.4 1.2.2 1.4-.7l2.6-12.2c.3-1.2-.5-1.7-1.2-1.4L3.3 10.1c-1.1.4-1.1 1-.2 1.3l4.1 1.3 9.5-6c.4-.3.8-.1.5.2z"/></svg>`;
 
@@ -370,6 +445,7 @@ function buildAreas() {
       <h2>권역 개요</h2><p>${esc(a.intro)}</p>
       <h2>이동 기준</h2><p>${esc(a.move)}</p>
     </div>
+    ${areaDetail(a)}
     ${linkCluster("포함 도시", cityLinks)}
     ${linkCluster("대표 생활권", lifeLinks)}
     ${linkCluster("가까운 지하철역", stationLinks)}
@@ -426,6 +502,7 @@ function buildCities() {
       <p>자택은 공동현관·엘리베이터·주차 여부를, 오피스텔은 방문자 등록과 관리 규정을, 호텔·숙소는 외부인 방문 정책과 객실 출입 방식을 먼저 확인합니다. 신도시·업무지구는 동·호수와 보안 규정을, 외곽·산업지구는 차량 이동 거리와 추가 이동비, 예약 가능 시간을 확인하는 것이 좋습니다.</p>
       <h2>안내 방향</h2><p>${esc(c.focus)}</p>
     </div>
+    ${cityDetailSections(c)}
     ${linkCluster("대표 행정동 안내", cityDongLinks)}
     ${linkCluster("대표 생활권 바로가기", lifeLinks)}
     ${linkCluster("가까운 지하철역", stationLinks)}
@@ -476,6 +553,7 @@ function buildDistrict(c, d) {
     <h2>대표 생활권</h2><p>${esc(d.note)} 생활권을 중심으로 오피스텔·상권·주거지가 형성되어 있습니다. 이용 장소가 자택·오피스텔·숙소인지에 따라 공동현관과 출입 방식 확인이 먼저 필요합니다.</p>
     <h2>이용 장소별 기준</h2><p>오피스텔은 공동현관·엘리베이터·관리 규정과 방문 가능 시간을, 상권·업무지구는 건물 보안 규정과 예약 가능 시간을, 주거지는 공동현관 출입 방식을 확인하는 것이 좋습니다.</p>
   </div>
+  ${districtDetail(c, d)}
   ${linkCluster("대표 행정동", dongLinks)}
   ${linkCluster("같은 도시 다른 행정구", siblingLinks)}
   ${linkCluster("관련 생활권", lifeLinks.length ? lifeLinks : lifeAreas.filter(l => l.city === c.slug).slice(0, 3).map(l => ({ href: `/life/${l.slug}/`, text: `${l.name} 생활권` })))}
@@ -547,6 +625,7 @@ function buildDongs() {
       <h2>이용 장소별 기준</h2>
       <p>자택은 공동현관·엘리베이터·주차 여부를, 오피스텔은 방문자 등록과 관리 규정을, 숙소는 외부인 방문 정책과 객실 출입 방식을 먼저 확인합니다. ${d.note.includes("외곽") || d.note.includes("차량") ? "외곽·산업권은 차량 이동 거리와 추가 이동비, 예약 가능 시간을 확인하는 것이 좋습니다." : "신규 단지가 많은 지역은 정확한 단지명과 동·호수를 확인하는 것이 좋습니다."}</p>
     </div>
+    ${dongDetail(d)}
     ${linkCluster("상위 도시·행정구", parentLinks)}
     ${linkCluster("인접 행정동", adjLinks)}
     ${linkCluster("관련 생활권·역세권", lifeLinks.concat(stationLinks))}
@@ -614,6 +693,7 @@ function buildLifeAreas() {
       <h2>이용 장소별 기준</h2>
       <p>신도시·오피스텔은 동·호수와 공동현관·관리 규정을, 역세권 상권은 숙소·건물 출입 방식을, 산업·외곽은 차량 이동 거리와 추가 이동비를 확인합니다.</p>
     </div>
+    ${lifeDetail(l)}
     ${linkCluster("포함 도시·행정구", [{ href: `/city/${l.city}/`, text: `${l.cityName} 안내` }].concat((l.districts || []).map(d => {
       const dobj = (c?.districts || []).find(x => x.name === d);
       return dobj ? { href: `/city/${l.city}/${dobj.slug}/`, text: `${l.cityName} ${d}` } : null;
@@ -674,6 +754,7 @@ function buildStations() {
       <h2>이용 장소별 기준</h2>
       <p>역 주변 오피스텔은 공동현관·관리 규정을, 숙소는 외부인 방문 정책과 객실 출입 방식을, 상권 건물은 보안·예약 가능 시간을 확인합니다.</p>
     </div>
+    ${stationDetail(s)}
     ${linkCluster("상위 도시·생활권", [{ href: `/city/${s.city}/`, text: `${s.cityName} 안내` }, life ? { href: `/life/${life.slug}/`, text: `${life.name} 생활권` } : null])}
     ${linkCluster("같은 도시 다른 역", sameCity)}
     ${checklistBlock(["역명이 아닌 정확한 방문 주소를 확인했나요?", "건물 공동현관·출입 방식을 확인했나요?", "가까운 생활권을 확인했나요?", "예약 가능 시간을 확인했나요?", "개인정보 처리 기준을 확인했나요?"])}
