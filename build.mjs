@@ -799,10 +799,9 @@ function buildUseCases() {
       <span class="eyebrow">이용 장소</span>
       <h1>${esc(u.h1)}</h1>
       <p class="lead">${esc(u.why)}</p>
+      ${(u.long || []).map((p, i) => (i === 1 ? `<h2>경기남부 지역별 참고</h2>` : "") + `<p>${esc(p)}</p>`).join("")}
       <h2>확인해야 할 내용</h2>
       <ul class="checklist">${u.points.map(p => `<li>${esc(p)}</li>`).join("")}</ul>
-      <h2>지역별 참고</h2>
-      <p>경기남부는 도시와 생활권에 따라 이용 환경이 다릅니다. 판교·광교·동탄·미사·배곧 등 신도시 오피스텔권과 수원역·평택역 등 상권, 반월·시화·고덕 산업권은 확인 항목이 서로 다르므로 방문 지역의 생활권을 함께 확인하는 것이 좋습니다.</p>
     </div>
     ${linkCluster("도시별 안내", cityLinks)}
     ${linkCluster("예약 전 확인", checks.slice(0, 5).map(ch => ({ href: `/check/${ch.slug}/`, text: ch.name })))}
@@ -841,6 +840,7 @@ function buildChecks() {
       <span class="eyebrow">예약 전 확인</span>
       <h1>${esc(ch.h1)}</h1>
       <p class="lead">${esc(ch.body)}</p>
+      ${(ch.long || []).map((p, i) => (i === 1 ? `<h2>경기남부 지역별 참고</h2>` : "") + `<p>${esc(p)}</p>`).join("")}
       <h2>확인 항목</h2>
       <ul class="checklist">${ch.points.map(p => `<li>${esc(p)}</li>`).join("")}</ul>
     </div>
