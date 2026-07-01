@@ -11,6 +11,11 @@
     "webBuild": "https://t.me/gandago_web",
     "partnership": "https://t.me/gandago_partner"
   },
+  "courses": [
+    { "name": "60분 코스", "price": "90,000", "duration": "60분", "desc": "가벼운 피로 회복과 전신 이완을 위한 기본 코스.", "best": false },
+    { "name": "90분 코스", "price": "150,000", "duration": "90분", "desc": "전신 균형과 깊은 이완까지 챙기는 인기 코스.", "best": true },
+    { "name": "120분 코스", "price": "180,000", "duration": "120분", "desc": "충분한 시간으로 머리부터 발끝까지 집중 관리.", "best": false }
+  ],
   "org": {
     "legalName": "간다GO",
     "description": "경기남부 출장마사지·홈타이 지역 안내 및 예약 전 확인 서비스",

@@ -124,6 +124,7 @@ function footer() {
       <div>
         <h4>이용 안내</h4>
         <ul>
+          <li><a href="/price/">코스·가격 안내</a></li>
           <li><a href="/check/">예약 전 확인</a></li>
           <li><a href="/policy/privacy-policy/">개인정보 처리방침</a></li>
           <li><a href="/policy/service-standard/">불법·선정적 서비스 불가 안내</a></li>
@@ -139,6 +140,26 @@ function footer() {
     </div>
   </div></footer>
   <a class="fab-reserve" href="${site.telegram.reservation}" rel="noopener" target="_blank" aria-label="예약 문의">${TG_ICON}<span>예약<br>문의</span></a>`;
+}
+
+// ---- 마사지 코스 메뉴 (메인 + 전 지역 페이지) -----------------
+function courseMenu() {
+  const cards = site.courses.map(c => `
+      <div class="menu-card${c.best ? " menu-card-best" : ""}">
+        ${c.best ? '<span class="menu-badge">BEST</span>' : ""}
+        <h3>${esc(c.name)}</h3>
+        <div class="menu-price">${esc(c.price)}<small>원</small></div>
+        <div class="menu-dur">${esc(c.duration)}</div>
+        <p>${esc(c.desc)}</p>
+        <a class="btn ${c.best ? "btn-orange" : "btn-outline-light"} btn-block" href="${site.telegram.reservation}" rel="noopener" target="_blank">예약 문의</a>
+      </div>`).join("");
+  return `<section class="course-menu" aria-label="마사지 코스 안내">
+    <span class="eyebrow">코스 · 요금</span>
+    <h2>마사지 코스 안내</h2>
+    <p class="menu-sub">경기남부 출장마사지 기본 코스입니다. 예약 문의로 지역·인원별 안내를 받으세요.</p>
+    <div class="grid grid-3 menu-cards">${cards}</div>
+    <p class="menu-note">표시 요금은 기본 정찰가이며 코스·인원·지역에 따라 달라질 수 있습니다. 자세한 내용은 <a href="/price/">가격 안내</a>를 확인하세요.</p>
+  </section>`;
 }
 
 // ---- Schema (JSON-LD) -----------------------------------------
@@ -235,6 +256,7 @@ ${header()}
 <main id="main" class="container">
 ${crumbsHtml(p.breadcrumb)}
 ${p.body}
+${(p.canonical === "/" || ["/area/", "/city/", "/dong/", "/life/", "/station/"].some(x => p.canonical.startsWith(x))) ? courseMenu() : ""}
 </main>
 ${footer()}
 </body>
@@ -815,6 +837,55 @@ function buildContact() {
   }));
 }
 
+function buildPrice() {
+  const offers = site.courses.map(c => ({
+    "@type": "Offer",
+    name: c.name,
+    price: c.price.replace(/,/g, ""),
+    priceCurrency: "KRW",
+    description: c.desc
+  }));
+  const body = `
+  <div class="prose section" style="max-width:none">
+    <span class="eyebrow">코스 · 가격</span>
+    <h1>경기남부 출장마사지 코스·가격 안내</h1>
+    <p class="lead">간다GO 기본 코스와 정찰 요금입니다. 실제 금액은 방문 지역, 인원, 코스, 시간대, 외곽 이동 여부에 따라 달라질 수 있으니 예약 문의로 정확히 안내받으세요.</p>
+  </div>
+  ${courseMenu()}
+  <div class="prose section" style="max-width:none">
+    <h2>요금에 영향을 주는 요소</h2>
+    <ul>
+      <li><strong>코스 시간</strong> — 60·90·120분 등 코스 길이에 따라 기본 요금이 달라집니다.</li>
+      <li><strong>지역·이동 거리</strong> — 도심 생활권과 외곽·산업지구는 <a href="/check/travel-fee/">추가 이동비 기준</a>이 다를 수 있습니다.</li>
+      <li><strong>인원·시간대</strong> — 인원 구성과 야간 예약 여부에 따라 안내 금액이 달라질 수 있습니다.</li>
+    </ul>
+    <p>표시 요금은 기본 정찰가이며, 허위·과장된 가격 문구나 즉시 할인 보장 표현은 사용하지 않습니다. 정확한 금액은 예약 전에 안내받는 것이 좋습니다.</p>
+  </div>
+  ${linkCluster("예약 전 확인 · 문의", [
+    { href: "/check/travel-fee/", text: "추가 이동비 기준" },
+    { href: "/check/time/", text: "예약 가능 시간" },
+    { href: "/check/service-policy/", text: "불법·선정적 서비스 불가 안내" },
+    { href: "/contact/", text: "문의하기" }
+  ])}
+  ${whoHowWhy("간다GO 기본 코스 구성과 정찰 요금, 요금 변동 요소")}`;
+  write("price", layout({
+    title: "경기남부 출장마사지 코스·가격 안내 | 간다GO",
+    description: "경기남부 출장마사지 60·90·120분 코스 정찰 요금과 요금 변동 요소 안내.",
+    canonical: "/price/", h1: "경기남부 출장마사지 코스·가격 안내",
+    breadcrumb: [{ name: "홈", href: "/" }, { name: "코스·가격 안내", href: "/price/" }],
+    extraSchema: [{
+      "@type": "Service",
+      "@id": site.baseUrl + "/price/#service",
+      serviceType: "출장마사지",
+      name: "경기남부 출장마사지",
+      areaServed: site.org.areaServed,
+      provider: { "@id": site.baseUrl + "/#organization" },
+      hasOfferCatalog: { "@type": "OfferCatalog", name: "출장마사지 코스", itemListElement: offers }
+    }],
+    body
+  }));
+}
+
 function buildNotFound() {
   const body = `
   <section class="hero" style="text-align:center">
@@ -882,6 +953,7 @@ buildStationIndex(); buildStations();
 buildUseIndex(); buildUseCases();
 buildCheckIndex(); buildChecks();
 buildPolicies();
+buildPrice();
 buildContact();
 buildNotFound();
 buildSitemapRobots();
