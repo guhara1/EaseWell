@@ -1,109 +1,2807 @@
 [
-  { "slug": "ingye-dong", "name": "인계동", "city": "suwon", "district": "팔달구", "districtSlug": "paldal-gu", "life": "suwon-station-ingye", "station": "suwon-cityhall-station", "adjacent": ["매교동", "우만동", "화서동"], "index": true, "note": "수원시청역과 나혜석거리를 낀 수원 최대 상업·업무 밀집지로, 오피스텔과 상가가 함께 있어 방문 시 동·호수와 건물 출입 방식 확인이 특히 중요합니다." },
-  { "slug": "maesan-dong", "name": "매산동", "city": "suwon", "district": "팔달구", "districtSlug": "paldal-gu", "life": "suwon-station-ingye", "station": "suwon-station", "adjacent": ["고등동", "매교동", "인계동"], "index": true, "note": "수원역 바로 앞 상권·숙박 밀집지로, 숙소 이용 시 외부인 방문 정책과 객실 출입 방식을 먼저 확인하는 것이 좋습니다." },
-  { "slug": "haenggung-dong", "name": "행궁동", "city": "suwon", "district": "팔달구", "districtSlug": "paldal-gu", "life": "suwon-station-ingye", "station": "suwon-station", "adjacent": ["매산동", "지동", "매향동"], "index": true, "note": "수원화성·행궁 관광권과 저층 주거가 섞인 지역으로, 골목형 주소가 많아 정확한 방문 위치와 공동현관 여부 확인이 필요합니다." },
-  { "slug": "yeongtong-dong", "name": "영통동", "city": "suwon", "district": "영통구", "districtSlug": "yeongtong-gu", "life": "gwanggyo-yeongtong", "station": "yeongtong-station", "adjacent": ["망포동", "매탄동", "원천동"], "index": true, "note": "영통역을 중심으로 아파트 단지와 상권이 밀집한 주거 생활권으로, 단지·동·호수와 공동현관 출입 방식 확인이 중요합니다." },
-  { "slug": "mangpo-dong", "name": "망포동", "city": "suwon", "district": "영통구", "districtSlug": "yeongtong-gu", "life": "mangpo-maetan", "station": "mangpo-station", "adjacent": ["영통동", "매탄동"], "index": true, "note": "망포역 인근 신규 아파트가 늘어난 주거지로, 최근 개발 단지가 많아 정확한 단지명과 동·호수 확인이 필요합니다." },
-  { "slug": "maetan-dong", "name": "매탄동", "city": "suwon", "district": "영통구", "districtSlug": "yeongtong-gu", "life": "mangpo-maetan", "station": "", "adjacent": ["원천동", "망포동", "영통동"], "index": true, "note": "삼성전자 수원사업장 인접 주거·상권 생활권으로, 오피스텔과 아파트가 섞여 있어 건물 유형별 출입 방식 확인이 필요합니다." },
-  { "slug": "gwanggyo-dong", "name": "광교동", "city": "suwon", "district": "영통구", "districtSlug": "yeongtong-gu", "life": "gwanggyo-yeongtong", "station": "gwanggyo-jungang-station", "adjacent": ["이의동", "하동"], "index": true, "note": "광교신도시 호수공원 인근 오피스텔·업무지구 생활권으로, 방문자 등록과 관리 규정이 있는 건물이 많아 예약 전 출입 방식 확인이 중요합니다." },
-  { "slug": "gwonseon-dong", "name": "권선동", "city": "suwon", "district": "권선구", "districtSlug": "gwonseon-gu", "life": "", "station": "", "adjacent": ["곡반정동", "세류동", "매탄동"], "index": true, "note": "권선구청 인근 주거·상업 생활권으로, 번호동(권선1·2동)은 권선동으로 묶어 안내하며 방문 주소와 공동현관 확인이 필요합니다." },
-  { "slug": "seryu-dong", "name": "세류동", "city": "suwon", "district": "권선구", "districtSlug": "gwonseon-gu", "life": "suwon-station-ingye", "station": "suwon-station", "adjacent": ["매교동", "권선동"], "index": true, "note": "수원역 남측 주거·상업 생활권으로, 역세권과 인접해 이동 기준과 건물 출입 방식을 함께 확인하는 것이 좋습니다." },
-  { "slug": "homaesil-dong", "name": "호매실동", "city": "suwon", "district": "권선구", "districtSlug": "gwonseon-gu", "life": "", "station": "", "adjacent": ["금곡동", "권선동"], "index": true, "note": "호매실지구 신규 아파트가 밀집한 주거지로, 단지가 많아 정확한 단지명과 공동현관 출입 방식 확인이 필요합니다." },
-  { "slug": "jeongja-dong-suwon", "name": "정자동", "city": "suwon", "district": "장안구", "districtSlug": "jangan-gu", "life": "", "station": "", "adjacent": ["천천동", "영화동", "송죽동"], "index": true, "note": "장안구 주거 생활권으로 성남 분당 정자동과 이름이 같아 도시·행정구까지 함께 확인해야 정확합니다. 번호동은 정자동으로 묶어 안내합니다." },
-  { "slug": "cheoncheon-dong", "name": "천천동", "city": "suwon", "district": "장안구", "districtSlug": "jangan-gu", "life": "", "station": "", "adjacent": ["정자동", "율전동"], "index": true, "note": "성균관대역과 대학가 인근 주거 생활권으로, 원룸·오피스텔이 많아 공동현관과 방문 가능 시간 확인이 필요합니다." },
-
-  { "slug": "pangyo-dong", "name": "판교동", "city": "seongnam", "district": "분당구", "districtSlug": "bundang-gu", "life": "bundang-pangyo", "station": "pangyo-station", "adjacent": ["백현동", "삼평동", "운중동"], "index": true, "note": "판교테크노밸리 업무지구와 이어지는 생활권으로, 오피스텔·업무 건물의 방문자 등록 규정과 예약 가능 시간 확인이 특히 중요합니다." },
-  { "slug": "jeongja-dong-seongnam", "name": "정자동", "city": "seongnam", "district": "분당구", "districtSlug": "bundang-gu", "life": "jeongja-sunae", "station": "jeongja-station", "adjacent": ["수내동", "서현동", "금곡동"], "index": true, "note": "분당 카페거리와 주거가 함께 있는 생활권으로, 수원 장안구 정자동과 다르므로 도시·행정구를 함께 확인해야 합니다." },
-  { "slug": "seohyeon-dong", "name": "서현동", "city": "seongnam", "district": "분당구", "districtSlug": "bundang-gu", "life": "yatap-seohyeon", "station": "seohyeon-station", "adjacent": ["이매동", "야탑동", "수내동"], "index": true, "note": "서현역 상권 중심 생활권으로, 상가·오피스텔 유동 인구가 많아 건물 출입 방식과 예약 가능 시간 확인이 좋습니다." },
-  { "slug": "yatap-dong", "name": "야탑동", "city": "seongnam", "district": "분당구", "districtSlug": "bundang-gu", "life": "yatap-seohyeon", "station": "yatap-station", "adjacent": ["이매동", "서현동"], "index": true, "note": "야탑역과 종합버스터미널 인근 상권 생활권으로, 이동 기준과 건물 출입 방식을 함께 확인하는 것이 좋습니다." },
-  { "slug": "sunae-dong", "name": "수내동", "city": "seongnam", "district": "분당구", "districtSlug": "bundang-gu", "life": "jeongja-sunae", "station": "", "adjacent": ["정자동", "서현동"], "index": true, "note": "분당구청 인근 주거 생활권으로, 아파트 단지가 많아 단지명과 공동현관 출입 방식 확인이 필요합니다." },
-  { "slug": "wirye-dong", "name": "위례동", "city": "seongnam", "district": "수정구", "districtSlug": "sujeong-gu", "life": "", "station": "", "adjacent": ["창곡동", "복정동"], "index": true, "note": "위례신도시 생활권으로 서울 송파권과 인접하며, 오피스텔·아파트가 밀집해 관리 규정과 방문 가능 시간 확인이 필요합니다." },
-  { "slug": "sinheung-dong", "name": "신흥동", "city": "seongnam", "district": "수정구", "districtSlug": "sujeong-gu", "life": "", "station": "", "adjacent": ["태평동", "수진동"], "index": false, "note": "수정구 원도심 주거 생활권으로, 번호동은 신흥동으로 묶어 안내하며 방문 주소와 공동현관 확인이 필요합니다." },
-  { "slug": "seongnam-dong", "name": "성남동", "city": "seongnam", "district": "중원구", "districtSlug": "jungwon-gu", "life": "", "station": "moran-station", "adjacent": ["금광동", "은행동"], "index": true, "note": "모란역과 이어지는 중원 원도심 상권 생활권으로, 상가·주거가 섞여 있어 건물 출입 방식 확인이 필요합니다." },
-  { "slug": "sangdaewon-dong", "name": "상대원동", "city": "seongnam", "district": "중원구", "districtSlug": "jungwon-gu", "life": "", "station": "", "adjacent": ["하대원동", "금광동"], "index": false, "note": "성남산업단지 인접 주거 생활권으로, 번호동은 상대원동으로 묶어 안내하며 차량 이동 기준과 방문 주소 확인이 필요합니다." },
-
-  { "slug": "jukjeon-dong", "name": "죽전동", "city": "yongin", "district": "수지구", "districtSlug": "suji-gu", "life": "jukjeon-suji", "station": "jukjeon-station", "adjacent": ["풍덕천동", "보정동", "상현동"], "index": true, "note": "죽전역 상권과 아파트 단지가 밀집한 생활권으로, 성남 분당권과 붙어 있어 이동 기준과 공동현관 출입 방식 확인이 좋습니다." },
-  { "slug": "pungdeokcheon-dong", "name": "풍덕천동", "city": "yongin", "district": "수지구", "districtSlug": "suji-gu", "life": "jukjeon-suji", "station": "", "adjacent": ["죽전동", "상현동", "동천동"], "index": true, "note": "수지구청 인근 주거·상업 생활권으로, 번호동은 풍덕천동으로 묶어 안내하며 단지·공동현관 확인이 필요합니다." },
-  { "slug": "sanghyeon-dong", "name": "상현동", "city": "yongin", "district": "수지구", "districtSlug": "suji-gu", "life": "jukjeon-suji", "station": "", "adjacent": ["성복동", "풍덕천동"], "index": true, "note": "광교와 인접한 신규 아파트 생활권으로, 번호동은 상현동으로 묶어 안내하며 단지명과 출입 방식 확인이 필요합니다." },
-  { "slug": "dongcheon-dong", "name": "동천동", "city": "yongin", "district": "수지구", "districtSlug": "suji-gu", "life": "", "station": "", "adjacent": ["고기동", "풍덕천동"], "index": true, "note": "신분당선 동천역 인근 주거 생활권으로, 서울 강남권 접근성이 좋아 이동 기준과 건물 출입 방식 확인이 좋습니다." },
-  { "slug": "gugal-dong", "name": "구갈동", "city": "yongin", "district": "기흥구", "districtSlug": "giheung-gu", "life": "bojeong-gugal", "station": "giheung-station", "adjacent": ["신갈동", "상갈동", "보정동"], "index": true, "note": "기흥역 인접 주거·상업 생활권으로, 역세권 건물의 공동현관과 관리 규정 확인이 필요합니다." },
-  { "slug": "bojeong-dong", "name": "보정동", "city": "yongin", "district": "기흥구", "districtSlug": "giheung-gu", "life": "bojeong-gugal", "station": "", "adjacent": ["죽전동", "마북동"], "index": true, "note": "보정동 카페거리와 아파트가 함께 있는 생활권으로, 상가·주거 혼재 지역이라 방문 위치와 출입 방식 확인이 필요합니다." },
-  { "slug": "dongbaek-dong", "name": "동백동", "city": "yongin", "district": "기흥구", "districtSlug": "giheung-gu", "life": "giheung-dongbaek", "station": "dongbaek-station", "adjacent": ["중동", "마북동"], "index": true, "note": "동백지구 아파트가 밀집한 주거 생활권으로, 번호동은 동백동으로 묶어 안내하며 단지·공동현관 확인이 필요합니다." },
-  { "slug": "singal-dong", "name": "신갈동", "city": "yongin", "district": "기흥구", "districtSlug": "giheung-gu", "life": "", "station": "", "adjacent": ["구갈동", "영덕동", "상갈동"], "index": true, "note": "신갈오거리 인근 상업·주거 생활권으로, 교통 요지라 이동 기준과 건물 출입 방식을 함께 확인하는 것이 좋습니다." },
-  { "slug": "yeokbuk-dong", "name": "역북동", "city": "yongin", "district": "처인구", "districtSlug": "cheoin-gu", "life": "cheoin-yeokbuk", "station": "", "adjacent": ["삼가동", "김량장동"], "index": true, "note": "처인구청 인근 신규 아파트 생활권으로, 도심과 외곽이 만나는 지역이라 차량 이동 기준 확인이 좋습니다." },
-  { "slug": "gimnyangjang-dong", "name": "김량장동", "city": "yongin", "district": "처인구", "districtSlug": "cheoin-gu", "life": "cheoin-yeokbuk", "station": "", "adjacent": ["역북동", "남동", "마평동"], "index": true, "note": "용인중앙시장을 낀 처인구 원도심 상권으로, 골목형 주소가 많아 정확한 방문 위치 확인이 필요합니다." },
-
-  { "slug": "byeongjeom-dong", "name": "병점동", "city": "hwaseong", "district": "", "districtSlug": "", "life": "byeongjeom-bongdam", "station": "byeongjeom-station", "adjacent": ["진안동", "기산동"], "index": true, "note": "병점역 상권과 주거가 함께 있는 생활권으로, 수원·오산과 인접해 이동 기준과 건물 출입 방식 확인이 좋습니다." },
-  { "slug": "bongdam-eup", "name": "봉담읍", "city": "hwaseong", "district": "", "districtSlug": "", "life": "byeongjeom-bongdam", "station": "", "adjacent": ["병점동", "매송면"], "index": true, "note": "택지지구와 대학이 있는 읍 지역으로, 신규 아파트와 외곽이 섞여 있어 방문 주소와 차량 이동 기준 확인이 필요합니다." },
-  { "slug": "hyangnam-eup", "name": "향남읍", "city": "hwaseong", "district": "", "districtSlug": "", "life": "", "station": "", "adjacent": ["남양읍", "양감면"], "index": true, "note": "제약단지와 택지지구가 있는 외곽 생활권으로, 지하철 접근이 어려워 차량 이동 거리와 추가 이동비, 예약 가능 시간 확인이 중요합니다." },
-  { "slug": "namyang-eup", "name": "남양읍", "city": "hwaseong", "district": "", "districtSlug": "", "life": "", "station": "", "adjacent": ["향남읍", "새솔동", "마도면"], "index": true, "note": "화성시청이 있는 서부 외곽 생활권으로, 차량 이동 거리가 길어 방문 주소와 추가 이동비 기준 확인이 필요합니다." },
-
-  { "slug": "osan-dong", "name": "오산동", "city": "osan", "district": "", "districtSlug": "", "life": "osan-station-central", "station": "osan-station", "adjacent": ["궐동", "부산동"], "index": true, "note": "오산역과 중앙 상권을 낀 도심 생활권으로, 숙박·상가가 있어 건물 출입 방식과 예약 가능 시간 확인이 좋습니다." },
-  { "slug": "sucheong-dong", "name": "수청동", "city": "osan", "district": "", "districtSlug": "", "life": "segyo-sucheong", "station": "osandae-station", "adjacent": ["원동", "누읍동"], "index": false, "note": "세교신도시와 이어지는 주거 생활권으로, 세교·수청 생활권 안내와 함께 확인하며 단지·공동현관 확인이 필요합니다." },
-
-  { "slug": "bijeon-dong", "name": "비전동", "city": "pyeongtaek", "district": "", "districtSlug": "", "life": "pyeongtaek-station-sosabeol", "station": "pyeongtaek-station", "adjacent": ["평택동", "동삭동"], "index": true, "note": "평택 중심 상권과 소사벌 택지가 있는 생활권으로, 상가·오피스텔이 밀집해 건물 출입 방식 확인이 좋습니다." },
-  { "slug": "godeok-dong", "name": "고덕동", "city": "pyeongtaek", "district": "", "districtSlug": "", "life": "godeok-newtown", "station": "seojeong-ri-station", "adjacent": ["서정동", "장당동"], "index": true, "note": "고덕국제신도시 오피스텔·아파트 밀집 생활권으로, 신규 단지가 많아 정확한 단지명과 공동현관 출입 방식 확인이 필요합니다." },
-  { "slug": "seojeong-dong", "name": "서정동", "city": "pyeongtaek", "district": "", "districtSlug": "", "life": "", "station": "seojeong-ri-station", "adjacent": ["지산동", "고덕동"], "index": false, "note": "서정리역과 송탄 생활권 인근 주거·상업 지역으로, 역세권 이동 기준과 건물 출입 방식을 함께 확인하는 것이 좋습니다." },
-
-  { "slug": "pyeongchon-dong", "name": "평촌동", "city": "anyang", "district": "동안구", "districtSlug": "dongan-gu", "life": "anyang-beomgye-pyeongchon", "station": "pyeongchon-station", "adjacent": ["호계동", "관양동"], "index": true, "note": "평촌 학원가와 상권이 밀집한 생활권으로, 오피스텔·상가 유동 인구가 많아 건물 출입 방식과 예약 가능 시간 확인이 좋습니다." },
-  { "slug": "gwanyang-dong", "name": "관양동", "city": "anyang", "district": "동안구", "districtSlug": "dongan-gu", "life": "", "station": "", "adjacent": ["평촌동", "비산동"], "index": true, "note": "인덕원역과 인접한 주거·상업 생활권으로, 의왕·과천 인접권이라 이동 기준과 건물 출입 방식 확인이 좋습니다." },
-  { "slug": "hogye-dong", "name": "호계동", "city": "anyang", "district": "동안구", "districtSlug": "dongan-gu", "life": "anyang-beomgye-pyeongchon", "station": "beomgye-station", "adjacent": ["평촌동", "비산동"], "index": true, "note": "범계역 로데오 상권을 낀 생활권으로, 상가·오피스텔이 밀집해 건물 출입 방식 확인이 특히 중요합니다." },
-  { "slug": "anyang-dong", "name": "안양동", "city": "anyang", "district": "만안구", "districtSlug": "manan-gu", "life": "anyang-beomgye-pyeongchon", "station": "anyang-station", "adjacent": ["석수동", "박달동"], "index": true, "note": "안양역 원도심 상권 생활권으로, 번호동은 안양동으로 묶어 안내하며 역세권 이동 기준과 건물 출입 방식 확인이 좋습니다." },
-  { "slug": "seoksu-dong", "name": "석수동", "city": "anyang", "district": "만안구", "districtSlug": "manan-gu", "life": "", "station": "", "adjacent": ["박달동", "안양동"], "index": false, "note": "관악역 인근 주거 생활권으로, 번호동은 석수동으로 묶어 안내하며 방문 주소와 공동현관 확인이 필요합니다." },
-
-  { "slug": "gojan-dong", "name": "고잔동", "city": "ansan", "district": "단원구", "districtSlug": "danwon-gu", "life": "ansan-jungang-gojan", "station": "gojan-station", "adjacent": ["초지동", "원곡동"], "index": true, "note": "안산 중앙 상권을 낀 생활권으로, 상가·오피스텔 유동 인구가 많아 건물 출입 방식과 예약 가능 시간 확인이 좋습니다." },
-  { "slug": "choji-dong", "name": "초지동", "city": "ansan", "district": "단원구", "districtSlug": "danwon-gu", "life": "choji-seonbu", "station": "choji-station", "adjacent": ["선부동", "고잔동"], "index": true, "note": "초지역 인근 주거 생활권으로, 환승역과 가까워 역명 기준 위치 확인과 건물 출입 방식 확인이 좋습니다." },
-  { "slug": "seonbu-dong", "name": "선부동", "city": "ansan", "district": "단원구", "districtSlug": "danwon-gu", "life": "choji-seonbu", "station": "", "adjacent": ["초지동", "와동"], "index": false, "note": "단원구 주거 밀집 생활권으로, 번호동은 선부동으로 묶어 안내하며 방문 주소와 공동현관 확인이 필요합니다." },
-  { "slug": "bono-dong", "name": "본오동", "city": "ansan", "district": "상록구", "districtSlug": "sangnok-gu", "life": "", "station": "", "adjacent": ["사동", "이동"], "index": false, "note": "상록수역 인근 주거 생활권으로, 번호동은 본오동으로 묶어 안내하며 방문 주소와 공동현관 확인이 필요합니다." },
-  { "slug": "sa-dong", "name": "사동", "city": "ansan", "district": "상록구", "districtSlug": "sangnok-gu", "life": "", "station": "", "adjacent": ["본오동", "성포동"], "index": false, "note": "한양대 에리카와 고잔신도시 인근 생활권으로, 대학·주거가 섞여 있어 방문 위치와 건물 출입 방식 확인이 필요합니다." },
-
-  { "slug": "baegot-dong", "name": "배곧동", "city": "siheung", "district": "", "districtSlug": "", "life": "siheung-baegot", "station": "", "adjacent": ["정왕동"], "index": true, "note": "배곧신도시 오피스텔·아파트 밀집 생활권으로, 번호동은 배곧동으로 묶어 안내하며 단지명과 공동현관 출입 방식 확인이 필요합니다." },
-  { "slug": "jeongwang-dong", "name": "정왕동", "city": "siheung", "district": "", "districtSlug": "", "life": "siheung-baegot", "station": "jeongwang-station", "adjacent": ["배곧동"], "index": true, "note": "정왕역과 시화산단이 이어지는 생활권으로, 번호동은 정왕동으로 묶어 안내하며 산업권 이동 기준과 예약 가능 시간 확인이 좋습니다." },
-
-  { "slug": "sanbon-dong", "name": "산본동", "city": "gunpo", "district": "", "districtSlug": "", "life": "gunpo-sanbon", "station": "sanbon-station", "adjacent": ["금정동", "당동"], "index": true, "note": "산본신도시 상권 중심 생활권으로, 아파트·상가가 밀집해 단지·건물 출입 방식 확인이 좋습니다." },
-  { "slug": "geumjeong-dong", "name": "금정동", "city": "gunpo", "district": "", "districtSlug": "", "life": "gunpo-sanbon", "station": "geumjeong-station", "adjacent": ["산본동", "당동"], "index": true, "note": "금정역 환승 생활권으로, 환승역도 노선별로 나누지 않고 역명 기준으로 위치를 확인하며 건물 출입 방식 확인이 좋습니다." },
-
-  { "slug": "naeson-dong", "name": "내손동", "city": "uiwang", "district": "", "districtSlug": "", "life": "uiwang-naeson", "station": "", "adjacent": ["포일동", "오전동", "청계동"], "index": true, "note": "인덕원과 평촌에 인접한 주거 생활권으로, 안양·과천과 이어져 이동 기준과 건물 출입 방식 확인이 좋습니다." },
-  { "slug": "ojeon-dong", "name": "오전동", "city": "uiwang", "district": "", "districtSlug": "", "life": "", "station": "uiwang-station", "adjacent": ["고천동", "내손동"], "index": true, "note": "의왕역 인근 원도심 주거 생활권으로, 역세권 이동 기준과 공동현관 출입 방식 확인이 필요합니다." },
-  { "slug": "poil-dong", "name": "포일동", "city": "uiwang", "district": "", "districtSlug": "", "life": "uiwang-naeson", "station": "", "adjacent": ["내손동", "청계동"], "index": true, "note": "인덕원 인접 신규 아파트 생활권으로, 단지명과 공동현관 출입 방식 확인이 필요합니다." },
-  { "slug": "cheonggye-dong-uiwang", "name": "청계동", "city": "uiwang", "district": "", "districtSlug": "", "life": "", "station": "", "adjacent": ["포일동"], "index": false, "note": "청계산 인근 외곽 주거 생활권으로, 화성 동탄 청계동과 다르며 차량 이동 기준과 방문 주소 확인이 필요합니다." },
-
-  { "slug": "byeolyang-dong", "name": "별양동", "city": "gwacheon", "district": "", "districtSlug": "", "life": "gwacheon-government-complex", "station": "gwacheon-government-complex-station", "adjacent": ["중앙동", "부림동"], "index": true, "note": "정부과천청사역과 중앙 상권을 낀 생활권으로, 업무·상가 유동 인구가 많아 건물 출입 방식과 예약 가능 시간 확인이 좋습니다." },
-  { "slug": "jungang-dong-gwacheon", "name": "중앙동", "city": "gwacheon", "district": "", "districtSlug": "", "life": "gwacheon-government-complex", "station": "gwacheon-government-complex-station", "adjacent": ["별양동", "문원동"], "index": true, "note": "과천 관문과 행정업무지구가 이어지는 생활권으로, 방문 위치와 건물 출입 방식 확인이 좋습니다." },
-  { "slug": "munwon-dong", "name": "문원동", "city": "gwacheon", "district": "", "districtSlug": "", "life": "", "station": "", "adjacent": ["갈현동", "중앙동"], "index": true, "note": "과천 주거와 외곽이 만나는 생활권으로, 방문 주소와 이동 기준 확인이 필요합니다." },
-  { "slug": "galhyeon-dong-gwacheon", "name": "갈현동", "city": "gwacheon", "district": "", "districtSlug": "", "life": "", "station": "", "adjacent": ["문원동"], "index": false, "note": "지식정보타운 개발권 인근 생활권으로, 신규 단지가 늘어 정확한 단지명 확인이 필요합니다." },
-
-  { "slug": "cheolsan-dong", "name": "철산동", "city": "gwangmyeong", "district": "", "districtSlug": "", "life": "gwangmyeong-cheolsan", "station": "cheolsan-station", "adjacent": ["하안동", "광명동"], "index": true, "note": "철산역 상권과 오피스텔이 밀집한 생활권으로, 건물 출입 방식과 예약 가능 시간 확인이 특히 중요합니다." },
-  { "slug": "haan-dong", "name": "하안동", "city": "gwangmyeong", "district": "", "districtSlug": "", "life": "", "station": "", "adjacent": ["철산동", "소하동"], "index": true, "note": "주거 단지가 밀집한 생활권으로, 번호동은 하안동으로 묶어 안내하며 단지명과 공동현관 확인이 필요합니다." },
-  { "slug": "soha-dong", "name": "소하동", "city": "gwangmyeong", "district": "", "districtSlug": "", "life": "", "station": "", "adjacent": ["일직동", "하안동"], "index": true, "note": "소하지구와 KTX광명역에 인접한 생활권으로, 단지·이동 기준과 건물 출입 방식 확인이 좋습니다." },
-  { "slug": "gwangmyeong-dong", "name": "광명동", "city": "gwangmyeong", "district": "", "districtSlug": "", "life": "", "station": "", "adjacent": ["철산동"], "index": true, "note": "광명사거리 원도심 상권 생활권으로, 골목형 주소가 많아 정확한 방문 위치 확인이 필요합니다." },
-  { "slug": "iljik-dong", "name": "일직동", "city": "gwangmyeong", "district": "", "districtSlug": "", "life": "gwangmyeong-cheolsan", "station": "gwangmyeong-station", "adjacent": ["소하동"], "index": true, "note": "KTX광명역과 업무·물류권이 이어지는 생활권으로, 이동 기준과 건물 출입 방식 확인이 좋습니다." },
-
-  { "slug": "deokpung-dong", "name": "덕풍동", "city": "hanam", "district": "", "districtSlug": "", "life": "", "station": "", "adjacent": ["신장동", "망월동"], "index": true, "note": "하남시청과 원도심 상권이 있는 생활권으로, 번호동은 덕풍동으로 묶어 안내하며 건물 출입 방식 확인이 좋습니다." },
-  { "slug": "sinjang-dong-hanam", "name": "신장동", "city": "hanam", "district": "", "districtSlug": "", "life": "", "station": "hanam-geomdansan-station", "adjacent": ["덕풍동", "창우동"], "index": true, "note": "하남검단산역 인근 원도심 생활권으로, 평택 신장동과 다르며 역세권 이동 기준과 공동현관 확인이 좋습니다." },
-  { "slug": "pungsan-dong", "name": "풍산동", "city": "hanam", "district": "", "districtSlug": "", "life": "hanam-misa", "station": "misa-station", "adjacent": ["망월동", "덕풍동"], "index": true, "note": "미사신도시 오피스텔·아파트 밀집 생활권으로, 정확한 단지명과 공동현관 출입 방식 확인이 필요합니다." },
-  { "slug": "gamil-dong", "name": "감일동", "city": "hanam", "district": "", "districtSlug": "", "life": "", "station": "", "adjacent": ["학암동"], "index": true, "note": "감일지구 신규 아파트 생활권으로, 서울 강동권과 인접해 단지명과 이동 기준 확인이 좋습니다." },
-  { "slug": "wirye-dong-hanam", "name": "위례동", "city": "hanam", "district": "", "districtSlug": "", "life": "", "station": "", "adjacent": ["학암동"], "index": true, "note": "위례신도시 하남권 생활권으로, 성남·서울 위례와 이어져 도시·행정동을 함께 확인해야 정확합니다." },
-
-  { "slug": "gyeongan-dong", "name": "경안동", "city": "gwangju-si", "district": "", "districtSlug": "", "life": "gwangju-taejeon", "station": "gyeonggi-gwangju-station", "adjacent": ["송정동", "역동"], "index": true, "note": "경기광주역과 원도심 상권이 있는 생활권으로, 역세권 이동 기준과 건물 출입 방식 확인이 좋습니다." },
-  { "slug": "taejeon-dong", "name": "태전동", "city": "gwangju-si", "district": "", "districtSlug": "", "life": "gwangju-taejeon", "station": "", "adjacent": ["목현동", "경안동"], "index": true, "note": "태전지구 신규 아파트 생활권으로, 단지가 많아 정확한 단지명과 공동현관 확인이 필요합니다." },
-  { "slug": "songjeong-dong-gwangju", "name": "송정동", "city": "gwangju-si", "district": "", "districtSlug": "", "life": "", "station": "", "adjacent": ["경안동"], "index": false, "note": "경기광주 원도심 주거 생활권으로, 방문 주소와 공동현관 출입 방식 확인이 필요합니다." },
-  { "slug": "gonjiam-eup", "name": "곤지암읍", "city": "gwangju-si", "district": "", "districtSlug": "", "life": "", "station": "gonjiam-station", "adjacent": ["초월읍"], "index": true, "note": "곤지암역과 외곽이 이어지는 생활권으로, 차량 이동 거리와 추가 이동비, 예약 가능 시간 확인이 중요합니다." },
-  { "slug": "chowol-eup", "name": "초월읍", "city": "gwangju-si", "district": "", "districtSlug": "", "life": "", "station": "", "adjacent": ["곤지암읍"], "index": true, "note": "동남부 외곽 생활권으로, 지하철 접근보다 차량 이동 기준과 방문 주소 확인이 중요합니다." },
-
-  { "slug": "changjeon-dong", "name": "창전동", "city": "icheon", "district": "", "districtSlug": "", "life": "icheon-bubal", "station": "icheon-station", "adjacent": ["중리동", "관고동"], "index": true, "note": "이천역과 원도심 상권이 있는 생활권으로, 숙박·상가 이동 기준과 건물 출입 방식 확인이 좋습니다." },
-  { "slug": "jungni-dong", "name": "중리동", "city": "icheon", "district": "", "districtSlug": "", "life": "", "station": "", "adjacent": ["창전동"], "index": true, "note": "이천시청 인근 주거 생활권으로, 방문 주소와 공동현관 출입 방식 확인이 필요합니다." },
-  { "slug": "bubal-eup", "name": "부발읍", "city": "icheon", "district": "", "districtSlug": "", "life": "icheon-bubal", "station": "bubal-station", "adjacent": ["창전동"], "index": true, "note": "부발역과 산업권이 이어지는 생활권으로, 산업지구 이동 기준과 예약 가능 시간 확인이 좋습니다." },
-  { "slug": "majang-myeon", "name": "마장면", "city": "icheon", "district": "", "districtSlug": "", "life": "", "station": "", "adjacent": ["호법면"], "index": false, "note": "물류·외곽 생활권으로, 차량 이동 거리와 추가 이동비 기준 확인이 필요합니다." },
-  { "slug": "janghowon-eup", "name": "장호원읍", "city": "icheon", "district": "", "districtSlug": "", "life": "", "station": "", "adjacent": ["설성면"], "index": true, "note": "이천 남부 외곽 생활권으로, 차량 이동 거리가 길어 방문 주소와 예약 가능 시간 확인이 중요합니다." },
-
-  { "slug": "yeoheung-dong", "name": "여흥동", "city": "yeoju", "district": "", "districtSlug": "", "life": "yeoju-ohak", "station": "yeoju-station", "adjacent": ["오학동", "중앙동"], "index": true, "note": "여주역과 원도심 상권이 있는 생활권으로, 역세권 이동 기준과 건물 출입 방식 확인이 좋습니다." },
-  { "slug": "ohak-dong", "name": "오학동", "city": "yeoju", "district": "", "districtSlug": "", "life": "yeoju-ohak", "station": "", "adjacent": ["여흥동"], "index": true, "note": "여주 신규 주거 생활권으로, 단지명과 공동현관 출입 방식 확인이 필요합니다." },
-  { "slug": "ganam-eup", "name": "가남읍", "city": "yeoju", "district": "", "districtSlug": "", "life": "", "station": "", "adjacent": ["점동면"], "index": false, "note": "여주 외곽·산업 생활권으로, 차량 이동 거리와 추가 이동비 기준 확인이 필요합니다." },
-  { "slug": "jeomdong-myeon", "name": "점동면", "city": "yeoju", "district": "", "districtSlug": "", "life": "", "station": "", "adjacent": ["가남읍"], "index": false, "note": "동남부 외곽 생활권으로, 지하철 접근이 어려워 차량 이동 기준과 방문 주소 확인이 중요합니다." },
-
-  { "slug": "anseong-dong", "name": "안성동", "city": "anseong", "district": "", "districtSlug": "", "life": "anseong-gongdo", "station": "", "adjacent": ["공도읍"], "index": true, "note": "안성 시내 원도심 상권 생활권으로, 지하철보다 차량 이동 기준과 방문 주소 확인이 중요합니다." },
-  { "slug": "gongdo-eup", "name": "공도읍", "city": "anseong", "district": "", "districtSlug": "", "life": "anseong-gongdo", "station": "", "adjacent": ["원곡면", "안성동"], "index": true, "note": "평택과 인접한 택지 생활권으로, 도시 경계 주소는 가까운 도시 생활권과 함께 확인하는 것이 좋습니다." },
-  { "slug": "daedeok-myeon", "name": "대덕면", "city": "anseong", "district": "", "districtSlug": "", "life": "", "station": "", "adjacent": ["안성동"], "index": false, "note": "대학과 외곽이 있는 생활권으로, 차량 이동 거리와 방문 주소 확인이 필요합니다." },
-  { "slug": "juksan-myeon", "name": "죽산면", "city": "anseong", "district": "", "districtSlug": "", "life": "", "station": "", "adjacent": ["일죽면"], "index": true, "note": "안성 동부 외곽 생활권으로, 차량 이동 거리가 길어 예약 가능 시간과 추가 이동비 확인이 중요합니다." }
+  {
+    "slug": "ingye-dong",
+    "name": "인계동",
+    "city": "suwon",
+    "district": "팔달구",
+    "districtSlug": "paldal-gu",
+    "life": "suwon-station-ingye",
+    "station": "suwon-cityhall-station",
+    "adjacent": [
+      "매교동",
+      "우만동",
+      "화서동"
+    ],
+    "index": true,
+    "note": "수원시청역과 나혜석거리를 낀 수원 최대 상업·업무 밀집지로, 오피스텔과 상가가 함께 있어 방문 시 동·호수와 건물 출입 방식 확인이 특히 중요합니다."
+  },
+  {
+    "slug": "maesan-dong",
+    "name": "매산동",
+    "city": "suwon",
+    "district": "팔달구",
+    "districtSlug": "paldal-gu",
+    "life": "suwon-station-ingye",
+    "station": "suwon-station",
+    "adjacent": [
+      "고등동",
+      "매교동",
+      "인계동"
+    ],
+    "index": true,
+    "note": "수원역 바로 앞 상권·숙박 밀집지로, 숙소 이용 시 외부인 방문 정책과 객실 출입 방식을 먼저 확인하는 것이 좋습니다."
+  },
+  {
+    "slug": "haenggung-dong",
+    "name": "행궁동",
+    "city": "suwon",
+    "district": "팔달구",
+    "districtSlug": "paldal-gu",
+    "life": "suwon-station-ingye",
+    "station": "suwon-station",
+    "adjacent": [
+      "매산동",
+      "지동",
+      "매향동"
+    ],
+    "index": true,
+    "note": "수원화성·행궁 관광권과 저층 주거가 섞인 지역으로, 골목형 주소가 많아 정확한 방문 위치와 공동현관 여부 확인이 필요합니다."
+  },
+  {
+    "slug": "yeongtong-dong",
+    "name": "영통동",
+    "city": "suwon",
+    "district": "영통구",
+    "districtSlug": "yeongtong-gu",
+    "life": "gwanggyo-yeongtong",
+    "station": "yeongtong-station",
+    "adjacent": [
+      "망포동",
+      "매탄동",
+      "원천동"
+    ],
+    "index": true,
+    "note": "영통역을 중심으로 아파트 단지와 상권이 밀집한 주거 생활권으로, 단지·동·호수와 공동현관 출입 방식 확인이 중요합니다."
+  },
+  {
+    "slug": "mangpo-dong",
+    "name": "망포동",
+    "city": "suwon",
+    "district": "영통구",
+    "districtSlug": "yeongtong-gu",
+    "life": "mangpo-maetan",
+    "station": "mangpo-station",
+    "adjacent": [
+      "영통동",
+      "매탄동"
+    ],
+    "index": true,
+    "note": "망포역 인근 신규 아파트가 늘어난 주거지로, 최근 개발 단지가 많아 정확한 단지명과 동·호수 확인이 필요합니다."
+  },
+  {
+    "slug": "maetan-dong",
+    "name": "매탄동",
+    "city": "suwon",
+    "district": "영통구",
+    "districtSlug": "yeongtong-gu",
+    "life": "mangpo-maetan",
+    "station": "",
+    "adjacent": [
+      "원천동",
+      "망포동",
+      "영통동"
+    ],
+    "index": true,
+    "note": "삼성전자 수원사업장 인접 주거·상권 생활권으로, 오피스텔과 아파트가 섞여 있어 건물 유형별 출입 방식 확인이 필요합니다."
+  },
+  {
+    "slug": "gwanggyo-dong",
+    "name": "광교동",
+    "city": "suwon",
+    "district": "영통구",
+    "districtSlug": "yeongtong-gu",
+    "life": "gwanggyo-yeongtong",
+    "station": "gwanggyo-jungang-station",
+    "adjacent": [
+      "이의동",
+      "하동"
+    ],
+    "index": true,
+    "note": "광교신도시 호수공원 인근 오피스텔·업무지구 생활권으로, 방문자 등록과 관리 규정이 있는 건물이 많아 예약 전 출입 방식 확인이 중요합니다."
+  },
+  {
+    "slug": "gwonseon-dong",
+    "name": "권선동",
+    "city": "suwon",
+    "district": "권선구",
+    "districtSlug": "gwonseon-gu",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "곡반정동",
+      "세류동",
+      "매탄동"
+    ],
+    "index": true,
+    "note": "권선구청 인근 주거·상업 생활권으로, 번호동(권선1·2동)은 권선동으로 묶어 안내하며 방문 주소와 공동현관 확인이 필요합니다."
+  },
+  {
+    "slug": "seryu-dong",
+    "name": "세류동",
+    "city": "suwon",
+    "district": "권선구",
+    "districtSlug": "gwonseon-gu",
+    "life": "suwon-station-ingye",
+    "station": "suwon-station",
+    "adjacent": [
+      "매교동",
+      "권선동"
+    ],
+    "index": true,
+    "note": "수원역 남측 주거·상업 생활권으로, 역세권과 인접해 이동 기준과 건물 출입 방식을 함께 확인하는 것이 좋습니다."
+  },
+  {
+    "slug": "homaesil-dong",
+    "name": "호매실동",
+    "city": "suwon",
+    "district": "권선구",
+    "districtSlug": "gwonseon-gu",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "금곡동",
+      "권선동"
+    ],
+    "index": true,
+    "note": "호매실지구 신규 아파트가 밀집한 주거지로, 단지가 많아 정확한 단지명과 공동현관 출입 방식 확인이 필요합니다."
+  },
+  {
+    "slug": "jeongja-dong-suwon",
+    "name": "정자동",
+    "city": "suwon",
+    "district": "장안구",
+    "districtSlug": "jangan-gu",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "천천동",
+      "영화동",
+      "송죽동"
+    ],
+    "index": true,
+    "note": "장안구 주거 생활권으로 성남 분당 정자동과 이름이 같아 도시·행정구까지 함께 확인해야 정확합니다. 번호동은 정자동으로 묶어 안내합니다."
+  },
+  {
+    "slug": "cheoncheon-dong",
+    "name": "천천동",
+    "city": "suwon",
+    "district": "장안구",
+    "districtSlug": "jangan-gu",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "정자동",
+      "율전동"
+    ],
+    "index": true,
+    "note": "성균관대역과 대학가 인근 주거 생활권으로, 원룸·오피스텔이 많아 공동현관과 방문 가능 시간 확인이 필요합니다."
+  },
+  {
+    "slug": "pangyo-dong",
+    "name": "판교동",
+    "city": "seongnam",
+    "district": "분당구",
+    "districtSlug": "bundang-gu",
+    "life": "bundang-pangyo",
+    "station": "pangyo-station",
+    "adjacent": [
+      "백현동",
+      "삼평동",
+      "운중동"
+    ],
+    "index": true,
+    "note": "판교테크노밸리 업무지구와 이어지는 생활권으로, 오피스텔·업무 건물의 방문자 등록 규정과 예약 가능 시간 확인이 특히 중요합니다."
+  },
+  {
+    "slug": "jeongja-dong-seongnam",
+    "name": "정자동",
+    "city": "seongnam",
+    "district": "분당구",
+    "districtSlug": "bundang-gu",
+    "life": "jeongja-sunae",
+    "station": "jeongja-station",
+    "adjacent": [
+      "수내동",
+      "서현동",
+      "금곡동"
+    ],
+    "index": true,
+    "note": "분당 카페거리와 주거가 함께 있는 생활권으로, 수원 장안구 정자동과 다르므로 도시·행정구를 함께 확인해야 합니다."
+  },
+  {
+    "slug": "seohyeon-dong",
+    "name": "서현동",
+    "city": "seongnam",
+    "district": "분당구",
+    "districtSlug": "bundang-gu",
+    "life": "yatap-seohyeon",
+    "station": "seohyeon-station",
+    "adjacent": [
+      "이매동",
+      "야탑동",
+      "수내동"
+    ],
+    "index": true,
+    "note": "서현역 상권 중심 생활권으로, 상가·오피스텔 유동 인구가 많아 건물 출입 방식과 예약 가능 시간 확인이 좋습니다."
+  },
+  {
+    "slug": "yatap-dong",
+    "name": "야탑동",
+    "city": "seongnam",
+    "district": "분당구",
+    "districtSlug": "bundang-gu",
+    "life": "yatap-seohyeon",
+    "station": "yatap-station",
+    "adjacent": [
+      "이매동",
+      "서현동"
+    ],
+    "index": true,
+    "note": "야탑역과 종합버스터미널 인근 상권 생활권으로, 이동 기준과 건물 출입 방식을 함께 확인하는 것이 좋습니다."
+  },
+  {
+    "slug": "sunae-dong",
+    "name": "수내동",
+    "city": "seongnam",
+    "district": "분당구",
+    "districtSlug": "bundang-gu",
+    "life": "jeongja-sunae",
+    "station": "",
+    "adjacent": [
+      "정자동",
+      "서현동"
+    ],
+    "index": true,
+    "note": "분당구청 인근 주거 생활권으로, 아파트 단지가 많아 단지명과 공동현관 출입 방식 확인이 필요합니다."
+  },
+  {
+    "slug": "wirye-dong",
+    "name": "위례동",
+    "city": "seongnam",
+    "district": "수정구",
+    "districtSlug": "sujeong-gu",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "창곡동",
+      "복정동"
+    ],
+    "index": true,
+    "note": "위례신도시 생활권으로 서울 송파권과 인접하며, 오피스텔·아파트가 밀집해 관리 규정과 방문 가능 시간 확인이 필요합니다."
+  },
+  {
+    "slug": "sinheung-dong",
+    "name": "신흥동",
+    "city": "seongnam",
+    "district": "수정구",
+    "districtSlug": "sujeong-gu",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "태평동",
+      "수진동"
+    ],
+    "index": false,
+    "note": "수정구 원도심 주거 생활권으로, 번호동은 신흥동으로 묶어 안내하며 방문 주소와 공동현관 확인이 필요합니다."
+  },
+  {
+    "slug": "seongnam-dong",
+    "name": "성남동",
+    "city": "seongnam",
+    "district": "중원구",
+    "districtSlug": "jungwon-gu",
+    "life": "",
+    "station": "moran-station",
+    "adjacent": [
+      "금광동",
+      "은행동"
+    ],
+    "index": true,
+    "note": "모란역과 이어지는 중원 원도심 상권 생활권으로, 상가·주거가 섞여 있어 건물 출입 방식 확인이 필요합니다."
+  },
+  {
+    "slug": "sangdaewon-dong",
+    "name": "상대원동",
+    "city": "seongnam",
+    "district": "중원구",
+    "districtSlug": "jungwon-gu",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "하대원동",
+      "금광동"
+    ],
+    "index": false,
+    "note": "성남산업단지 인접 주거 생활권으로, 번호동은 상대원동으로 묶어 안내하며 차량 이동 기준과 방문 주소 확인이 필요합니다."
+  },
+  {
+    "slug": "jukjeon-dong",
+    "name": "죽전동",
+    "city": "yongin",
+    "district": "수지구",
+    "districtSlug": "suji-gu",
+    "life": "jukjeon-suji",
+    "station": "jukjeon-station",
+    "adjacent": [
+      "풍덕천동",
+      "보정동",
+      "상현동"
+    ],
+    "index": true,
+    "note": "죽전역 상권과 아파트 단지가 밀집한 생활권으로, 성남 분당권과 붙어 있어 이동 기준과 공동현관 출입 방식 확인이 좋습니다."
+  },
+  {
+    "slug": "pungdeokcheon-dong",
+    "name": "풍덕천동",
+    "city": "yongin",
+    "district": "수지구",
+    "districtSlug": "suji-gu",
+    "life": "jukjeon-suji",
+    "station": "",
+    "adjacent": [
+      "죽전동",
+      "상현동",
+      "동천동"
+    ],
+    "index": true,
+    "note": "수지구청 인근 주거·상업 생활권으로, 번호동은 풍덕천동으로 묶어 안내하며 단지·공동현관 확인이 필요합니다."
+  },
+  {
+    "slug": "sanghyeon-dong",
+    "name": "상현동",
+    "city": "yongin",
+    "district": "수지구",
+    "districtSlug": "suji-gu",
+    "life": "jukjeon-suji",
+    "station": "",
+    "adjacent": [
+      "성복동",
+      "풍덕천동"
+    ],
+    "index": true,
+    "note": "광교와 인접한 신규 아파트 생활권으로, 번호동은 상현동으로 묶어 안내하며 단지명과 출입 방식 확인이 필요합니다."
+  },
+  {
+    "slug": "dongcheon-dong",
+    "name": "동천동",
+    "city": "yongin",
+    "district": "수지구",
+    "districtSlug": "suji-gu",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "고기동",
+      "풍덕천동"
+    ],
+    "index": true,
+    "note": "신분당선 동천역 인근 주거 생활권으로, 서울 강남권 접근성이 좋아 이동 기준과 건물 출입 방식 확인이 좋습니다."
+  },
+  {
+    "slug": "gugal-dong",
+    "name": "구갈동",
+    "city": "yongin",
+    "district": "기흥구",
+    "districtSlug": "giheung-gu",
+    "life": "bojeong-gugal",
+    "station": "giheung-station",
+    "adjacent": [
+      "신갈동",
+      "상갈동",
+      "보정동"
+    ],
+    "index": true,
+    "note": "기흥역 인접 주거·상업 생활권으로, 역세권 건물의 공동현관과 관리 규정 확인이 필요합니다."
+  },
+  {
+    "slug": "bojeong-dong",
+    "name": "보정동",
+    "city": "yongin",
+    "district": "기흥구",
+    "districtSlug": "giheung-gu",
+    "life": "bojeong-gugal",
+    "station": "",
+    "adjacent": [
+      "죽전동",
+      "마북동"
+    ],
+    "index": true,
+    "note": "보정동 카페거리와 아파트가 함께 있는 생활권으로, 상가·주거 혼재 지역이라 방문 위치와 출입 방식 확인이 필요합니다."
+  },
+  {
+    "slug": "dongbaek-dong",
+    "name": "동백동",
+    "city": "yongin",
+    "district": "기흥구",
+    "districtSlug": "giheung-gu",
+    "life": "giheung-dongbaek",
+    "station": "dongbaek-station",
+    "adjacent": [
+      "중동",
+      "마북동"
+    ],
+    "index": true,
+    "note": "동백지구 아파트가 밀집한 주거 생활권으로, 번호동은 동백동으로 묶어 안내하며 단지·공동현관 확인이 필요합니다."
+  },
+  {
+    "slug": "singal-dong",
+    "name": "신갈동",
+    "city": "yongin",
+    "district": "기흥구",
+    "districtSlug": "giheung-gu",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "구갈동",
+      "영덕동",
+      "상갈동"
+    ],
+    "index": true,
+    "note": "신갈오거리 인근 상업·주거 생활권으로, 교통 요지라 이동 기준과 건물 출입 방식을 함께 확인하는 것이 좋습니다."
+  },
+  {
+    "slug": "yeokbuk-dong",
+    "name": "역북동",
+    "city": "yongin",
+    "district": "처인구",
+    "districtSlug": "cheoin-gu",
+    "life": "cheoin-yeokbuk",
+    "station": "",
+    "adjacent": [
+      "삼가동",
+      "김량장동"
+    ],
+    "index": true,
+    "note": "처인구청 인근 신규 아파트 생활권으로, 도심과 외곽이 만나는 지역이라 차량 이동 기준 확인이 좋습니다."
+  },
+  {
+    "slug": "gimnyangjang-dong",
+    "name": "김량장동",
+    "city": "yongin",
+    "district": "처인구",
+    "districtSlug": "cheoin-gu",
+    "life": "cheoin-yeokbuk",
+    "station": "",
+    "adjacent": [
+      "역북동",
+      "남동",
+      "마평동"
+    ],
+    "index": true,
+    "note": "용인중앙시장을 낀 처인구 원도심 상권으로, 골목형 주소가 많아 정확한 방문 위치 확인이 필요합니다."
+  },
+  {
+    "slug": "byeongjeom-dong",
+    "name": "병점동",
+    "city": "hwaseong",
+    "district": "",
+    "districtSlug": "",
+    "life": "byeongjeom-bongdam",
+    "station": "byeongjeom-station",
+    "adjacent": [
+      "진안동",
+      "기산동"
+    ],
+    "index": true,
+    "note": "병점역 상권과 주거가 함께 있는 생활권으로, 수원·오산과 인접해 이동 기준과 건물 출입 방식 확인이 좋습니다."
+  },
+  {
+    "slug": "bongdam-eup",
+    "name": "봉담읍",
+    "city": "hwaseong",
+    "district": "",
+    "districtSlug": "",
+    "life": "byeongjeom-bongdam",
+    "station": "",
+    "adjacent": [
+      "병점동",
+      "매송면"
+    ],
+    "index": true,
+    "note": "택지지구와 대학이 있는 읍 지역으로, 신규 아파트와 외곽이 섞여 있어 방문 주소와 차량 이동 기준 확인이 필요합니다."
+  },
+  {
+    "slug": "hyangnam-eup",
+    "name": "향남읍",
+    "city": "hwaseong",
+    "district": "",
+    "districtSlug": "",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "남양읍",
+      "양감면"
+    ],
+    "index": true,
+    "note": "제약단지와 택지지구가 있는 외곽 생활권으로, 지하철 접근이 어려워 차량 이동 거리와 추가 이동비, 예약 가능 시간 확인이 중요합니다."
+  },
+  {
+    "slug": "namyang-eup",
+    "name": "남양읍",
+    "city": "hwaseong",
+    "district": "",
+    "districtSlug": "",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "향남읍",
+      "새솔동",
+      "마도면"
+    ],
+    "index": true,
+    "note": "화성시청이 있는 서부 외곽 생활권으로, 차량 이동 거리가 길어 방문 주소와 추가 이동비 기준 확인이 필요합니다."
+  },
+  {
+    "slug": "osan-dong",
+    "name": "오산동",
+    "city": "osan",
+    "district": "",
+    "districtSlug": "",
+    "life": "osan-station-central",
+    "station": "osan-station",
+    "adjacent": [
+      "궐동",
+      "부산동"
+    ],
+    "index": true,
+    "note": "오산역과 중앙 상권을 낀 도심 생활권으로, 숙박·상가가 있어 건물 출입 방식과 예약 가능 시간 확인이 좋습니다."
+  },
+  {
+    "slug": "sucheong-dong",
+    "name": "수청동",
+    "city": "osan",
+    "district": "",
+    "districtSlug": "",
+    "life": "segyo-sucheong",
+    "station": "osandae-station",
+    "adjacent": [
+      "원동",
+      "누읍동"
+    ],
+    "index": false,
+    "note": "세교신도시와 이어지는 주거 생활권으로, 세교·수청 생활권 안내와 함께 확인하며 단지·공동현관 확인이 필요합니다."
+  },
+  {
+    "slug": "bijeon-dong",
+    "name": "비전동",
+    "city": "pyeongtaek",
+    "district": "",
+    "districtSlug": "",
+    "life": "pyeongtaek-station-sosabeol",
+    "station": "pyeongtaek-station",
+    "adjacent": [
+      "평택동",
+      "동삭동"
+    ],
+    "index": true,
+    "note": "평택 중심 상권과 소사벌 택지가 있는 생활권으로, 상가·오피스텔이 밀집해 건물 출입 방식 확인이 좋습니다."
+  },
+  {
+    "slug": "godeok-dong",
+    "name": "고덕동",
+    "city": "pyeongtaek",
+    "district": "",
+    "districtSlug": "",
+    "life": "godeok-newtown",
+    "station": "seojeong-ri-station",
+    "adjacent": [
+      "서정동",
+      "장당동"
+    ],
+    "index": true,
+    "note": "고덕국제신도시 오피스텔·아파트 밀집 생활권으로, 신규 단지가 많아 정확한 단지명과 공동현관 출입 방식 확인이 필요합니다."
+  },
+  {
+    "slug": "seojeong-dong",
+    "name": "서정동",
+    "city": "pyeongtaek",
+    "district": "",
+    "districtSlug": "",
+    "life": "",
+    "station": "seojeong-ri-station",
+    "adjacent": [
+      "지산동",
+      "고덕동"
+    ],
+    "index": false,
+    "note": "서정리역과 송탄 생활권 인근 주거·상업 지역으로, 역세권 이동 기준과 건물 출입 방식을 함께 확인하는 것이 좋습니다."
+  },
+  {
+    "slug": "pyeongchon-dong",
+    "name": "평촌동",
+    "city": "anyang",
+    "district": "동안구",
+    "districtSlug": "dongan-gu",
+    "life": "anyang-beomgye-pyeongchon",
+    "station": "pyeongchon-station",
+    "adjacent": [
+      "호계동",
+      "관양동"
+    ],
+    "index": true,
+    "note": "평촌 학원가와 상권이 밀집한 생활권으로, 오피스텔·상가 유동 인구가 많아 건물 출입 방식과 예약 가능 시간 확인이 좋습니다."
+  },
+  {
+    "slug": "gwanyang-dong",
+    "name": "관양동",
+    "city": "anyang",
+    "district": "동안구",
+    "districtSlug": "dongan-gu",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "평촌동",
+      "비산동"
+    ],
+    "index": true,
+    "note": "인덕원역과 인접한 주거·상업 생활권으로, 의왕·과천 인접권이라 이동 기준과 건물 출입 방식 확인이 좋습니다."
+  },
+  {
+    "slug": "hogye-dong",
+    "name": "호계동",
+    "city": "anyang",
+    "district": "동안구",
+    "districtSlug": "dongan-gu",
+    "life": "anyang-beomgye-pyeongchon",
+    "station": "beomgye-station",
+    "adjacent": [
+      "평촌동",
+      "비산동"
+    ],
+    "index": true,
+    "note": "범계역 로데오 상권을 낀 생활권으로, 상가·오피스텔이 밀집해 건물 출입 방식 확인이 특히 중요합니다."
+  },
+  {
+    "slug": "anyang-dong",
+    "name": "안양동",
+    "city": "anyang",
+    "district": "만안구",
+    "districtSlug": "manan-gu",
+    "life": "anyang-beomgye-pyeongchon",
+    "station": "anyang-station",
+    "adjacent": [
+      "석수동",
+      "박달동"
+    ],
+    "index": true,
+    "note": "안양역 원도심 상권 생활권으로, 번호동은 안양동으로 묶어 안내하며 역세권 이동 기준과 건물 출입 방식 확인이 좋습니다."
+  },
+  {
+    "slug": "seoksu-dong",
+    "name": "석수동",
+    "city": "anyang",
+    "district": "만안구",
+    "districtSlug": "manan-gu",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "박달동",
+      "안양동"
+    ],
+    "index": false,
+    "note": "관악역 인근 주거 생활권으로, 번호동은 석수동으로 묶어 안내하며 방문 주소와 공동현관 확인이 필요합니다."
+  },
+  {
+    "slug": "gojan-dong",
+    "name": "고잔동",
+    "city": "ansan",
+    "district": "단원구",
+    "districtSlug": "danwon-gu",
+    "life": "ansan-jungang-gojan",
+    "station": "gojan-station",
+    "adjacent": [
+      "초지동",
+      "원곡동"
+    ],
+    "index": true,
+    "note": "안산 중앙 상권을 낀 생활권으로, 상가·오피스텔 유동 인구가 많아 건물 출입 방식과 예약 가능 시간 확인이 좋습니다."
+  },
+  {
+    "slug": "choji-dong",
+    "name": "초지동",
+    "city": "ansan",
+    "district": "단원구",
+    "districtSlug": "danwon-gu",
+    "life": "choji-seonbu",
+    "station": "choji-station",
+    "adjacent": [
+      "선부동",
+      "고잔동"
+    ],
+    "index": true,
+    "note": "초지역 인근 주거 생활권으로, 환승역과 가까워 역명 기준 위치 확인과 건물 출입 방식 확인이 좋습니다."
+  },
+  {
+    "slug": "seonbu-dong",
+    "name": "선부동",
+    "city": "ansan",
+    "district": "단원구",
+    "districtSlug": "danwon-gu",
+    "life": "choji-seonbu",
+    "station": "",
+    "adjacent": [
+      "초지동",
+      "와동"
+    ],
+    "index": false,
+    "note": "단원구 주거 밀집 생활권으로, 번호동은 선부동으로 묶어 안내하며 방문 주소와 공동현관 확인이 필요합니다."
+  },
+  {
+    "slug": "bono-dong",
+    "name": "본오동",
+    "city": "ansan",
+    "district": "상록구",
+    "districtSlug": "sangnok-gu",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "사동",
+      "이동"
+    ],
+    "index": false,
+    "note": "상록수역 인근 주거 생활권으로, 번호동은 본오동으로 묶어 안내하며 방문 주소와 공동현관 확인이 필요합니다."
+  },
+  {
+    "slug": "sa-dong",
+    "name": "사동",
+    "city": "ansan",
+    "district": "상록구",
+    "districtSlug": "sangnok-gu",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "본오동",
+      "성포동"
+    ],
+    "index": false,
+    "note": "한양대 에리카와 고잔신도시 인근 생활권으로, 대학·주거가 섞여 있어 방문 위치와 건물 출입 방식 확인이 필요합니다."
+  },
+  {
+    "slug": "baegot-dong",
+    "name": "배곧동",
+    "city": "siheung",
+    "district": "",
+    "districtSlug": "",
+    "life": "siheung-baegot",
+    "station": "",
+    "adjacent": [
+      "정왕동"
+    ],
+    "index": true,
+    "note": "배곧신도시 오피스텔·아파트 밀집 생활권으로, 번호동은 배곧동으로 묶어 안내하며 단지명과 공동현관 출입 방식 확인이 필요합니다."
+  },
+  {
+    "slug": "jeongwang-dong",
+    "name": "정왕동",
+    "city": "siheung",
+    "district": "",
+    "districtSlug": "",
+    "life": "siheung-baegot",
+    "station": "jeongwang-station",
+    "adjacent": [
+      "배곧동"
+    ],
+    "index": true,
+    "note": "정왕역과 시화산단이 이어지는 생활권으로, 번호동은 정왕동으로 묶어 안내하며 산업권 이동 기준과 예약 가능 시간 확인이 좋습니다."
+  },
+  {
+    "slug": "sanbon-dong",
+    "name": "산본동",
+    "city": "gunpo",
+    "district": "",
+    "districtSlug": "",
+    "life": "gunpo-sanbon",
+    "station": "sanbon-station",
+    "adjacent": [
+      "금정동",
+      "당동"
+    ],
+    "index": true,
+    "note": "산본신도시 상권 중심 생활권으로, 아파트·상가가 밀집해 단지·건물 출입 방식 확인이 좋습니다."
+  },
+  {
+    "slug": "geumjeong-dong",
+    "name": "금정동",
+    "city": "gunpo",
+    "district": "",
+    "districtSlug": "",
+    "life": "gunpo-sanbon",
+    "station": "geumjeong-station",
+    "adjacent": [
+      "산본동",
+      "당동"
+    ],
+    "index": true,
+    "note": "금정역 환승 생활권으로, 환승역도 노선별로 나누지 않고 역명 기준으로 위치를 확인하며 건물 출입 방식 확인이 좋습니다."
+  },
+  {
+    "slug": "naeson-dong",
+    "name": "내손동",
+    "city": "uiwang",
+    "district": "",
+    "districtSlug": "",
+    "life": "uiwang-naeson",
+    "station": "",
+    "adjacent": [
+      "포일동",
+      "오전동",
+      "청계동"
+    ],
+    "index": true,
+    "note": "인덕원과 평촌에 인접한 주거 생활권으로, 안양·과천과 이어져 이동 기준과 건물 출입 방식 확인이 좋습니다."
+  },
+  {
+    "slug": "ojeon-dong",
+    "name": "오전동",
+    "city": "uiwang",
+    "district": "",
+    "districtSlug": "",
+    "life": "",
+    "station": "uiwang-station",
+    "adjacent": [
+      "고천동",
+      "내손동"
+    ],
+    "index": true,
+    "note": "의왕역 인근 원도심 주거 생활권으로, 역세권 이동 기준과 공동현관 출입 방식 확인이 필요합니다."
+  },
+  {
+    "slug": "poil-dong",
+    "name": "포일동",
+    "city": "uiwang",
+    "district": "",
+    "districtSlug": "",
+    "life": "uiwang-naeson",
+    "station": "",
+    "adjacent": [
+      "내손동",
+      "청계동"
+    ],
+    "index": true,
+    "note": "인덕원 인접 신규 아파트 생활권으로, 단지명과 공동현관 출입 방식 확인이 필요합니다."
+  },
+  {
+    "slug": "cheonggye-dong-uiwang",
+    "name": "청계동",
+    "city": "uiwang",
+    "district": "",
+    "districtSlug": "",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "포일동"
+    ],
+    "index": false,
+    "note": "청계산 인근 외곽 주거 생활권으로, 화성 동탄 청계동과 다르며 차량 이동 기준과 방문 주소 확인이 필요합니다."
+  },
+  {
+    "slug": "byeolyang-dong",
+    "name": "별양동",
+    "city": "gwacheon",
+    "district": "",
+    "districtSlug": "",
+    "life": "gwacheon-government-complex",
+    "station": "gwacheon-government-complex-station",
+    "adjacent": [
+      "중앙동",
+      "부림동"
+    ],
+    "index": true,
+    "note": "정부과천청사역과 중앙 상권을 낀 생활권으로, 업무·상가 유동 인구가 많아 건물 출입 방식과 예약 가능 시간 확인이 좋습니다."
+  },
+  {
+    "slug": "jungang-dong-gwacheon",
+    "name": "중앙동",
+    "city": "gwacheon",
+    "district": "",
+    "districtSlug": "",
+    "life": "gwacheon-government-complex",
+    "station": "gwacheon-government-complex-station",
+    "adjacent": [
+      "별양동",
+      "문원동"
+    ],
+    "index": true,
+    "note": "과천 관문과 행정업무지구가 이어지는 생활권으로, 방문 위치와 건물 출입 방식 확인이 좋습니다."
+  },
+  {
+    "slug": "munwon-dong",
+    "name": "문원동",
+    "city": "gwacheon",
+    "district": "",
+    "districtSlug": "",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "갈현동",
+      "중앙동"
+    ],
+    "index": true,
+    "note": "과천 주거와 외곽이 만나는 생활권으로, 방문 주소와 이동 기준 확인이 필요합니다."
+  },
+  {
+    "slug": "galhyeon-dong-gwacheon",
+    "name": "갈현동",
+    "city": "gwacheon",
+    "district": "",
+    "districtSlug": "",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "문원동"
+    ],
+    "index": false,
+    "note": "지식정보타운 개발권 인근 생활권으로, 신규 단지가 늘어 정확한 단지명 확인이 필요합니다."
+  },
+  {
+    "slug": "cheolsan-dong",
+    "name": "철산동",
+    "city": "gwangmyeong",
+    "district": "",
+    "districtSlug": "",
+    "life": "gwangmyeong-cheolsan",
+    "station": "cheolsan-station",
+    "adjacent": [
+      "하안동",
+      "광명동"
+    ],
+    "index": true,
+    "note": "철산역 상권과 오피스텔이 밀집한 생활권으로, 건물 출입 방식과 예약 가능 시간 확인이 특히 중요합니다."
+  },
+  {
+    "slug": "haan-dong",
+    "name": "하안동",
+    "city": "gwangmyeong",
+    "district": "",
+    "districtSlug": "",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "철산동",
+      "소하동"
+    ],
+    "index": true,
+    "note": "주거 단지가 밀집한 생활권으로, 번호동은 하안동으로 묶어 안내하며 단지명과 공동현관 확인이 필요합니다."
+  },
+  {
+    "slug": "soha-dong",
+    "name": "소하동",
+    "city": "gwangmyeong",
+    "district": "",
+    "districtSlug": "",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "일직동",
+      "하안동"
+    ],
+    "index": true,
+    "note": "소하지구와 KTX광명역에 인접한 생활권으로, 단지·이동 기준과 건물 출입 방식 확인이 좋습니다."
+  },
+  {
+    "slug": "gwangmyeong-dong",
+    "name": "광명동",
+    "city": "gwangmyeong",
+    "district": "",
+    "districtSlug": "",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "철산동"
+    ],
+    "index": true,
+    "note": "광명사거리 원도심 상권 생활권으로, 골목형 주소가 많아 정확한 방문 위치 확인이 필요합니다."
+  },
+  {
+    "slug": "iljik-dong",
+    "name": "일직동",
+    "city": "gwangmyeong",
+    "district": "",
+    "districtSlug": "",
+    "life": "gwangmyeong-cheolsan",
+    "station": "gwangmyeong-station",
+    "adjacent": [
+      "소하동"
+    ],
+    "index": true,
+    "note": "KTX광명역과 업무·물류권이 이어지는 생활권으로, 이동 기준과 건물 출입 방식 확인이 좋습니다."
+  },
+  {
+    "slug": "deokpung-dong",
+    "name": "덕풍동",
+    "city": "hanam",
+    "district": "",
+    "districtSlug": "",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "신장동",
+      "망월동"
+    ],
+    "index": true,
+    "note": "하남시청과 원도심 상권이 있는 생활권으로, 번호동은 덕풍동으로 묶어 안내하며 건물 출입 방식 확인이 좋습니다."
+  },
+  {
+    "slug": "sinjang-dong-hanam",
+    "name": "신장동",
+    "city": "hanam",
+    "district": "",
+    "districtSlug": "",
+    "life": "",
+    "station": "hanam-geomdansan-station",
+    "adjacent": [
+      "덕풍동",
+      "창우동"
+    ],
+    "index": true,
+    "note": "하남검단산역 인근 원도심 생활권으로, 평택 신장동과 다르며 역세권 이동 기준과 공동현관 확인이 좋습니다."
+  },
+  {
+    "slug": "pungsan-dong",
+    "name": "풍산동",
+    "city": "hanam",
+    "district": "",
+    "districtSlug": "",
+    "life": "hanam-misa",
+    "station": "misa-station",
+    "adjacent": [
+      "망월동",
+      "덕풍동"
+    ],
+    "index": true,
+    "note": "미사신도시 오피스텔·아파트 밀집 생활권으로, 정확한 단지명과 공동현관 출입 방식 확인이 필요합니다."
+  },
+  {
+    "slug": "gamil-dong",
+    "name": "감일동",
+    "city": "hanam",
+    "district": "",
+    "districtSlug": "",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "학암동"
+    ],
+    "index": true,
+    "note": "감일지구 신규 아파트 생활권으로, 서울 강동권과 인접해 단지명과 이동 기준 확인이 좋습니다."
+  },
+  {
+    "slug": "wirye-dong-hanam",
+    "name": "위례동",
+    "city": "hanam",
+    "district": "",
+    "districtSlug": "",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "학암동"
+    ],
+    "index": true,
+    "note": "위례신도시 하남권 생활권으로, 성남·서울 위례와 이어져 도시·행정동을 함께 확인해야 정확합니다."
+  },
+  {
+    "slug": "gyeongan-dong",
+    "name": "경안동",
+    "city": "gwangju-si",
+    "district": "",
+    "districtSlug": "",
+    "life": "gwangju-taejeon",
+    "station": "gyeonggi-gwangju-station",
+    "adjacent": [
+      "송정동",
+      "역동"
+    ],
+    "index": true,
+    "note": "경기광주역과 원도심 상권이 있는 생활권으로, 역세권 이동 기준과 건물 출입 방식 확인이 좋습니다."
+  },
+  {
+    "slug": "taejeon-dong",
+    "name": "태전동",
+    "city": "gwangju-si",
+    "district": "",
+    "districtSlug": "",
+    "life": "gwangju-taejeon",
+    "station": "",
+    "adjacent": [
+      "목현동",
+      "경안동"
+    ],
+    "index": true,
+    "note": "태전지구 신규 아파트 생활권으로, 단지가 많아 정확한 단지명과 공동현관 확인이 필요합니다."
+  },
+  {
+    "slug": "songjeong-dong-gwangju",
+    "name": "송정동",
+    "city": "gwangju-si",
+    "district": "",
+    "districtSlug": "",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "경안동"
+    ],
+    "index": false,
+    "note": "경기광주 원도심 주거 생활권으로, 방문 주소와 공동현관 출입 방식 확인이 필요합니다."
+  },
+  {
+    "slug": "gonjiam-eup",
+    "name": "곤지암읍",
+    "city": "gwangju-si",
+    "district": "",
+    "districtSlug": "",
+    "life": "",
+    "station": "gonjiam-station",
+    "adjacent": [
+      "초월읍"
+    ],
+    "index": true,
+    "note": "곤지암역과 외곽이 이어지는 생활권으로, 차량 이동 거리와 추가 이동비, 예약 가능 시간 확인이 중요합니다."
+  },
+  {
+    "slug": "chowol-eup",
+    "name": "초월읍",
+    "city": "gwangju-si",
+    "district": "",
+    "districtSlug": "",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "곤지암읍"
+    ],
+    "index": true,
+    "note": "동남부 외곽 생활권으로, 지하철 접근보다 차량 이동 기준과 방문 주소 확인이 중요합니다."
+  },
+  {
+    "slug": "changjeon-dong",
+    "name": "창전동",
+    "city": "icheon",
+    "district": "",
+    "districtSlug": "",
+    "life": "icheon-bubal",
+    "station": "icheon-station",
+    "adjacent": [
+      "중리동",
+      "관고동"
+    ],
+    "index": true,
+    "note": "이천역과 원도심 상권이 있는 생활권으로, 숙박·상가 이동 기준과 건물 출입 방식 확인이 좋습니다."
+  },
+  {
+    "slug": "jungni-dong",
+    "name": "중리동",
+    "city": "icheon",
+    "district": "",
+    "districtSlug": "",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "창전동"
+    ],
+    "index": true,
+    "note": "이천시청 인근 주거 생활권으로, 방문 주소와 공동현관 출입 방식 확인이 필요합니다."
+  },
+  {
+    "slug": "bubal-eup",
+    "name": "부발읍",
+    "city": "icheon",
+    "district": "",
+    "districtSlug": "",
+    "life": "icheon-bubal",
+    "station": "bubal-station",
+    "adjacent": [
+      "창전동"
+    ],
+    "index": true,
+    "note": "부발역과 산업권이 이어지는 생활권으로, 산업지구 이동 기준과 예약 가능 시간 확인이 좋습니다."
+  },
+  {
+    "slug": "majang-myeon",
+    "name": "마장면",
+    "city": "icheon",
+    "district": "",
+    "districtSlug": "",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "호법면"
+    ],
+    "index": false,
+    "note": "물류·외곽 생활권으로, 차량 이동 거리와 추가 이동비 기준 확인이 필요합니다."
+  },
+  {
+    "slug": "janghowon-eup",
+    "name": "장호원읍",
+    "city": "icheon",
+    "district": "",
+    "districtSlug": "",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "설성면"
+    ],
+    "index": true,
+    "note": "이천 남부 외곽 생활권으로, 차량 이동 거리가 길어 방문 주소와 예약 가능 시간 확인이 중요합니다."
+  },
+  {
+    "slug": "yeoheung-dong",
+    "name": "여흥동",
+    "city": "yeoju",
+    "district": "",
+    "districtSlug": "",
+    "life": "yeoju-ohak",
+    "station": "yeoju-station",
+    "adjacent": [
+      "오학동",
+      "중앙동"
+    ],
+    "index": true,
+    "note": "여주역과 원도심 상권이 있는 생활권으로, 역세권 이동 기준과 건물 출입 방식 확인이 좋습니다."
+  },
+  {
+    "slug": "ohak-dong",
+    "name": "오학동",
+    "city": "yeoju",
+    "district": "",
+    "districtSlug": "",
+    "life": "yeoju-ohak",
+    "station": "",
+    "adjacent": [
+      "여흥동"
+    ],
+    "index": true,
+    "note": "여주 신규 주거 생활권으로, 단지명과 공동현관 출입 방식 확인이 필요합니다."
+  },
+  {
+    "slug": "ganam-eup",
+    "name": "가남읍",
+    "city": "yeoju",
+    "district": "",
+    "districtSlug": "",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "점동면"
+    ],
+    "index": false,
+    "note": "여주 외곽·산업 생활권으로, 차량 이동 거리와 추가 이동비 기준 확인이 필요합니다."
+  },
+  {
+    "slug": "jeomdong-myeon",
+    "name": "점동면",
+    "city": "yeoju",
+    "district": "",
+    "districtSlug": "",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "가남읍"
+    ],
+    "index": false,
+    "note": "동남부 외곽 생활권으로, 지하철 접근이 어려워 차량 이동 기준과 방문 주소 확인이 중요합니다."
+  },
+  {
+    "slug": "anseong-dong",
+    "name": "안성동",
+    "city": "anseong",
+    "district": "",
+    "districtSlug": "",
+    "life": "anseong-gongdo",
+    "station": "",
+    "adjacent": [
+      "공도읍"
+    ],
+    "index": true,
+    "note": "안성 시내 원도심 상권 생활권으로, 지하철보다 차량 이동 기준과 방문 주소 확인이 중요합니다."
+  },
+  {
+    "slug": "gongdo-eup",
+    "name": "공도읍",
+    "city": "anseong",
+    "district": "",
+    "districtSlug": "",
+    "life": "anseong-gongdo",
+    "station": "",
+    "adjacent": [
+      "원곡면",
+      "안성동"
+    ],
+    "index": true,
+    "note": "평택과 인접한 택지 생활권으로, 도시 경계 주소는 가까운 도시 생활권과 함께 확인하는 것이 좋습니다."
+  },
+  {
+    "slug": "daedeok-myeon",
+    "name": "대덕면",
+    "city": "anseong",
+    "district": "",
+    "districtSlug": "",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "안성동"
+    ],
+    "index": false,
+    "note": "대학과 외곽이 있는 생활권으로, 차량 이동 거리와 방문 주소 확인이 필요합니다."
+  },
+  {
+    "slug": "juksan-myeon",
+    "name": "죽산면",
+    "city": "anseong",
+    "district": "",
+    "districtSlug": "",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "일죽면"
+    ],
+    "index": true,
+    "note": "안성 동부 외곽 생활권으로, 차량 이동 거리가 길어 예약 가능 시간과 추가 이동비 확인이 중요합니다."
+  },
+  {
+    "slug": "yuljeon-dong",
+    "name": "율전동",
+    "city": "suwon",
+    "district": "장안구",
+    "districtSlug": "jangan-gu",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "천천동",
+      "정자동"
+    ],
+    "index": false,
+    "note": "성균관대·율전 주거 생활권으로, 번호동은 율전동으로 묶어 안내하며 원룸·오피스텔 공동현관 확인이 필요합니다."
+  },
+  {
+    "slug": "yeonghwa-dong",
+    "name": "영화동",
+    "city": "suwon",
+    "district": "장안구",
+    "districtSlug": "jangan-gu",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "송죽동",
+      "조원동"
+    ],
+    "index": false,
+    "note": "장안구 원도심 주거 생활권으로, 방문 주소와 공동현관 출입 방식 확인이 필요합니다."
+  },
+  {
+    "slug": "songjuk-dong",
+    "name": "송죽동",
+    "city": "suwon",
+    "district": "장안구",
+    "districtSlug": "jangan-gu",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "영화동",
+      "조원동"
+    ],
+    "index": false,
+    "note": "장안구 주거 생활권으로, 저층 주택과 아파트가 섞여 있어 정확한 동·호수 확인이 필요합니다."
+  },
+  {
+    "slug": "jowon-dong",
+    "name": "조원동",
+    "city": "suwon",
+    "district": "장안구",
+    "districtSlug": "jangan-gu",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "송죽동",
+      "파장동"
+    ],
+    "index": false,
+    "note": "장안구 조원 주거 생활권으로, 번호동은 조원동으로 묶어 안내합니다."
+  },
+  {
+    "slug": "yeonmu-dong",
+    "name": "연무동",
+    "city": "suwon",
+    "district": "장안구",
+    "districtSlug": "jangan-gu",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "우만동",
+      "조원동"
+    ],
+    "index": false,
+    "note": "수원화성 동측 주거 생활권으로, 골목형 주소가 많아 정확한 현관 위치 확인이 필요합니다."
+  },
+  {
+    "slug": "pajang-dong",
+    "name": "파장동",
+    "city": "suwon",
+    "district": "장안구",
+    "districtSlug": "jangan-gu",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "정자동",
+      "이목동"
+    ],
+    "index": false,
+    "note": "장안구 북부 주거 생활권으로, 방문 주소와 공동현관 확인이 필요합니다."
+  },
+  {
+    "slug": "geumgok-dong",
+    "name": "금곡동",
+    "city": "suwon",
+    "district": "권선구",
+    "districtSlug": "gwonseon-gu",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "호매실동",
+      "곡반정동"
+    ],
+    "index": true,
+    "note": "호매실지구와 이어지는 신규 아파트 생활권으로, 단지명과 공동현관 출입 방식 확인이 필요합니다."
+  },
+  {
+    "slug": "gosaek-dong",
+    "name": "고색동",
+    "city": "suwon",
+    "district": "권선구",
+    "districtSlug": "gwonseon-gu",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "평동",
+      "세류동"
+    ],
+    "index": false,
+    "note": "권선구 서남부 주거·산업 혼재 생활권으로, 방문 주소와 이동 기준 확인이 필요합니다."
+  },
+  {
+    "slug": "seodun-dong",
+    "name": "서둔동",
+    "city": "suwon",
+    "district": "권선구",
+    "districtSlug": "gwonseon-gu",
+    "life": "",
+    "station": "suwon-station",
+    "adjacent": [
+      "세류동",
+      "고색동"
+    ],
+    "index": false,
+    "note": "수원역 서측 주거 생활권으로, 역세권 이동 기준과 공동현관 확인이 필요합니다."
+  },
+  {
+    "slug": "gokbanjeong-dong",
+    "name": "곡반정동",
+    "city": "suwon",
+    "district": "권선구",
+    "districtSlug": "gwonseon-gu",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "권선동",
+      "금곡동"
+    ],
+    "index": false,
+    "note": "권선구 주거 생활권으로, 번호동은 곡반정동으로 묶어 안내합니다."
+  },
+  {
+    "slug": "pyeong-dong",
+    "name": "평동",
+    "city": "suwon",
+    "district": "권선구",
+    "districtSlug": "gwonseon-gu",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "고색동"
+    ],
+    "index": false,
+    "note": "권선구 서부 주거·물류 생활권으로, 차량 이동 기준과 방문 주소 확인이 필요합니다."
+  },
+  {
+    "slug": "hwaseo-dong",
+    "name": "화서동",
+    "city": "suwon",
+    "district": "팔달구",
+    "districtSlug": "paldal-gu",
+    "life": "suwon-station-ingye",
+    "station": "",
+    "adjacent": [
+      "인계동",
+      "우만동"
+    ],
+    "index": true,
+    "note": "화서역과 수원화성 서측을 낀 주거·상권 생활권으로, 역세권 이동 기준과 공동현관 확인이 좋습니다."
+  },
+  {
+    "slug": "uman-dong",
+    "name": "우만동",
+    "city": "suwon",
+    "district": "팔달구",
+    "districtSlug": "paldal-gu",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "인계동",
+      "연무동"
+    ],
+    "index": false,
+    "note": "아주대 인근 주거 생활권으로, 원룸·오피스텔이 많아 공동현관과 방문 시간 확인이 필요합니다."
+  },
+  {
+    "slug": "ji-dong",
+    "name": "지동",
+    "city": "suwon",
+    "district": "팔달구",
+    "districtSlug": "paldal-gu",
+    "life": "suwon-station-ingye",
+    "station": "",
+    "adjacent": [
+      "매교동",
+      "행궁동"
+    ],
+    "index": false,
+    "note": "수원화성 인근 원도심 주거 생활권으로, 골목형 주소가 많아 정확한 위치 확인이 필요합니다."
+  },
+  {
+    "slug": "godeung-dong",
+    "name": "고등동",
+    "city": "suwon",
+    "district": "팔달구",
+    "districtSlug": "paldal-gu",
+    "life": "suwon-station-ingye",
+    "station": "suwon-station",
+    "adjacent": [
+      "매산동",
+      "매교동"
+    ],
+    "index": true,
+    "note": "수원역 북측 상권·주거 생활권으로, 숙소·상가가 있어 건물 출입 방식 확인이 좋습니다."
+  },
+  {
+    "slug": "maegyo-dong",
+    "name": "매교동",
+    "city": "suwon",
+    "district": "팔달구",
+    "districtSlug": "paldal-gu",
+    "life": "suwon-station-ingye",
+    "station": "suwon-cityhall-station",
+    "adjacent": [
+      "인계동",
+      "지동"
+    ],
+    "index": true,
+    "note": "매교역 인근 신규 아파트와 원도심이 만나는 생활권으로, 단지·공동현관 확인이 필요합니다."
+  },
+  {
+    "slug": "woncheon-dong",
+    "name": "원천동",
+    "city": "suwon",
+    "district": "영통구",
+    "districtSlug": "yeongtong-gu",
+    "life": "gwanggyo-yeongtong",
+    "station": "",
+    "adjacent": [
+      "매탄동",
+      "영통동"
+    ],
+    "index": true,
+    "note": "광교호수공원과 아주대 인근 생활권으로, 오피스텔·아파트가 섞여 단지 정보 확인이 필요합니다."
+  },
+  {
+    "slug": "uiui-dong",
+    "name": "이의동",
+    "city": "suwon",
+    "district": "영통구",
+    "districtSlug": "yeongtong-gu",
+    "life": "gwanggyo-yeongtong",
+    "station": "gwanggyo-jungang-station",
+    "adjacent": [
+      "광교동",
+      "하동"
+    ],
+    "index": true,
+    "note": "광교신도시 중심 생활권으로, 오피스텔·업무지구가 밀집해 방문자 등록·관리 규정 확인이 좋습니다."
+  },
+  {
+    "slug": "ha-dong",
+    "name": "하동",
+    "city": "suwon",
+    "district": "영통구",
+    "districtSlug": "yeongtong-gu",
+    "life": "gwanggyo-yeongtong",
+    "station": "gwanggyo-jungang-station",
+    "adjacent": [
+      "이의동",
+      "광교동"
+    ],
+    "index": true,
+    "note": "광교 갤러리아·업무지구 생활권으로, 상업·업무 건물 출입 방식 확인이 좋습니다."
+  },
+  {
+    "slug": "sin-dong-suwon",
+    "name": "신동",
+    "city": "suwon",
+    "district": "영통구",
+    "districtSlug": "yeongtong-gu",
+    "life": "mangpo-maetan",
+    "station": "mangpo-station",
+    "adjacent": [
+      "망포동",
+      "영통동"
+    ],
+    "index": false,
+    "note": "망포·신동 신규 아파트 생활권으로, 단지명과 공동현관 확인이 필요합니다."
+  },
+  {
+    "slug": "taepyeong-dong",
+    "name": "태평동",
+    "city": "seongnam",
+    "district": "수정구",
+    "districtSlug": "sujeong-gu",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "신흥동",
+      "수진동"
+    ],
+    "index": false,
+    "note": "수정구 원도심 주거 생활권으로, 번호동은 태평동으로 묶어 안내합니다."
+  },
+  {
+    "slug": "sujin-dong",
+    "name": "수진동",
+    "city": "seongnam",
+    "district": "수정구",
+    "districtSlug": "sujeong-gu",
+    "life": "",
+    "station": "moran-station",
+    "adjacent": [
+      "신흥동",
+      "태평동"
+    ],
+    "index": false,
+    "note": "모란역 인근 원도심 상권·주거 생활권으로, 건물 출입 방식 확인이 필요합니다."
+  },
+  {
+    "slug": "bokjeong-dong",
+    "name": "복정동",
+    "city": "seongnam",
+    "district": "수정구",
+    "districtSlug": "sujeong-gu",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "위례동",
+      "창곡동"
+    ],
+    "index": true,
+    "note": "복정역과 위례신도시가 이어지는 생활권으로, 서울 송파권 인접해 이동 기준 확인이 좋습니다."
+  },
+  {
+    "slug": "changgok-dong",
+    "name": "창곡동",
+    "city": "seongnam",
+    "district": "수정구",
+    "districtSlug": "sujeong-gu",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "위례동",
+      "복정동"
+    ],
+    "index": true,
+    "note": "위례신도시 성남권 생활권으로, 오피스텔·아파트 밀집해 단지·공동현관 확인이 필요합니다."
+  },
+  {
+    "slug": "jungang-dong-seongnam",
+    "name": "중앙동",
+    "city": "seongnam",
+    "district": "중원구",
+    "districtSlug": "jungwon-gu",
+    "life": "",
+    "station": "moran-station",
+    "adjacent": [
+      "성남동",
+      "금광동"
+    ],
+    "index": false,
+    "note": "성남 원도심 중앙 상권 생활권으로, 상가·주거가 섞여 건물 출입 방식 확인이 필요합니다."
+  },
+  {
+    "slug": "geumgwang-dong",
+    "name": "금광동",
+    "city": "seongnam",
+    "district": "중원구",
+    "districtSlug": "jungwon-gu",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "성남동",
+      "은행동"
+    ],
+    "index": false,
+    "note": "중원구 주거 생활권으로, 번호동은 금광동으로 묶어 안내합니다."
+  },
+  {
+    "slug": "hadaewon-dong",
+    "name": "하대원동",
+    "city": "seongnam",
+    "district": "중원구",
+    "districtSlug": "jungwon-gu",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "상대원동",
+      "성남동"
+    ],
+    "index": false,
+    "note": "성남산단 인접 주거 생활권으로, 차량 이동 기준과 방문 주소 확인이 필요합니다."
+  },
+  {
+    "slug": "eunhaeng-dong-seongnam",
+    "name": "은행동",
+    "city": "seongnam",
+    "district": "중원구",
+    "districtSlug": "jungwon-gu",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "금광동",
+      "상대원동"
+    ],
+    "index": false,
+    "note": "중원구 은행 주거 생활권으로, 방문 주소와 공동현관 확인이 필요합니다."
+  },
+  {
+    "slug": "bundang-dong",
+    "name": "분당동",
+    "city": "seongnam",
+    "district": "분당구",
+    "districtSlug": "bundang-gu",
+    "life": "jeongja-sunae",
+    "station": "",
+    "adjacent": [
+      "수내동",
+      "정자동"
+    ],
+    "index": true,
+    "note": "분당 초기 개발지 주거 생활권으로, 아파트 단지가 많아 단지·공동현관 확인이 좋습니다."
+  },
+  {
+    "slug": "baekhyeon-dong",
+    "name": "백현동",
+    "city": "seongnam",
+    "district": "분당구",
+    "districtSlug": "bundang-gu",
+    "life": "bundang-pangyo",
+    "station": "pangyo-station",
+    "adjacent": [
+      "판교동",
+      "정자동"
+    ],
+    "index": true,
+    "note": "판교 알파돔·업무지구 인접 생활권으로, 오피스텔 방문자 등록·관리 규정 확인이 좋습니다."
+  },
+  {
+    "slug": "imae-dong",
+    "name": "이매동",
+    "city": "seongnam",
+    "district": "분당구",
+    "districtSlug": "bundang-gu",
+    "life": "yatap-seohyeon",
+    "station": "seohyeon-station",
+    "adjacent": [
+      "서현동",
+      "야탑동"
+    ],
+    "index": true,
+    "note": "이매·서현 상권 인접 주거 생활권으로, 역세권 이동 기준과 공동현관 확인이 좋습니다."
+  },
+  {
+    "slug": "gumi-dong",
+    "name": "구미동",
+    "city": "seongnam",
+    "district": "분당구",
+    "districtSlug": "bundang-gu",
+    "life": "jeongja-sunae",
+    "station": "",
+    "adjacent": [
+      "수내동",
+      "정자동"
+    ],
+    "index": true,
+    "note": "분당 남부 오리·구미 주거 생활권으로, 용인 죽전과 인접해 이동 기준 확인이 좋습니다."
+  },
+  {
+    "slug": "samga-dong",
+    "name": "삼가동",
+    "city": "yongin",
+    "district": "처인구",
+    "districtSlug": "cheoin-gu",
+    "life": "cheoin-yeokbuk",
+    "station": "",
+    "adjacent": [
+      "역북동",
+      "김량장동"
+    ],
+    "index": false,
+    "note": "처인구청·삼가역 인근 신규 아파트 생활권으로, 단지·공동현관 확인이 필요합니다."
+  },
+  {
+    "slug": "yubang-dong",
+    "name": "유방동",
+    "city": "yongin",
+    "district": "처인구",
+    "districtSlug": "cheoin-gu",
+    "life": "cheoin-yeokbuk",
+    "station": "",
+    "adjacent": [
+      "김량장동",
+      "역북동"
+    ],
+    "index": false,
+    "note": "처인구 주거 생활권으로, 방문 주소와 공동현관 확인이 필요합니다."
+  },
+  {
+    "slug": "pogok-eup",
+    "name": "포곡읍",
+    "city": "yongin",
+    "district": "처인구",
+    "districtSlug": "cheoin-gu",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "모현읍",
+      "김량장동"
+    ],
+    "index": true,
+    "note": "에버랜드 인근 외곽 생활권으로, 차량 이동 거리와 추가 이동비, 예약 가능 시간 확인이 중요합니다."
+  },
+  {
+    "slug": "mohyeon-eup",
+    "name": "모현읍",
+    "city": "yongin",
+    "district": "처인구",
+    "districtSlug": "cheoin-gu",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "포곡읍",
+      "오포"
+    ],
+    "index": true,
+    "note": "광주와 인접한 외곽 생활권으로, 차량 이동 기준과 방문 주소 확인이 중요합니다."
+  },
+  {
+    "slug": "namsa-eup",
+    "name": "남사읍",
+    "city": "yongin",
+    "district": "처인구",
+    "districtSlug": "cheoin-gu",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "이동읍"
+    ],
+    "index": true,
+    "note": "용인 남부 반도체 클러스터 인근 외곽 생활권으로, 차량 이동 거리와 추가 이동비 확인이 중요합니다."
+  },
+  {
+    "slug": "idong-eup",
+    "name": "이동읍",
+    "city": "yongin",
+    "district": "처인구",
+    "districtSlug": "cheoin-gu",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "남사읍",
+      "양지면"
+    ],
+    "index": true,
+    "note": "용인 남부 외곽 생활권으로, 지하철 접근이 어려워 차량 이동 기준 확인이 중요합니다."
+  },
+  {
+    "slug": "yangji-myeon",
+    "name": "양지면",
+    "city": "yongin",
+    "district": "처인구",
+    "districtSlug": "cheoin-gu",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "이동읍"
+    ],
+    "index": true,
+    "note": "영동고속도로 양지IC 인근 외곽 생활권으로, 차량 이동 거리와 예약 가능 시간 확인이 중요합니다."
+  },
+  {
+    "slug": "jung-dong-yongin",
+    "name": "중동",
+    "city": "yongin",
+    "district": "기흥구",
+    "districtSlug": "giheung-gu",
+    "life": "giheung-dongbaek",
+    "station": "dongbaek-station",
+    "adjacent": [
+      "동백동",
+      "상갈동"
+    ],
+    "index": true,
+    "note": "동백지구 중심 주거·상권 생활권으로, 아파트·오피스텔이 밀집해 단지·공동현관 확인이 좋습니다."
+  },
+  {
+    "slug": "sanggal-dong",
+    "name": "상갈동",
+    "city": "yongin",
+    "district": "기흥구",
+    "districtSlug": "giheung-gu",
+    "life": "bojeong-gugal",
+    "station": "giheung-station",
+    "adjacent": [
+      "구갈동",
+      "보정동"
+    ],
+    "index": false,
+    "note": "기흥역 인근 주거 생활권으로, 역세권 이동 기준과 공동현관 확인이 필요합니다."
+  },
+  {
+    "slug": "yeongdeok-dong",
+    "name": "영덕동",
+    "city": "yongin",
+    "district": "기흥구",
+    "districtSlug": "giheung-gu",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "신갈동",
+      "보정동"
+    ],
+    "index": true,
+    "note": "흥덕지구 신규 아파트·업무 생활권으로, 단지·오피스텔 관리 규정 확인이 좋습니다."
+  },
+  {
+    "slug": "mabuk-dong",
+    "name": "마북동",
+    "city": "yongin",
+    "district": "기흥구",
+    "districtSlug": "giheung-gu",
+    "life": "bojeong-gugal",
+    "station": "",
+    "adjacent": [
+      "보정동",
+      "구성"
+    ],
+    "index": false,
+    "note": "구성·마북 주거 생활권으로, 방문 주소와 공동현관 출입 방식 확인이 필요합니다."
+  },
+  {
+    "slug": "cheongdeok-dong",
+    "name": "청덕동",
+    "city": "yongin",
+    "district": "기흥구",
+    "districtSlug": "giheung-gu",
+    "life": "giheung-dongbaek",
+    "station": "",
+    "adjacent": [
+      "동백동",
+      "보정동"
+    ],
+    "index": true,
+    "note": "청덕·동백 신규 아파트 생활권으로, 단지명과 공동현관 확인이 필요합니다."
+  },
+  {
+    "slug": "seongbok-dong",
+    "name": "성복동",
+    "city": "yongin",
+    "district": "수지구",
+    "districtSlug": "suji-gu",
+    "life": "jukjeon-suji",
+    "station": "",
+    "adjacent": [
+      "상현동",
+      "신봉동"
+    ],
+    "index": true,
+    "note": "성복역과 광교 인접 아파트·상권 생활권으로, 단지·건물 출입 방식 확인이 좋습니다."
+  },
+  {
+    "slug": "sinbong-dong",
+    "name": "신봉동",
+    "city": "yongin",
+    "district": "수지구",
+    "districtSlug": "suji-gu",
+    "life": "jukjeon-suji",
+    "station": "",
+    "adjacent": [
+      "성복동",
+      "풍덕천동"
+    ],
+    "index": false,
+    "note": "수지 서부 아파트 주거 생활권으로, 단지·공동현관 확인이 필요합니다."
+  },
+  {
+    "slug": "gogi-dong",
+    "name": "고기동",
+    "city": "yongin",
+    "district": "수지구",
+    "districtSlug": "suji-gu",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "동천동",
+      "신봉동"
+    ],
+    "index": false,
+    "note": "동천·고기 자연부락과 주거가 섞인 생활권으로, 정확한 주소와 이동 기준 확인이 필요합니다."
+  },
+  {
+    "slug": "bansong-dong",
+    "name": "반송동",
+    "city": "hwaseong",
+    "district": "",
+    "districtSlug": "",
+    "life": "dongtan-newtown",
+    "station": "dongtan-station",
+    "adjacent": [
+      "석우동",
+      "능동"
+    ],
+    "index": true,
+    "note": "동탄1신도시 메타폴리스 상권 생활권으로, 오피스텔·아파트 밀집해 단지·공동현관 확인이 좋습니다."
+  },
+  {
+    "slug": "seogu-dong",
+    "name": "석우동",
+    "city": "hwaseong",
+    "district": "",
+    "districtSlug": "",
+    "life": "dongtan-newtown",
+    "station": "dongtan-station",
+    "adjacent": [
+      "반송동",
+      "영천동"
+    ],
+    "index": true,
+    "note": "동탄1신도시 주거·상권 생활권으로, 단지명과 공동현관 출입 방식 확인이 필요합니다."
+  },
+  {
+    "slug": "yeongcheon-dong",
+    "name": "영천동",
+    "city": "hwaseong",
+    "district": "",
+    "districtSlug": "",
+    "life": "dongtan-newtown",
+    "station": "dongtan-station",
+    "adjacent": [
+      "청계동",
+      "석우동"
+    ],
+    "index": true,
+    "note": "동탄2신도시 주거·업무 생활권으로, 신규 단지가 많아 단지·동·호수 확인이 필요합니다."
+  },
+  {
+    "slug": "cheonggye-dong-hwaseong",
+    "name": "청계동",
+    "city": "hwaseong",
+    "district": "",
+    "districtSlug": "",
+    "life": "dongtan-newtown",
+    "station": "dongtan-station",
+    "adjacent": [
+      "오산동",
+      "영천동"
+    ],
+    "index": true,
+    "note": "동탄역 인근 오피스텔·업무지구 생활권으로, 방문자 등록·관리 규정 확인이 좋습니다."
+  },
+  {
+    "slug": "osan-dong-hwaseong",
+    "name": "오산동",
+    "city": "hwaseong",
+    "district": "",
+    "districtSlug": "",
+    "life": "dongtan-newtown",
+    "station": "dongtan-station",
+    "adjacent": [
+      "청계동",
+      "영천동"
+    ],
+    "index": true,
+    "note": "동탄역·SRT 인근 신규 오피스텔 생활권으로, 정확한 단지·동·호수 확인이 필요합니다."
+  },
+  {
+    "slug": "jinan-dong",
+    "name": "진안동",
+    "city": "hwaseong",
+    "district": "",
+    "districtSlug": "",
+    "life": "byeongjeom-bongdam",
+    "station": "byeongjeom-station",
+    "adjacent": [
+      "병점동",
+      "기산동"
+    ],
+    "index": true,
+    "note": "병점역 인근 주거·상권 생활권으로, 역세권 이동 기준과 공동현관 확인이 좋습니다."
+  },
+  {
+    "slug": "saesol-dong",
+    "name": "새솔동",
+    "city": "hwaseong",
+    "district": "",
+    "districtSlug": "",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "남양읍",
+      "송산면"
+    ],
+    "index": true,
+    "note": "송산그린시티 신규 아파트 생활권으로, 단지·이동 기준과 공동현관 확인이 필요합니다."
+  },
+  {
+    "slug": "songsan-myeon",
+    "name": "송산면",
+    "city": "hwaseong",
+    "district": "",
+    "districtSlug": "",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "남양읍",
+      "새솔동"
+    ],
+    "index": true,
+    "note": "화성 서부 해안 외곽 생활권으로, 차량 이동 거리와 추가 이동비 확인이 중요합니다."
+  },
+  {
+    "slug": "jungang-dong-osan",
+    "name": "중앙동",
+    "city": "osan",
+    "district": "",
+    "districtSlug": "",
+    "life": "osan-station-central",
+    "station": "osan-station",
+    "adjacent": [
+      "오산동",
+      "궐동"
+    ],
+    "index": true,
+    "note": "오산역과 시청 인근 중앙 상권 생활권으로, 상가·숙소 건물 출입 방식 확인이 좋습니다."
+  },
+  {
+    "slug": "daewon-dong",
+    "name": "대원동",
+    "city": "osan",
+    "district": "",
+    "districtSlug": "",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "누읍동",
+      "갈곶동"
+    ],
+    "index": false,
+    "note": "오산 남부 주거·산업 혼재 생활권으로, 번호동은 대원 생활권으로 묶어 안내합니다."
+  },
+  {
+    "slug": "namchon-dong",
+    "name": "남촌동",
+    "city": "osan",
+    "district": "",
+    "districtSlug": "",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "오산동",
+      "세마동"
+    ],
+    "index": false,
+    "note": "오산 남촌 주거 생활권으로, 방문 주소와 이동 기준 확인이 필요합니다."
+  },
+  {
+    "slug": "sinjang-dong-osan",
+    "name": "신장동",
+    "city": "osan",
+    "district": "",
+    "districtSlug": "",
+    "life": "segyo-sucheong",
+    "station": "osandae-station",
+    "adjacent": [
+      "수청동",
+      "세마동"
+    ],
+    "index": false,
+    "note": "세교신도시 인근 신장 주거 생활권으로, 단지·공동현관 확인이 필요합니다."
+  },
+  {
+    "slug": "sema-dong",
+    "name": "세마동",
+    "city": "osan",
+    "district": "",
+    "districtSlug": "",
+    "life": "",
+    "station": "sema-station",
+    "adjacent": [
+      "신장동",
+      "초평동"
+    ],
+    "index": true,
+    "note": "세마역과 물향기수목원 인근 생활권으로, 역세권·외곽 이동 기준 확인이 좋습니다."
+  },
+  {
+    "slug": "chopyeong-dong",
+    "name": "초평동",
+    "city": "osan",
+    "district": "",
+    "districtSlug": "",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "세마동",
+      "대원동"
+    ],
+    "index": false,
+    "note": "오산 초평 외곽 주거 생활권으로, 차량 이동 기준과 방문 주소 확인이 필요합니다."
+  },
+  {
+    "slug": "gwol-dong",
+    "name": "궐동",
+    "city": "osan",
+    "district": "",
+    "districtSlug": "",
+    "life": "osan-station-central",
+    "station": "osan-station",
+    "adjacent": [
+      "오산동",
+      "부산동"
+    ],
+    "index": false,
+    "note": "오산대 인근 원룸·주거 생활권으로, 공동현관과 방문 시간 확인이 필요합니다."
+  },
+  {
+    "slug": "galgot-dong",
+    "name": "갈곶동",
+    "city": "osan",
+    "district": "",
+    "districtSlug": "",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "대원동"
+    ],
+    "index": false,
+    "note": "오산 남부 외곽 생활권으로, 차량 이동 기준과 방문 주소 확인이 필요합니다."
+  },
+  {
+    "slug": "nueup-dong",
+    "name": "누읍동",
+    "city": "osan",
+    "district": "",
+    "districtSlug": "",
+    "life": "segyo-sucheong",
+    "station": "",
+    "adjacent": [
+      "수청동",
+      "대원동"
+    ],
+    "index": false,
+    "note": "세교 인근 누읍 주거 생활권으로, 단지·공동현관 확인이 필요합니다."
+  },
+  {
+    "slug": "pyeongtaek-dong",
+    "name": "평택동",
+    "city": "pyeongtaek",
+    "district": "",
+    "districtSlug": "",
+    "life": "pyeongtaek-station-sosabeol",
+    "station": "pyeongtaek-station",
+    "adjacent": [
+      "비전동",
+      "통복동"
+    ],
+    "index": true,
+    "note": "평택역 원도심 상권·숙소 생활권으로, 건물 출입 방식과 예약 가능 시간 확인이 좋습니다."
+  },
+  {
+    "slug": "sosa-dong",
+    "name": "소사동",
+    "city": "pyeongtaek",
+    "district": "",
+    "districtSlug": "",
+    "life": "pyeongtaek-station-sosabeol",
+    "station": "",
+    "adjacent": [
+      "비전동",
+      "죽백동"
+    ],
+    "index": true,
+    "note": "소사벌택지지구 신규 아파트 생활권으로, 단지·공동현관 확인이 필요합니다."
+  },
+  {
+    "slug": "songtan-dong",
+    "name": "송탄동",
+    "city": "pyeongtaek",
+    "district": "",
+    "districtSlug": "",
+    "life": "",
+    "station": "seojeong-ri-station",
+    "adjacent": [
+      "서정동",
+      "지산동"
+    ],
+    "index": true,
+    "note": "송탄 상권·주거 생활권으로, 서정리역 이동 기준과 건물 출입 방식 확인이 좋습니다."
+  },
+  {
+    "slug": "anjung-eup",
+    "name": "안중읍",
+    "city": "pyeongtaek",
+    "district": "",
+    "districtSlug": "",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "포승읍",
+      "현덕면"
+    ],
+    "index": true,
+    "note": "평택 서부 안중 상권·외곽 생활권으로, 차량 이동 거리와 추가 이동비 확인이 중요합니다."
+  },
+  {
+    "slug": "poseung-eup",
+    "name": "포승읍",
+    "city": "pyeongtaek",
+    "district": "",
+    "districtSlug": "",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "안중읍"
+    ],
+    "index": true,
+    "note": "평택항·산업단지 인근 외곽 생활권으로, 차량 이동 기준과 예약 가능 시간 확인이 중요합니다."
+  },
+  {
+    "slug": "cheongbuk-eup",
+    "name": "청북읍",
+    "city": "pyeongtaek",
+    "district": "",
+    "districtSlug": "",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "안중읍",
+      "오성면"
+    ],
+    "index": false,
+    "note": "평택 북서부 택지·외곽 생활권으로, 차량 이동 거리와 방문 주소 확인이 필요합니다."
+  },
+  {
+    "slug": "paengseong-eup",
+    "name": "팽성읍",
+    "city": "pyeongtaek",
+    "district": "",
+    "districtSlug": "",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "평택동"
+    ],
+    "index": true,
+    "note": "평택 남부 팽성·안정리 외곽 생활권으로, 차량 이동 기준과 예약 가능 시간 확인이 중요합니다."
+  },
+  {
+    "slug": "iljuk-myeon",
+    "name": "일죽면",
+    "city": "anseong",
+    "district": "",
+    "districtSlug": "",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "죽산면"
+    ],
+    "index": true,
+    "note": "안성 동부 일죽IC 인근 외곽 생활권으로, 차량 이동 거리와 추가 이동비 확인이 중요합니다."
+  },
+  {
+    "slug": "geumgwang-myeon",
+    "name": "금광면",
+    "city": "anseong",
+    "district": "",
+    "districtSlug": "",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "안성동"
+    ],
+    "index": false,
+    "note": "안성 동부 금광 외곽 생활권으로, 차량 이동 기준과 방문 주소 확인이 필요합니다."
+  },
+  {
+    "slug": "bakdal-dong",
+    "name": "박달동",
+    "city": "anyang",
+    "district": "만안구",
+    "districtSlug": "manan-gu",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "안양동",
+      "석수동"
+    ],
+    "index": false,
+    "note": "만안구 박달 주거 생활권으로, 방문 주소와 공동현관 확인이 필요합니다."
+  },
+  {
+    "slug": "bisan-dong",
+    "name": "비산동",
+    "city": "anyang",
+    "district": "동안구",
+    "districtSlug": "dongan-gu",
+    "life": "anyang-beomgye-pyeongchon",
+    "station": "",
+    "adjacent": [
+      "관양동",
+      "평촌동"
+    ],
+    "index": true,
+    "note": "안양종합운동장 인근 주거·상권 생활권으로, 단지·건물 출입 방식 확인이 좋습니다."
+  },
+  {
+    "slug": "dang-dong",
+    "name": "당동",
+    "city": "gunpo",
+    "district": "",
+    "districtSlug": "",
+    "life": "gunpo-sanbon",
+    "station": "gunpo-station",
+    "adjacent": [
+      "금정동",
+      "산본동"
+    ],
+    "index": false,
+    "note": "군포역 인근 주거 생활권으로, 역세권 이동 기준과 공동현관 확인이 필요합니다."
+  },
+  {
+    "slug": "bugok-dong",
+    "name": "부곡동",
+    "city": "gunpo",
+    "district": "",
+    "districtSlug": "",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "대야미동",
+      "당동"
+    ],
+    "index": false,
+    "note": "군포 남부 부곡·대야 주거 생활권으로, 방문 주소와 이동 기준 확인이 필요합니다."
+  },
+  {
+    "slug": "daeyami-dong",
+    "name": "대야미동",
+    "city": "gunpo",
+    "district": "",
+    "districtSlug": "",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "부곡동"
+    ],
+    "index": true,
+    "note": "대야미역과 수리산 인근 생활권으로, 역세권·외곽 이동 기준 확인이 좋습니다."
+  },
+  {
+    "slug": "gocheon-dong",
+    "name": "고천동",
+    "city": "uiwang",
+    "district": "",
+    "districtSlug": "",
+    "life": "",
+    "station": "uiwang-station",
+    "adjacent": [
+      "오전동",
+      "내손동"
+    ],
+    "index": false,
+    "note": "의왕시청·고천 주거 생활권으로, 방문 주소와 공동현관 확인이 필요합니다."
+  },
+  {
+    "slug": "burim-dong",
+    "name": "부림동",
+    "city": "gwacheon",
+    "district": "",
+    "districtSlug": "",
+    "life": "gwacheon-government-complex",
+    "station": "",
+    "adjacent": [
+      "별양동",
+      "갈현동"
+    ],
+    "index": false,
+    "note": "과천 부림 주거 생활권으로, 아파트 단지 공동현관 확인이 필요합니다."
+  },
+  {
+    "slug": "wolpi-dong",
+    "name": "월피동",
+    "city": "ansan",
+    "district": "상록구",
+    "districtSlug": "sangnok-gu",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "성포동",
+      "본오동"
+    ],
+    "index": false,
+    "note": "상록구 월피 주거 생활권으로, 방문 주소와 공동현관 확인이 필요합니다."
+  },
+  {
+    "slug": "seongpo-dong",
+    "name": "성포동",
+    "city": "ansan",
+    "district": "상록구",
+    "districtSlug": "sangnok-gu",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "월피동",
+      "사동"
+    ],
+    "index": true,
+    "note": "안산문화광장·예술인아파트 인근 생활권으로, 단지·건물 출입 방식 확인이 좋습니다."
+  },
+  {
+    "slug": "i-dong-ansan",
+    "name": "이동",
+    "city": "ansan",
+    "district": "상록구",
+    "districtSlug": "sangnok-gu",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "본오동",
+      "사동"
+    ],
+    "index": false,
+    "note": "상록구 이동 주거 생활권으로, 방문 주소와 공동현관 확인이 필요합니다."
+  },
+  {
+    "slug": "il-dong-ansan",
+    "name": "일동",
+    "city": "ansan",
+    "district": "상록구",
+    "districtSlug": "sangnok-gu",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "본오동",
+      "이동"
+    ],
+    "index": false,
+    "note": "상록구 일동 주거 생활권으로, 번호동은 일동으로 묶어 안내합니다."
+  },
+  {
+    "slug": "wongok-dong",
+    "name": "원곡동",
+    "city": "ansan",
+    "district": "단원구",
+    "districtSlug": "danwon-gu",
+    "life": "ansan-jungang-gojan",
+    "station": "",
+    "adjacent": [
+      "고잔동",
+      "신길동"
+    ],
+    "index": true,
+    "note": "안산 다문화거리 인근 상권·주거 생활권으로, 건물 출입 방식과 예약 가능 시간 확인이 좋습니다."
+  },
+  {
+    "slug": "wa-dong",
+    "name": "와동",
+    "city": "ansan",
+    "district": "단원구",
+    "districtSlug": "danwon-gu",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "고잔동",
+      "선부동"
+    ],
+    "index": false,
+    "note": "단원구 와동 주거 생활권으로, 방문 주소와 공동현관 확인이 필요합니다."
+  },
+  {
+    "slug": "singil-dong",
+    "name": "신길동",
+    "city": "ansan",
+    "district": "단원구",
+    "districtSlug": "danwon-gu",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "원곡동",
+      "와동"
+    ],
+    "index": false,
+    "note": "단원구 신길 주거 생활권으로, 번호동은 신길동으로 묶어 안내합니다."
+  },
+  {
+    "slug": "neunggok-dong",
+    "name": "능곡동",
+    "city": "siheung",
+    "district": "",
+    "districtSlug": "",
+    "life": "siheung-baegot",
+    "station": "siheung-neunggok-station",
+    "adjacent": [
+      "장곡동",
+      "은행동"
+    ],
+    "index": true,
+    "note": "시흥능곡역과 장현지구 인근 신도시 생활권으로, 단지·공동현관 확인이 좋습니다."
+  },
+  {
+    "slug": "eunhaeng-dong-siheung",
+    "name": "은행동",
+    "city": "siheung",
+    "district": "",
+    "districtSlug": "",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "대야동",
+      "능곡동"
+    ],
+    "index": false,
+    "note": "시흥 은행 주거 생활권으로, 방문 주소와 공동현관 확인이 필요합니다."
+  },
+  {
+    "slug": "janggok-dong",
+    "name": "장곡동",
+    "city": "siheung",
+    "district": "",
+    "districtSlug": "",
+    "life": "siheung-baegot",
+    "station": "siheung-neunggok-station",
+    "adjacent": [
+      "능곡동",
+      "배곧동"
+    ],
+    "index": true,
+    "note": "장현지구 신규 아파트 생활권으로, 단지명과 공동현관 출입 방식 확인이 필요합니다."
+  },
+  {
+    "slug": "wolgot-dong",
+    "name": "월곶동",
+    "city": "siheung",
+    "district": "",
+    "districtSlug": "",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "정왕동"
+    ],
+    "index": true,
+    "note": "월곶포구·해안 인근 숙소·주거 생활권으로, 이동 기준과 건물 출입 방식 확인이 좋습니다."
+  },
+  {
+    "slug": "daeya-dong",
+    "name": "대야동",
+    "city": "siheung",
+    "district": "",
+    "districtSlug": "",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "은행동",
+      "신천동"
+    ],
+    "index": false,
+    "note": "시흥 북부 대야 주거 생활권으로, 방문 주소와 이동 기준 확인이 필요합니다."
+  },
+  {
+    "slug": "sincheon-dong",
+    "name": "신천동",
+    "city": "siheung",
+    "district": "",
+    "districtSlug": "",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "대야동"
+    ],
+    "index": false,
+    "note": "시흥 북부 신천 주거 생활권으로, 소사원시선 이동 기준과 공동현관 확인이 필요합니다."
+  },
+  {
+    "slug": "mangwol-dong",
+    "name": "망월동",
+    "city": "hanam",
+    "district": "",
+    "districtSlug": "",
+    "life": "hanam-misa",
+    "station": "misa-station",
+    "adjacent": [
+      "풍산동",
+      "미사"
+    ],
+    "index": true,
+    "note": "미사강변신도시 중심 생활권으로, 오피스텔·아파트 밀집해 단지·공동현관 확인이 좋습니다."
+  },
+  {
+    "slug": "yeok-dong",
+    "name": "역동",
+    "city": "gwangju-si",
+    "district": "",
+    "districtSlug": "",
+    "life": "gwangju-taejeon",
+    "station": "gyeonggi-gwangju-station",
+    "adjacent": [
+      "경안동",
+      "송정동"
+    ],
+    "index": false,
+    "note": "경기광주역 인근 주거 생활권으로, 역세권 이동 기준과 공동현관 확인이 필요합니다."
+  },
+  {
+    "slug": "opo",
+    "name": "오포",
+    "city": "gwangju-si",
+    "district": "",
+    "districtSlug": "",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "모현읍",
+      "태전동"
+    ],
+    "index": true,
+    "note": "광주 서부 오포(신현·능평) 주거·외곽 생활권으로, 차량 이동 기준과 방문 주소 확인이 좋습니다."
+  },
+  {
+    "slug": "sindun-myeon",
+    "name": "신둔면",
+    "city": "icheon",
+    "district": "",
+    "districtSlug": "",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "창전동",
+      "마장면"
+    ],
+    "index": true,
+    "note": "이천 도자예술촌 인근 외곽 생활권으로, 차량 이동 거리와 예약 가능 시간 확인이 중요합니다."
+  },
+  {
+    "slug": "daesin-myeon",
+    "name": "대신면",
+    "city": "yeoju",
+    "district": "",
+    "districtSlug": "",
+    "life": "",
+    "station": "",
+    "adjacent": [
+      "여흥동",
+      "점동면"
+    ],
+    "index": false,
+    "note": "여주 북부 대신 외곽 생활권으로, 차량 이동 기준과 방문 주소 확인이 필요합니다."
+  }
 ]

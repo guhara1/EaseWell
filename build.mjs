@@ -289,6 +289,17 @@ function courseMenu() {
   </section>`;
 }
 
+// ---- 지역 페이지 히어로 배너 (이미지 + 제목) ------------------
+function heroBanner(eyebrow, h1, lead) {
+  const img = site.heroImage;
+  const style = img ? ` style="background-image: var(--overlay-hero), url('${img}'); background-size:cover; background-position:center;"` : "";
+  return `<section class="hero hero-region${img ? " hero-photo" : ""}"${style}>
+    ${eyebrow ? `<span class="eyebrow">${eyebrow}</span>` : ""}
+    <h1>${h1}</h1>
+    ${lead ? `<p class="lead">${lead}</p>` : ""}
+  </section>`;
+}
+
 // ---- 이용 후기 (별점) -----------------------------------------
 function stars(n) {
   const full = "★".repeat(n) + "☆".repeat(5 - n);
@@ -557,10 +568,8 @@ function buildAreas() {
     const lifeLinks = lifeAreas.filter(l => a.cities.includes(l.city)).map(l => ({ href: `/life/${l.slug}/`, text: `${l.name} 생활권` }));
     const stationLinks = stations.filter(s => a.cities.includes(s.city)).slice(0, 8).map(s => ({ href: `/station/${s.slug}/`, text: s.name }));
     const body = `
+    ${heroBanner(esc(a.name), esc(a.name) + " 출장마사지 · 경기남부 생활권 안내", esc(a.lead))}
     <div class="prose section">
-      <span class="eyebrow">${esc(a.name)}</span>
-      <h1>${esc(a.name)} 출장마사지 · 경기남부 생활권 안내</h1>
-      <p class="lead">${esc(a.lead)}</p>
       <h2>권역 개요</h2><p>${esc(a.intro)}</p>
       <h2>이동 기준</h2><p>${esc(a.move)}</p>
     </div>
@@ -611,10 +620,8 @@ function buildCities() {
     const cityDongLinks = dongsInCity(c.slug).map(x => ({ href: dongUrl(x), text: x.district ? `${x.district} ${x.name}` : x.name }));
     const districtSection = c.districts.length ? `<h2>행정구별 생활권</h2><ul>${c.districts.map(d => `<li><a href="/city/${c.slug}/${d.slug}/"><strong>${esc(d.name)}</strong></a> — ${esc(d.note)}</li>`).join("")}</ul>` : "";
     const body = `
+    ${heroBanner(esc(c.region), esc(c.name) + " 출장마사지 · 생활권·역세권 지역 안내", esc(c.intro))}
     <div class="prose section">
-      <span class="eyebrow">${esc(c.region)}</span>
-      <h1>${esc(c.name)} 출장마사지 · 생활권·역세권 지역 안내</h1>
-      <p class="lead">${esc(c.intro)}</p>
       ${districtSection}
       <h2>대표 생활권</h2><p>${esc(c.living)}</p>
       <h2>가까운 역·인접 지역</h2><p>${esc(c.access)}</p>
@@ -665,10 +672,8 @@ function buildDistrict(c, d) {
   const stationLinks = stations.filter(s => s.city === c.slug && s.district === d.name).map(s => ({ href: `/station/${s.slug}/`, text: s.name }));
   const dongLinks = dongsInCity(c.slug, d.slug).map(x => ({ href: dongUrl(x), text: x.name }));
   const body = `
+  ${heroBanner(esc(c.name) + " · 행정구 안내", esc(c.name) + " " + esc(d.name) + " 출장마사지 · " + esc(d.note.split(" ")[0]) + " 생활권 안내", esc(c.name) + " " + esc(d.name) + "은(는) " + esc(d.note) + "을(를) 중심으로 하는 생활권입니다. 같은 " + esc(c.name) + " 안에서도 행정구별로 이동 기준과 이용 환경이 달라, 방문 주소와 함께 행정구·생활권을 확인하는 것이 정확합니다.")}
   <div class="prose section">
-    <span class="eyebrow">${esc(c.name)} · 행정구 안내</span>
-    <h1>${esc(c.name)} ${esc(d.name)} 출장마사지 · ${esc(d.note.split(" ")[0])} 생활권 안내</h1>
-    <p class="lead">${esc(c.name)} ${esc(d.name)}은(는) ${esc(d.note)}을(를) 중심으로 하는 생활권입니다. 같은 ${esc(c.name)} 안에서도 행정구별로 이동 기준과 이용 환경이 달라, 방문 주소와 함께 행정구·생활권을 확인하는 것이 정확합니다.</p>
     <h2>상위 도시</h2><p><a href="/city/${c.slug}/">${esc(c.name)} 전체 안내</a>에서 다른 행정구와 도시 전체 생활권을 함께 확인할 수 있습니다. ${esc(c.name)}은(는) ${esc(c.region)}에 속합니다.</p>
     <h2>대표 생활권</h2><p>${esc(d.note)} 생활권을 중심으로 오피스텔·상권·주거지가 형성되어 있습니다. 이용 장소가 자택·오피스텔·숙소인지에 따라 공동현관과 출입 방식 확인이 먼저 필요합니다.</p>
     <h2>이용 장소별 기준</h2><p>오피스텔은 공동현관·엘리베이터·관리 규정과 방문 가능 시간을, 상권·업무지구는 건물 보안 규정과 예약 가능 시간을, 주거지는 공동현관 출입 방식을 확인하는 것이 좋습니다.</p>
@@ -733,10 +738,8 @@ function buildDongs() {
     const posDesc = district ? `${c.name} ${d.district}에 속한 행정동` : `${c.name}의 행정동`;
     const h1 = `${d.name} 출장마사지 · ${district ? d.district + " " : c.name + " "}생활권 안내`;
     const body = `
+    ${heroBanner(esc(c.name) + (district ? " · " + esc(d.district) : "") + " · 행정동", esc(h1), esc(d.note))}
     <div class="prose section">
-      <span class="eyebrow">${esc(c.name)}${district ? " · " + esc(d.district) : ""} · 행정동</span>
-      <h1>${esc(h1)}</h1>
-      <p class="lead">${esc(d.note)}</p>
       <h2>행정동 위치</h2>
       <p>${esc(d.name)}은(는) ${esc(posDesc)}으로, ${esc((d.adjacent || []).join(", "))} 등과 인접합니다.${life ? ` 생활권으로는 ${esc(life.name)}과(와) 이어집니다.` : ""} 같은 이름의 동이 다른 도시에 있을 수 있어, 방문 주소는 도시·행정구·행정동을 함께 확인하는 것이 정확합니다.</p>
       <h2>상위 도시·행정구</h2>
@@ -803,10 +806,8 @@ function buildLifeAreas() {
     const neighbors = lifeAreas.filter(x => x.city === l.city && x.slug !== l.slug).slice(0, 4).map(x => ({ href: `/life/${x.slug}/`, text: `${x.name} 생활권` }));
     const dongTags = (l.dongs || []).map(d => `<span class="tag">${esc(d)}</span>`).join("");
     const body = `
+    ${heroBanner(esc(l.cityName) + " · " + esc(l.type), esc(l.name) + " 출장마사지 생활권 안내", esc(l.note))}
     <div class="prose section">
-      <span class="eyebrow">${esc(l.cityName)} · ${esc(l.type)}</span>
-      <h1>${esc(l.name)} 출장마사지 생활권 안내</h1>
-      <p class="lead">${esc(l.note)}</p>
       <div class="meta" style="margin-bottom:16px">${dongTags}</div>
       <h2>생활권 개요</h2>
       <p>${esc(l.name)}은(는) ${esc(l.cityName)}${(l.districts && l.districts.length) ? ` ${l.districts.join("·")}` : ""}에 속하는 ${esc(l.type)} 생활권입니다. ${esc(l.note)} 포함 행정동으로는 ${esc((l.dongs || []).join(", "))} 등이 있습니다.</p>
@@ -867,10 +868,8 @@ function buildStations() {
     const sameCity = stations.filter(x => x.city === s.city && x.slug !== s.slug).slice(0, 5).map(x => ({ href: `/station/${x.slug}/`, text: x.name }));
     const transferNote = s.transfer ? `${s.name}은(는) 환승 성격이 있는 역이지만, 출구별·노선별로 페이지를 나누지 않고 역명 기준 한 곳으로 안내해 중복을 줄입니다.` : `${s.name}은(는) 역명 기준으로 위치를 안내합니다.`;
     const body = `
+    ${heroBanner(esc(s.cityName) + (s.district ? " · " + esc(s.district) : "") + " 역세권", esc(s.name) + " 출장마사지 · 역세권 생활권 안내", esc(s.note))}
     <div class="prose section">
-      <span class="eyebrow">${esc(s.cityName)}${s.district ? " · " + esc(s.district) : ""} 역세권</span>
-      <h1>${esc(s.name)} 출장마사지 · 역세권 생활권 안내</h1>
-      <p class="lead">${esc(s.note)}</p>
       <h2>역세권 개요</h2>
       <p>${esc(s.name)}은(는) ${esc(s.cityName)}${s.district ? " " + esc(s.district) : ""} ${esc((s.dongs || []).join("·"))} 인근의 역세권으로, ${esc(s.life)} 생활권과 이어집니다. 역명은 위치를 설명하는 데 도움이 되지만 실제 방문 가능 여부는 정확한 주소와 건물 출입 방식까지 함께 확인해야 합니다.</p>
       <h2>환승·출구 안내</h2><p>${esc(transferNote)} 출구 방향은 참고용이며 건물 주소로 확인합니다.</p>
