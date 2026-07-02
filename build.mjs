@@ -337,6 +337,22 @@ function reviewSchemaItems() {
     reviewBody: r.body
   }));
 }
+// 후기·별점이 노출되는 페이지(메인+지역)에 붙일 Service 스키마(평점+개별 후기 포함)
+function reviewServiceSchema(canonical) {
+  return {
+    "@type": "Service",
+    "@id": site.baseUrl + canonical + "#service",
+    serviceType: "출장마사지",
+    name: "경기남부 출장마사지",
+    areaServed: site.org.areaServed,
+    provider: { "@id": site.baseUrl + "/#organization" },
+    aggregateRating: aggregateRatingSchema(),
+    review: reviewSchemaItems()
+  };
+}
+function showsRegionBlocks(canonical) {
+  return canonical === "/" || ["/area/", "/city/", "/dong/", "/life/", "/station/"].some(x => canonical.startsWith(x));
+}
 
 // ---- Schema (JSON-LD) -----------------------------------------
 function orgSchema() {
@@ -410,10 +426,10 @@ function crumbsHtml(crumbs) {
 function layout(p) {
   const ogImage = p.ogImage || "/assets/og-default.svg";
   const alt = p.ogAlt || (p.h1 + " 안내 이미지");
-  const schema = [orgSchema(), websiteSchema(), webPageSchema(p), breadcrumbSchema(p.breadcrumb), imageObjectSchema(ogImage, alt), ...(p.extraSchema || [])];
+  const schema = [orgSchema(), websiteSchema(), webPageSchema(p), breadcrumbSchema(p.breadcrumb), imageObjectSchema(ogImage, alt), ...(showsRegionBlocks(p.canonical) ? [reviewServiceSchema(p.canonical)] : []), ...(p.extraSchema || [])];
   const graph = { "@context": "https://schema.org", "@graph": schema };
   const canonicalAbs = site.baseUrl + p.canonical;
-  if (!p.skipSitemap) urls.push({ loc: canonicalAbs, noindex: !!p.noindex });
+  if (!p.skipSitemap) urls.push({ loc: canonicalAbs, noindex: !!p.noindex, title: p.title, description: clampDesc(p.description) });
   return `<!doctype html>
 <html lang="ko">
 <head>
@@ -421,6 +437,10 @@ function layout(p) {
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(p.title)}</title>
 <meta name="description" content="${esc(clampDesc(p.description))}">
+${site.naverVerification ? `<meta name="naver-site-verification" content="${site.naverVerification}" />` : ""}
+${site.googleVerification ? `<meta name="google-site-verification" content="${site.googleVerification}" />` : ""}
+<link rel="alternate" type="application/rss+xml" title="${esc(site.name)} 업데이트" href="/rss.xml">
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
 ${p.noindex ? '<meta name="robots" content="noindex,follow">' : '<meta name="robots" content="index,follow,max-image-preview:large">'}
 <link rel="canonical" href="${canonicalAbs}">
 <meta property="og:type" content="website">
@@ -444,7 +464,7 @@ ${header()}
 <main id="main" class="container">
 ${crumbsHtml(p.breadcrumb)}
 ${p.body}
-${(p.canonical === "/" || ["/area/", "/city/", "/dong/", "/life/", "/station/"].some(x => p.canonical.startsWith(x))) ? courseMenu() + reviewsBlock() : ""}
+${showsRegionBlocks(p.canonical) ? courseMenu() + reviewsBlock() : ""}
 </main>
 ${footer()}
 </body>
@@ -1165,13 +1185,54 @@ function buildNotFound() {
 
 function buildSitemapRobots() {
   const today = process.env.BUILD_DATE || "2026-07-01";
+  const rfc822 = new Date(today + "T09:00:00+09:00").toUTCString();
   const items = urls.filter(u => !u.noindex);
+  const prio = u => u.loc === site.baseUrl + "/" ? "1.0" : /\/(city|area|life|station|price|reviews)\/[^/]+\/?$|\/$/.test(u.loc.replace(site.baseUrl, "")) ? "0.8" : "0.6";
+  // sitemap.xml (네임스페이스 정정: sitemaps.org)
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemap.org/schemas/sitemap/0.9">
-${items.map(u => `  <url><loc>${u.loc}</loc><lastmod>${today}</lastmod></url>`).join("\n")}
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${items.map(u => `  <url><loc>${u.loc}</loc><lastmod>${today}</lastmod><changefreq>weekly</changefreq><priority>${prio(u)}</priority></url>`).join("\n")}
 </urlset>`;
   writeFileSync(join(OUT, "sitemap.xml"), xml);
-  writeFileSync(join(OUT, "robots.txt"), `User-agent: *\nAllow: /\n\nSitemap: ${site.baseUrl}/sitemap.xml\n`);
+
+  // RSS 2.0 피드 (네이버·구글 색인 발견 보조)
+  const rssItems = items.map(u => `    <item>
+      <title>${esc(u.title || "")}</title>
+      <link>${u.loc}</link>
+      <guid isPermaLink="true">${u.loc}</guid>
+      <description>${esc(u.description || "")}</description>
+      <pubDate>${rfc822}</pubDate>
+    </item>`).join("\n");
+  const rss = `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>${esc(site.name)} · ${esc(site.tagline)}</title>
+    <link>${site.baseUrl}/</link>
+    <atom:link href="${site.baseUrl}/rss.xml" rel="self" type="application/rss+xml"/>
+    <description>${esc(site.org.description)}</description>
+    <language>ko</language>
+    <lastBuildDate>${rfc822}</lastBuildDate>
+${rssItems}
+  </channel>
+</rss>`;
+  writeFileSync(join(OUT, "rss.xml"), rss);
+
+  // robots.txt (네이버 Yeti·구글봇 명시 허용 + 사이트맵)
+  const robots = `User-agent: *
+Allow: /
+
+User-agent: Yeti
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+Sitemap: ${site.baseUrl}/sitemap.xml
+`;
+  writeFileSync(join(OUT, "robots.txt"), robots);
 }
 
 function buildAssets() {
