@@ -220,6 +220,9 @@ function header() {
 }
 
 function footer() {
+  const tel = site.phone.replace(/-/g, "");
+  const cityLinks = cities.map(c => `<a href="/city/${c.slug}/">${esc(c.name)}</a>`).join("");
+  const year = (process.env.BUILD_DATE || "2026-07-01").slice(0, 4);
   return `<footer class="site-footer"><div class="container">
     <div class="footer-cta">
       <div>
@@ -231,39 +234,66 @@ function footer() {
         <a class="btn btn-orange btn-lg" href="${site.telegram.partnership}" rel="noopener" target="_blank">${TG_ICON} 제휴문의</a>
       </div>
     </div>
+
     <div class="footer-grid">
       <div class="footer-brand">
-        <div class="name">상호 · ${esc(site.name)}</div>
-        <div class="tel">${esc(site.phoneLabel)} <a href="tel:${site.phone.replace(/-/g, "")}">${esc(site.phone)}</a></div>
-        <p class="desc">경기남부 출장마사지·홈타이 지역 안내 및 예약 전 확인 서비스. 불법·선정적 서비스는 제공하거나 안내하지 않습니다.</p>
+        <a class="brand" href="/" style="color:#fff">간다<span class="dot">GO</span></a>
+        <div class="tel">${esc(site.phoneLabel)} <a href="tel:${tel}">${esc(site.phone)}</a></div>
+        <p class="desc">경기남부 출장마사지·홈타이 지역 안내 및 예약 전 확인 서비스입니다. 실제 오프라인 매장이 없는 방문형 안내 서비스이며, 불법·선정적 서비스는 제공하거나 안내하지 않습니다.</p>
+        <dl class="footer-meta">
+          <dt>상호</dt><dd>${esc(site.name)}</dd>
+          <dt>서비스 지역</dt><dd>${esc(site.org.areaServed)}</dd>
+          <dt>운영·문의</dt><dd><a href="/contact/">문의하기</a> · <a href="${site.telegram.reservation}" rel="noopener" target="_blank">텔레그램 예약</a></dd>
+        </dl>
       </div>
-      <div>
-        <h4>바로가기</h4>
+      <nav class="footer-col" aria-label="지역 안내">
+        <h4>지역 안내</h4>
         <ul>
           <li><a href="/area/">권역 안내</a></li>
           <li><a href="/city/">도시 안내</a></li>
+          <li><a href="/dong/">행정동 안내</a></li>
           <li><a href="/life/">생활권</a></li>
           <li><a href="/station/">지하철역</a></li>
           <li><a href="/use/">이용 장소</a></li>
         </ul>
-      </div>
-      <div>
-        <h4>이용 안내</h4>
+      </nav>
+      <nav class="footer-col" aria-label="서비스·후기">
+        <h4>서비스·후기</h4>
         <ul>
           <li><a href="/price/">코스·가격 안내</a></li>
-          <li><a href="/reviews/">이용 후기</a></li>
+          <li><a href="/reviews/">이용 후기·별점</a></li>
           <li><a href="/check/">예약 전 확인</a></li>
-          <li><a href="/policy/privacy-policy/">개인정보 처리방침</a></li>
-          <li><a href="/policy/service-standard/">불법·선정적 서비스 불가 안내</a></li>
-          <li><a href="/policy/authors/">작성자·검수자 안내</a></li>
           <li><a href="/contact/">문의하기</a></li>
         </ul>
-      </div>
+      </nav>
+      <nav class="footer-col" aria-label="회사·정책">
+        <h4>회사·정책</h4>
+        <ul>
+          <li><a href="/policy/authors/">작성자·검수자 안내</a></li>
+          <li><a href="/policy/content-standard/">콘텐츠 작성 기준</a></li>
+          <li><a href="/policy/privacy-policy/">개인정보 처리방침</a></li>
+          <li><a href="/policy/service-standard/">불법·선정적 서비스 불가</a></li>
+          <li><a href="/sitemap/">사이트맵</a></li>
+        </ul>
+      </nav>
     </div>
+
+    <div class="footer-regions">
+      <h4>경기남부 도시 바로가기</h4>
+      <nav class="footer-citylinks" aria-label="도시 바로가기">${cityLinks}</nav>
+    </div>
+
+    <div class="footer-eeat">
+      이 사이트의 지역 안내 콘텐츠는 <strong>${esc(site.author.name)}</strong>가 작성하고 <strong>${esc(site.author.reviewer)}</strong>가 검수합니다.
+      허위 후기·과장된 평점·선정적 표현을 사용하지 않으며, 예약 확인에 필요한 최소한의 개인정보만 안내받습니다.
+    </div>
+
     <div class="footer-legal">
-      © ${site.name} · 경기남부 지역 안내 · 전화예약 ${esc(site.phone)} ·
+      © ${year} ${esc(site.name)}. 경기남부 지역 안내 · ${esc(site.phoneLabel)} ${esc(site.phone)} ·
       <a href="/policy/privacy-policy/">개인정보처리방침</a> ·
-      <a href="/policy/service-standard/">서비스 정책</a>
+      <a href="/policy/service-standard/">서비스 정책</a> ·
+      <a href="/sitemap.xml">sitemap.xml</a> ·
+      <a href="/rss.xml">RSS</a>
     </div>
   </div></footer>
   <a class="fab-reserve" href="${site.telegram.reservation}" rel="noopener" target="_blank" aria-label="예약 문의">${TG_ICON}<span>예약<br>문의</span></a>`;
@@ -1160,6 +1190,37 @@ function buildReviews() {
   }));
 }
 
+function buildHtmlSitemap() {
+  const sec = (title, links) => `<section class="section"><h2>${esc(title)}</h2><nav class="linkcluster" aria-label="${esc(title)}">${links.map(l => `<a href="${l.href}">${esc(l.text)}</a>`).join("")}</nav></section>`;
+  const body = `
+  <div class="prose section" style="max-width:none">
+    <span class="eyebrow">사이트맵</span>
+    <h1>간다GO 사이트맵</h1>
+    <p class="lead">간다GO 경기남부 지역 안내의 전체 페이지 구조입니다. 원하는 지역·안내 페이지로 바로 이동할 수 있습니다.</p>
+  </div>
+  ${sec("주요 안내", [
+    { href: "/", text: "홈" }, { href: "/price/", text: "코스·가격 안내" }, { href: "/reviews/", text: "이용 후기" },
+    { href: "/contact/", text: "문의하기" }, { href: "/area/", text: "권역 안내" }, { href: "/city/", text: "도시 안내" },
+    { href: "/dong/", text: "행정동 안내" }, { href: "/life/", text: "생활권" }, { href: "/station/", text: "지하철역" },
+    { href: "/use/", text: "이용 장소" }, { href: "/check/", text: "예약 전 확인" }
+  ])}
+  ${sec("권역", areas.map(a => ({ href: `/area/${a.slug}/`, text: a.name })))}
+  ${sec("도시", cities.map(c => ({ href: `/city/${c.slug}/`, text: c.name })))}
+  ${sec("생활권", lifeAreas.map(l => ({ href: `/life/${l.slug}/`, text: l.name })))}
+  ${sec("지하철역", stations.map(s => ({ href: `/station/${s.slug}/`, text: s.name })))}
+  ${sec("행정동", adminDongs.filter(d => d.index).map(d => ({ href: dongUrl(d), text: (d.district ? d.district + " " : "") + d.name })))}
+  ${sec("이용 장소", useCases.map(u => ({ href: `/use/${u.slug}/`, text: u.name })))}
+  ${sec("예약 전 확인", checks.map(ch => ({ href: `/check/${ch.slug}/`, text: ch.name })))}
+  ${sec("운영 기준", policies.map(po => ({ href: `/policy/${po.slug}/`, text: po.name })))}`;
+  write("sitemap", layout({
+    title: "간다GO 사이트맵｜경기남부 지역 안내 전체 페이지",
+    description: "간다GO 경기남부 출장마사지 지역 안내 사이트맵. 권역·도시·생활권·역세권 전체 페이지 안내.",
+    canonical: "/sitemap/", h1: "간다GO 사이트맵",
+    breadcrumb: [{ name: "홈", href: "/" }, { name: "사이트맵", href: "/sitemap/" }],
+    body
+  }));
+}
+
 function buildNotFound() {
   const body = `
   <section class="hero" style="text-align:center">
@@ -1271,6 +1332,7 @@ buildPolicies();
 buildPrice();
 buildReviews();
 buildContact();
+buildHtmlSitemap();
 buildNotFound();
 buildSitemapRobots();
 
